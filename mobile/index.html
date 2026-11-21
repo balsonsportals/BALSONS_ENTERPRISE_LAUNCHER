@@ -16,14 +16,16 @@
   <!-- 1. TOP MOBILE HEADER -->
   <header class="mobile-header">
     <div class="mobile-header-left">
-      <img src="assets/images/balsons-logo.png" alt="BALSONS Logo" class="mobile-brand-logo" onerror="this.onerror=null; this.src='../assets/images/balsons-logo.png';">
-      <div class="mobile-header-title">
-        <h1>BALSONS</h1>
-        <span>Mobile Ecosystem</span>
-      </div>
+      <a href="index.html" style="text-decoration:none; display:flex; align-items:center; gap:8px;">
+        <img src="assets/images/balsons-logo.png" alt="BALSONS Logo" class="mobile-brand-logo" onerror="this.onerror=null; this.src='../assets/images/balsons-logo.png';">
+        <div class="mobile-header-title">
+          <h1>BALSONS</h1>
+          <span>Mobile Ecosystem</span>
+        </div>
+      </a>
     </div>
     <div class="mobile-header-right">
-      <button class="btn-header-action" id="activeUserPill" onclick="BalsonsMobileApp.openUserSwitcher()" title="Tap to switch user session">
+      <button class="btn-header-action" id="activeUserPill" onclick="BalsonsMobileApp.openUserSwitcher()" title="Tap to switch active user">
         👤 Admin (2026)
       </button>
       <button class="btn-header-action" id="btnMobileTheme" onclick="BalsonsMobileApp.toggleTheme()" title="Toggle Light/Dark Theme">
@@ -35,409 +37,245 @@
     </div>
   </header>
 
-  <!-- 2. MAIN MOBILE CONTENT VIEWS -->
-  <main>
-
-    <!-- =========================================================================
-         VIEW 1: MOBILE HUB & ECOSYSTEM LAUNCHER
-         ========================================================================= -->
-    <section id="view-hub" class="mobile-view-container active">
-      <!-- HERO STATUS BANNER -->
-      <div class="mobile-hero-card">
-        <div class="m-hero-top">
-          <div class="m-hero-title">
-            <h2>Jupiter Tatravagonka Railwheel</h2>
-            <p>Onsite Mobile Command & Execution Portal</p>
-          </div>
-          <span class="m-hero-badge">
-            <span style="width:6px; height:6px; border-radius:50%; background:#10b981; display:inline-block;"></span>
-            LIVE FIELD OPS
-          </span>
+  <main style="padding:16px; max-width:900px; margin:0 auto; width:100%;">
+    <!-- HERO STATUS BANNER -->
+    <div class="mobile-hero-card">
+      <div class="m-hero-top">
+        <div class="m-hero-title">
+          <h2>Jupiter Tatravagonka Railwheel</h2>
+          <p>Onsite Mobile Command & Execution Portal</p>
         </div>
-
-        <div class="m-kpi-row">
-          <div class="m-kpi-item">
-            <span class="m-kpi-lbl">Total Erection</span>
-            <span class="m-kpi-val">2,531 MT</span>
-            <span class="m-kpi-sub">3 Execution Areas</span>
-          </div>
-          <div class="m-kpi-item">
-            <span class="m-kpi-lbl">Active PTWs</span>
-            <span class="m-kpi-val">8 Valid</span>
-            <span class="m-kpi-sub">0 Violations</span>
-          </div>
-          <div class="m-kpi-item">
-            <span class="m-kpi-lbl">Site Muster</span>
-            <span class="m-kpi-val">42 Crew</span>
-            <span class="m-kpi-sub">Gate Verified</span>
-          </div>
-        </div>
+        <span class="m-hero-badge">
+          <span style="width:6px; height:6px; border-radius:50%; background:#10b981; display:inline-block;"></span>
+          LIVE FIELD OPS
+        </span>
       </div>
 
-      <!-- QUICK PORTALS GRID -->
-      <h3 style="font-size:13px; font-weight:800; text-transform:uppercase; color:var(--b-text-secondary); margin-bottom:10px; letter-spacing:0.5px;">
-        🏛️ Specialized Mobile Portals
-      </h3>
-
-      <!-- CARD: OPERATIONS -->
-      <div class="mobile-touch-card">
-        <div class="mt-header">
-          <div class="mt-header-title">
-            <h3>🏗️ Operations & Heavy Rigging</h3>
-            <p>Line Axle (890.5 MT) • Line Wheel (1,145 MT) • Machine Shop (496 MT)</p>
-          </div>
-          <span class="mt-badge tag-chip tag-cyan">V7.2 LIVE</span>
+      <div class="m-kpi-row">
+        <div class="m-kpi-item">
+          <span class="m-kpi-lbl">Total Erection</span>
+          <span class="m-kpi-val">2,531 MT</span>
+          <span class="m-kpi-sub">3 Execution Areas</span>
         </div>
-        <p style="font-size:11.5px; color:var(--b-text-secondary); margin-bottom:12px;">
-          Direct mechanical erection oversight, crane tandem haulage, 360° dossiers, and dual-sync with Google Sheet <code>1GeqDDmB...</code>.
-        </p>
-        <div class="mt-actions-row">
-          <button class="btn-mobile-act-primary" onclick="BalsonsMobileApp.switchView('operations')">
-            Open Operations View ➔
-          </button>
-          <a href="../BALSONS%20OPERATIONS%20MANAGER/index.html" class="btn-mobile-act-secondary">
-            Full Portal ↗
-          </a>
+        <div class="m-kpi-item">
+          <span class="m-kpi-lbl">Active PTWs</span>
+          <span class="m-kpi-val">8 Valid</span>
+          <span class="m-kpi-sub">0 Violations</span>
+        </div>
+        <div class="m-kpi-item">
+          <span class="m-kpi-lbl">Site Muster</span>
+          <span class="m-kpi-val">42 Crew</span>
+          <span class="m-kpi-sub">Gate Verified</span>
         </div>
       </div>
+    </div>
 
-      <!-- CARD: STORE & TACKLE -->
-      <div class="mobile-touch-card">
-        <div class="mt-header">
-          <div class="mt-header-title">
-            <h3>📦 Store & Tackle Inventory</h3>
-            <p>Form 11 Lifting Certificates • Tool Issue/Return • Bilingual</p>
-          </div>
-          <span class="mt-badge tag-chip tag-green">V3.2 FORM 11</span>
+    <!-- QUICK SPECIALIZED PORTALS GRID -->
+    <h3 style="font-size:13px; font-weight:800; text-transform:uppercase; color:var(--b-text-secondary); margin-bottom:10px; letter-spacing:0.5px;">
+      🏛️ Specialized Mobile Portals (Full End-to-End Suite)
+    </h3>
+
+    <!-- CARD 1: OPERATIONS -->
+    <div class="mobile-touch-card">
+      <div class="mt-header">
+        <div class="mt-header-title">
+          <h3>🏗️ Operations & Heavy Rigging</h3>
+          <p>Line Axle (890.5 MT) • Line Wheel (1,145 MT) • Machine Shop (496 MT)</p>
         </div>
-        <p style="font-size:11.5px; color:var(--b-text-secondary); margin-bottom:12px;">
-          TPI inspection validity verification, sling certifications, calibrated torque wrenches, and returnable gate passes.
-        </p>
-        <div class="mt-actions-row">
-          <button class="btn-mobile-act-primary" style="background:#059669;" onclick="BalsonsMobileApp.switchView('store')">
-            Open Store View ➔
-          </button>
-          <a href="../BALSONS%20STORE%20MANAGER/frontend/index.html" class="btn-mobile-act-secondary">
-            Full Portal ↗
-          </a>
-        </div>
+        <span class="mt-badge tag-chip tag-cyan">V7.2 LIVE</span>
       </div>
-
-      <!-- CARD: SAFETY & PTW -->
-      <div class="mobile-touch-card">
-        <div class="mt-header">
-          <div class="mt-header-title">
-            <h3>🦺 Safety & Risk Manager</h3>
-            <p>Permit-To-Work (PTW) • Form 31 Medical Fitness • 4-Eye Sign-Off</p>
-          </div>
-          <span class="mt-badge tag-chip tag-red">V2.1 ZERO HARM</span>
-        </div>
-        <p style="font-size:11.5px; color:var(--b-text-secondary); margin-bottom:12px;">
-          Zero-harm enforcement, tandem lift 4-eye approval, environmental wind interlocks, and daily site safety passport.
-        </p>
-        <div class="mt-actions-row">
-          <button class="btn-mobile-act-primary" style="background:#dc2626;" onclick="BalsonsMobileApp.switchView('safety')">
-            Open Safety View ➔
-          </button>
-          <a href="../BALSONS%20SAFETY%20MANAGER/index.html" class="btn-mobile-act-secondary">
-            Full Portal ↗
-          </a>
-        </div>
+      <p style="font-size:11.5px; color:var(--b-text-secondary); margin-bottom:12px;">
+        Direct mechanical erection oversight, crane tandem haulage, 360° dossiers, and dual-sync with Google Sheet <code>1GeqDDmB...</code>.
+      </p>
+      <div class="mt-actions-row">
+        <a href="operations.html" class="btn-mobile-act-primary" style="text-align:center; text-decoration:none; display:flex; align-items:center; justify-content:center;">
+          Open Mobile Operations ➔
+        </a>
+        <a href="../BALSONS%20OPERATIONS%20MANAGER/index.html" class="btn-mobile-act-secondary">
+          Full Desktop ↗
+        </a>
       </div>
+    </div>
 
-            <!-- CARD: PURCHASE MANAGER -->
-      <div class="mobile-touch-card">
-        <div class="mt-header">
-          <div class="mt-header-title">
-            <h3>🛒 Purchase & Sourcing Manager</h3>
-            <p>PR Register • RFQ Sourcing • CS Landed Cost Matrix • POs & ASN</p>
-          </div>
-          <span class="mt-badge tag-chip tag-cyan">V6.0 SOURCING</span>
+    <!-- CARD 2: PURCHASE -->
+    <div class="mobile-touch-card">
+      <div class="mt-header">
+        <div class="mt-header-title">
+          <h3>🛒 Purchase & Sourcing Manager</h3>
+          <p>PR Register • RFQ Sourcing • CS Landed Cost Matrix • POs & ASN</p>
         </div>
-        <p style="font-size:11.5px; color:var(--b-text-secondary); margin-bottom:12px;">
-          PR approval workflows, 4-tier DoA approvals, normalized L1/L2/L3 landed cost comparison (freight, customs, GST), and delivery tracking synced with Google Sheet <code>1ANnu4X2...</code>.
-        </p>
-        <div class="mt-actions-row">
-          <a href="../BALSONS%20PURCHASE%20MANAGER/index.html" class="btn-mobile-act-primary" style="background:#0284c7; text-align:center; text-decoration:none; display:flex; align-items:center; justify-content:center;">
-            Open Purchase Portal ➔
-          </a>
-          <a href="https://docs.google.com/spreadsheets/d/1ANnu4X2dR0EITq5RvkyfMv1Xfz30Ba26IKjc40uyj_c/edit" target="_blank" class="btn-mobile-act-secondary">
-            Sheet DB ↗
-          </a>
-        </div>
+        <span class="mt-badge tag-chip tag-cyan" style="background:rgba(2,132,199,0.12); color:#0284c7;">V6.0 SOURCING</span>
       </div>
-
-      <!-- DESKTOP SWITCH CALLOUT -->
-      <div class="switch-desktop-banner">
-        <div class="switch-banner-text">
-          <strong>💻 Need Full Screen Desktop Mode?</strong>
-          <div>Switch to high-density desktop dashboards with multi-window layouts.</div>
-        </div>
-        <a href="../index.html" class="btn-switch-now">Switch to Desktop ↗</a>
+      <p style="font-size:11.5px; color:var(--b-text-secondary); margin-bottom:12px;">
+        PR approval workflows, 4-tier DoA approvals, normalized L1/L2/L3 landed cost comparison (freight, customs, GST), and delivery tracking synced with Google Sheet <code>1ANnu4X2...</code>.
+      </p>
+      <div class="mt-actions-row">
+        <a href="purchase.html" class="btn-mobile-act-primary" style="background:#0284c7; text-align:center; text-decoration:none; display:flex; align-items:center; justify-content:center;">
+          Open Mobile Purchase ➔
+        </a>
+        <a href="../BALSONS%20PURCHASE%20MANAGER/index.html" class="btn-mobile-act-secondary">
+          Full Desktop ↗
+        </a>
       </div>
-    </section>
+    </div>
 
-    <!-- =========================================================================
-         VIEW 2: MOBILE OPERATIONS & WORK PACKAGES
-         ========================================================================= -->
-    <section id="view-operations" class="mobile-view-container">
-      <div style="margin-bottom:12px;">
-        <h2 style="font-size:16px; font-weight:900; color:var(--b-text-primary);">🏗️ Operations Manager (Mobile)</h2>
-        <p style="font-size:11px; color:var(--b-text-muted);">Area Workspaces, Equipment Assemblies & 360° Dossiers</p>
+    <!-- CARD 3: STORE & TACKLE -->
+    <div class="mobile-touch-card">
+      <div class="mt-header">
+        <div class="mt-header-title">
+          <h3>📦 Store & Tackle Inventory</h3>
+          <p>Form 11 Lifting Certificates • Tool Issue/Return • Bilingual</p>
+        </div>
+        <span class="mt-badge tag-chip tag-green">V3.2 FORM 11</span>
       </div>
-
-      <!-- AREA SWITCHER SEGMENTED CONTROL -->
-      <div class="mobile-segment-tabs" id="opsAreaPills">
-        <button class="segment-pill-btn active" onclick="BalsonsMobileApp.setArea('LINE-AXLE', this)">
-          <span>🏗️</span> Line Axle (890.5 MT)
-        </button>
-        <button class="segment-pill-btn" onclick="BalsonsMobileApp.setArea('LINE-WHEEL', this)">
-          <span>⚙️</span> Line Wheel (1,145 MT)
-        </button>
-        <button class="segment-pill-btn" onclick="BalsonsMobileApp.setArea('AREA-MACHINE-SHOP-AXLE', this)">
-          <span>🏢</span> Machine Shop (7 Streams)
-        </button>
+      <p style="font-size:11.5px; color:var(--b-text-secondary); margin-bottom:12px;">
+        TPI inspection validity verification, sling certifications, calibrated torque wrenches, and returnable gate passes.
+      </p>
+      <div class="mt-actions-row">
+        <a href="store.html" class="btn-mobile-act-primary" style="background:#059669; text-align:center; text-decoration:none; display:flex; align-items:center; justify-content:center;">
+          Open Mobile Store ➔
+        </a>
+        <a href="../BALSONS%20STORE%20MANAGER/frontend/index.html" class="btn-mobile-act-secondary">
+          Full Desktop ↗
+        </a>
       </div>
+    </div>
 
-      <!-- DYNAMIC PACKAGE LIST -->
-      <div id="opsPackageListContainer">
-        <!-- Rendered by BalsonsMobileApp.renderAreaPackages() -->
+    <!-- CARD 4: SAFETY & PTW -->
+    <div class="mobile-touch-card">
+      <div class="mt-header">
+        <div class="mt-header-title">
+          <h3>🦺 Safety & Risk Manager</h3>
+          <p>Permit-To-Work (PTW) • Form 31 Medical Fitness • 4-Eye Sign-Off</p>
+        </div>
+        <span class="mt-badge tag-chip tag-red">V2.1 ZERO HARM</span>
       </div>
-    </section>
-
-    <!-- =========================================================================
-         VIEW 3: MOBILE STORE & TACKLE RADAR
-         ========================================================================= -->
-    <section id="view-store" class="mobile-view-container">
-      <div style="margin-bottom:12px;">
-        <h2 style="font-size:16px; font-weight:900; color:var(--b-text-primary);">📦 Store & Tackle Inventory</h2>
-        <p style="font-size:11px; color:var(--b-text-muted);">Form 11 Lifting Certificates & Fast Mobile Tool Issuance</p>
+      <p style="font-size:11.5px; color:var(--b-text-secondary); margin-bottom:12px;">
+        Zero-harm enforcement, tandem lift 4-eye approval, environmental wind interlocks, and daily site safety passport.
+      </p>
+      <div class="mt-actions-row">
+        <a href="safety.html" class="btn-mobile-act-primary" style="background:#dc2626; text-align:center; text-decoration:none; display:flex; align-items:center; justify-content:center;">
+          Open Mobile Safety ➔
+        </a>
+        <a href="../BALSONS%20SAFETY%20MANAGER/index.html" class="btn-mobile-act-secondary">
+          Full Desktop ↗
+        </a>
       </div>
+    </div>
 
-      <!-- TACKLE SCAN CARD -->
-      <div class="mobile-touch-card" style="background:linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0.04) 100%); border-color: rgba(16, 185, 129, 0.3);">
-        <div class="mt-header">
-          <div class="mt-header-title">
-            <h3 style="color:#059669;">📷 Quick Barcode / Form 11 Scanner</h3>
-            <p>Scan Tackle ID or Employee Badge on the Site Floor</p>
-          </div>
-          <span class="mt-badge tag-chip tag-green">CAMERA READY</span>
+    <!-- CARD 5: GATE ENTRY -->
+    <div class="mobile-touch-card">
+      <div class="mt-header">
+        <div class="mt-header-title">
+          <h3>🚧 Gate Entry & Security</h3>
+          <p>Tri-Portal Decision Engine • RFID Turnstile • Onsite Head-Count</p>
         </div>
-        <p style="font-size:11.5px; color:var(--b-text-secondary); margin-bottom:12px;">
-          Instantly checks third-party inspection (TPI) certificate expiration before handing over rigging gear.
-        </p>
-        <button class="btn-mobile-act-primary" style="background:#059669; width:100%;" onclick="BalsonsMobileApp.simulateBarcodeScan()">
-          📷 Scan Tackle Barcode
-        </button>
+        <span class="mt-badge tag-chip tag-amber">V2.0 GATE</span>
       </div>
-
-      <!-- FORM 11 TACKLE LIST SUMMARY -->
-      <h3 style="font-size:13px; font-weight:800; text-transform:uppercase; color:var(--b-text-secondary); margin-bottom:10px;">
-        📋 Critical Heavy Rigging Gear Onsite
-      </h3>
-
-      <div class="mobile-touch-card">
-        <div class="mt-header">
-          <div class="mt-header-title">
-            <h3>Wire Rope Sling - 60T (Matched Pair)</h3>
-            <p>ID: SLING-60T-001 • Form 11: CERT-2026-TPI-882</p>
-          </div>
-          <span class="mt-badge tag-chip tag-green">VALID ✓</span>
-        </div>
-        <div style="font-size:11px; color:var(--b-text-muted); margin-bottom:8px;">
-          Custody: Dilip Rout (Line Axle) • Exp: 2027-04-15 (145 Days Remaining)
-        </div>
-        <div class="mt-actions-row">
-          <button class="btn-mobile-act-secondary" onclick="alert('Form 11 Inspection Report: Valid Lloyd\'s Register certificate on file.')">View Certificate</button>
-          <button class="btn-mobile-act-secondary" onclick="alert('Returned to Store safely!')">Log Return</button>
-        </div>
+      <p style="font-size:11.5px; color:var(--b-text-secondary); margin-bottom:12px;">
+        Tri-portal interlocks, RFID turnstile check-in, real-time head-count muster roll, and material vehicle passes.
+      </p>
+      <div class="mt-actions-row">
+        <a href="gate.html" class="btn-mobile-act-primary" style="background:#d97706; text-align:center; text-decoration:none; display:flex; align-items:center; justify-content:center;">
+          Open Mobile Gate ➔
+        </a>
+        <a href="../BALSONS%20GATE%20ENTRY%20MANAGER/index.html" class="btn-mobile-act-secondary">
+          Full Desktop ↗
+        </a>
       </div>
+    </div>
 
-      <div class="mobile-touch-card">
-        <div class="mt-header">
-          <div class="mt-header-title">
-            <h3>Hydraulic Torque Wrench 10,000 Nm</h3>
-            <p>ID: TORQUE-HYD-02 • Form 11: CAL-2026-NABL-410</p>
-          </div>
-          <span class="mt-badge tag-chip tag-green">VALID ✓</span>
+    <!-- CARD 6: HUMAN RESOURCES -->
+    <div class="mobile-touch-card">
+      <div class="mt-header">
+        <div class="mt-header-title">
+          <h3>👥 Human Resources (HR)</h3>
+          <p>42 Workforce Ledger • Aadhaar KYC Vault • Statutory Compliance</p>
         </div>
-        <div style="font-size:11px; color:var(--b-text-muted); margin-bottom:8px;">
-          Custody: Sarat Mishra (Machine Shop) • Calibration: Valid
-        </div>
-        <div class="mt-actions-row">
-          <button class="btn-mobile-act-secondary" onclick="alert('Calibration Certificate: Accuracy ±1.5% verified.')">View Certificate</button>
-          <button class="btn-mobile-act-secondary" onclick="alert('Returned to Store safely!')">Log Return</button>
-        </div>
+        <span class="mt-badge tag-chip tag-blue">V2.0 KYC</span>
       </div>
-    </section>
-
-    <!-- =========================================================================
-         VIEW 4: MOBILE SAFETY & PTW CLEARANCE
-         ========================================================================= -->
-    <section id="view-safety" class="mobile-view-container">
-      <div style="margin-bottom:12px;">
-        <h2 style="font-size:16px; font-weight:900; color:var(--b-text-primary);">🦺 Safety & Risk Manager</h2>
-        <p style="font-size:11px; color:var(--b-text-muted);">High-Risk Permits (PTW), Wind Gauges & 4-Eye Lift Clearance</p>
+      <p style="font-size:11.5px; color:var(--b-text-secondary); margin-bottom:12px;">
+        Aadhaar biometric KYC verification, Form 31 medical fitness tracker, skill competency matrix, and shift attendance.
+      </p>
+      <div class="mt-actions-row">
+        <a href="hr.html" class="btn-mobile-act-primary" style="background:#2563eb; text-align:center; text-decoration:none; display:flex; align-items:center; justify-content:center;">
+          Open Mobile HR ➔
+        </a>
+        <a href="../BALSONS%20HR%20MANAGER/index.html" class="btn-mobile-act-secondary">
+          Full Desktop ↗
+        </a>
       </div>
+    </div>
 
-      <!-- WIND SPEED GAUGING & INTERLOCK -->
-      <div class="mobile-touch-card" style="border-left: 4px solid var(--b-status-green);">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <div>
-            <div style="font-size:11px; font-weight:700; color:var(--b-text-muted); text-transform:uppercase;">Site Anemometer</div>
-            <div style="font-size:22px; font-weight:900; font-family:var(--b-font-mono); color:var(--b-text-primary);">4.2 m/s</div>
-            <div style="font-size:10px; color:#10b981; font-weight:700;">SAFE LIFTING WEATHER (Limit: 9.8 m/s)</div>
-          </div>
-          <button class="btn-mobile-act-primary" style="background:#dc2626; flex:none; padding:0 12px; height:34px;" onclick="BalsonsMobileApp.simulatePTWCheck()">
-            Verify 4-Eye PTW
-          </button>
+    <!-- CARD 7: DIRECTORY -->
+    <div class="mobile-touch-card">
+      <div class="mt-header">
+        <div class="mt-header-title">
+          <h3>📱 Master Directory & Credentials</h3>
+          <p>All Portal Links • 14 User Accounts • 6 Database Sheets</p>
         </div>
+        <span class="mt-badge tag-chip tag-purple">SAM-2026</span>
       </div>
-
-      <!-- ACTIVE HIGH RISK PTW PERMITS -->
-      <h3 style="font-size:13px; font-weight:800; text-transform:uppercase; color:var(--b-text-secondary); margin-bottom:10px;">
-        ⚡ Active Permits-To-Work (Today)
-      </h3>
-
-      <div class="mobile-touch-card">
-        <div class="mt-header">
-          <div class="mt-header-title">
-            <h3>PTW-2026-LIFT-042 (Heavy Tandem Lift)</h3>
-            <p>Demag 600T + Liebherr 500T • Area 1 Line Axle</p>
-          </div>
-          <span class="mt-badge tag-chip tag-red">ACTIVE PTW</span>
-        </div>
-        <div style="font-size:11px; color:var(--b-text-secondary); margin-bottom:10px;">
-          4-Eye Sign-Off: <strong>Dilip Rout</strong> (Ops) & <strong>Gajendra Rao</strong> (HSE) Verified.
-        </div>
-        <button class="btn-mobile-act-secondary" style="width:100%;" onclick="alert('Permit PTW-2026-LIFT-042 details:\n- Ground Bearing Pressure: 42 t/m2\n- Crane Matting: 100mm Steel Plating Verified\n- Radio Comms: Channel 4 Exclusive')">
-          Inspect Safety Checklist
-        </button>
+      <p style="font-size:11.5px; color:var(--b-text-secondary); margin-bottom:12px;">
+        Complete enterprise directory of all live systems, Sheet DB links, Apps Script Clasp IDs, and credentials.
+      </p>
+      <div class="mt-actions-row">
+        <a href="directory.html" class="btn-mobile-act-primary" style="background:#7c3aed; text-align:center; text-decoration:none; display:flex; align-items:center; justify-content:center;">
+          Open Mobile Directory ➔
+        </a>
+        <a href="../balsons-master-ecosystem-directory.html" class="btn-mobile-act-secondary">
+          Full Directory ↗
+        </a>
       </div>
+    </div>
 
-      <div class="mobile-touch-card">
-        <div class="mt-header">
-          <div class="mt-header-title">
-            <h3>PTW-2026-HEIGHT-089 (Gantry Rail Work)</h3>
-            <p>Overhead Fall Arrest Rigging • Area 3 Machine Shop</p>
-          </div>
-          <span class="mt-badge tag-chip tag-amber">ACTIVE PTW</span>
-        </div>
-        <div style="font-size:11px; color:var(--b-text-secondary); margin-bottom:10px;">
-          Form 31 Medical Fitness verified for all 6 riggers on working platform.
-        </div>
-        <button class="btn-mobile-act-secondary" style="width:100%;" onclick="alert('Permit PTW-2026-HEIGHT-089 details:\n- Full Body Harness 100% Tie-Off\n- Lifeline Anchor Capacity: 22 kN\n- Wind Speed Interlock Active')">
-          Inspect Safety Checklist
-        </button>
+    <!-- DESKTOP SWITCH CALLOUT -->
+    <div class="switch-desktop-banner">
+      <div class="switch-banner-text">
+        <strong>💻 Need Full Screen Desktop Mode?</strong>
+        <div>Switch to high-density desktop dashboards with multi-window layouts.</div>
       </div>
-    </section>
-
-    <!-- =========================================================================
-         VIEW 5: MOBILE MORE & FIELD UTILITIES
-         ========================================================================= -->
-    <section id="view-more" class="mobile-view-container">
-      <div style="margin-bottom:12px;">
-        <h2 style="font-size:16px; font-weight:900; color:var(--b-text-primary);">📱 Mobile Field Utilities & Gate</h2>
-        <p style="font-size:11px; color:var(--b-text-muted);">Turnstiles, Workforce KYC, User Passwords & Directory</p>
-      </div>
-
-      <!-- GATE ENTRY TURNSTILE SIMULATOR -->
-      <div class="mobile-touch-card">
-        <div class="mt-header">
-          <div class="mt-header-title">
-            <h3>🚪 Gate Entry & Muster Scanner</h3>
-            <p>Tri-Portal Turnstile Clearance Interlock</p>
-          </div>
-          <span class="mt-badge tag-chip tag-amber">GATE ENGINE</span>
-        </div>
-        <p style="font-size:11.5px; color:var(--b-text-secondary); margin-bottom:12px;">
-          Checks real-time HR Aadhaar onboarding + Safety Form 31 medical fitness before turnstiles unlock.
-        </p>
-        <button class="btn-mobile-act-primary" style="background:#d97706; width:100%;" onclick="BalsonsMobileApp.simulateGateScan()">
-          🚪 Test Turnstile Badge Scan
-        </button>
-      </div>
-
-      <!-- USER CREDENTIALS QUICK DIRECTORY -->
-      <div class="mobile-touch-card">
-        <div class="mt-header">
-          <div class="mt-header-title">
-            <h3>🔐 User Credentials & Passwords</h3>
-            <p>12 Verified Accounts • Quick Shift Handover</p>
-          </div>
-          <span class="mt-badge tag-chip tag-purple">SAM-2026</span>
-        </div>
-        <p style="font-size:11.5px; color:var(--b-text-secondary); margin-bottom:12px;">
-          Instant 1-tap login switch between Super Admin, Area Managers, Store In-Charge, and Rigging Supervisors.
-        </p>
-        <div class="mt-actions-row">
-          <button class="btn-mobile-act-primary" style="background:#7c3aed;" onclick="BalsonsMobileApp.openUserSwitcher()">
-            Switch User Session ➔
-          </button>
-          <a href="../balsons-master-ecosystem-directory.html" class="btn-mobile-act-secondary">
-            Master Directory ↗
-          </a>
-        </div>
-      </div>
-
-      <!-- STANDALONE SISTER PORTAL SHORTCUTS -->
-      <div class="mobile-touch-card">
-        <h3 style="font-size:13px; font-weight:800; margin-bottom:10px;">🌐 Full Desktop Portals</h3>
-        <div style="display:flex; flex-direction:column; gap:8px;">
-          <a href="../index.html" class="btn-mobile-act-secondary" style="justify-content:flex-start; padding-left:14px;">
-            <span>🚀</span> Central Enterprise Launcher (Desktop)
-          </a>
-          <a href="../BALSONS%20OPERATIONS%20MANAGER/index.html" class="btn-mobile-act-secondary" style="justify-content:flex-start; padding-left:14px;">
-            <span>🏗️</span> Operations & Heavy Rigging Manager
-          </a>
-          <a href="../BALSONS%20STORE%20MANAGER/frontend/index.html" class="btn-mobile-act-secondary" style="justify-content:flex-start; padding-left:14px;">
-            <span>📦</span> Store & Tackle Inventory Manager
-          </a>
-          <a href="../BALSONS%20SAFETY%20MANAGER/index.html" class="btn-mobile-act-secondary" style="justify-content:flex-start; padding-left:14px;">
-            <span>🦺</span> Safety & Risk Manager
-          </a>
-          <a href="../BALSONS%20GATE%20ENTRY%20MANAGER/index.html" class="btn-mobile-act-secondary" style="justify-content:flex-start; padding-left:14px;">
-            <span>🚪</span> Gate Entry & Site Security Manager
-          </a>
-          <a href="../BALSONS%20HR%20MANAGER/index.html" class="btn-mobile-act-secondary" style="justify-content:flex-start; padding-left:14px;">
-            <span>👥</span> Human Resources (HR) Manager
-          </a>
-        </div>
-      </div>
-    </section>
-
+      <a href="../index.html" class="btn-switch-now">Switch to Desktop ↗</a>
+    </div>
   </main>
 
-  <!-- 3. FLOATING ACTION BUTTON (SPEED DIAL) -->
-  <button class="mobile-fab-btn" onclick="BalsonsMobileApp.openDossier('WP-AXLE-01')" title="Quick 360° Dossier Action">
-    📋
-  </button>
-
-  <!-- 4. BOTTOM NAVIGATION BAR (FIXED FOR ONE-THUMB USE) -->
+  <!-- BOTTOM NAVIGATION (SMARTPHONE 1-THUMB & TABLET DOCKED) -->
   <nav class="mobile-bottom-nav">
-    <button class="nav-item-btn active" data-view="hub" onclick="BalsonsMobileApp.switchView('hub')">
+    <a href="index.html" class="nav-item-btn active">
       <span class="nav-icon">🌐</span>
       <span class="nav-label">Hub</span>
-    </button>
-    <button class="nav-item-btn" data-view="operations" onclick="BalsonsMobileApp.switchView('operations')">
+    </a>
+    <a href="operations.html" class="nav-item-btn ">
       <span class="nav-icon">🏗️</span>
-      <span class="nav-label">Operations</span>
-    </button>
-    <button class="nav-item-btn" data-view="store" onclick="BalsonsMobileApp.switchView('store')">
+      <span class="nav-label">Ops</span>
+    </a>
+    <a href="purchase.html" class="nav-item-btn ">
+      <span class="nav-icon">🛒</span>
+      <span class="nav-label">Purch</span>
+    </a>
+    <a href="store.html" class="nav-item-btn ">
       <span class="nav-icon">📦</span>
       <span class="nav-label">Store</span>
-    </button>
-    <button class="nav-item-btn" data-view="safety" onclick="BalsonsMobileApp.switchView('safety')">
+    </a>
+    <a href="safety.html" class="nav-item-btn ">
       <span class="nav-icon">🦺</span>
       <span class="nav-label">Safety</span>
-    </button>
-    <button class="nav-item-btn" data-view="more" onclick="BalsonsMobileApp.switchView('more')">
+    </a>
+    <a href="gate.html" class="nav-item-btn ">
+      <span class="nav-icon">🚧</span>
+      <span class="nav-label">Gate</span>
+    </a>
+    <a href="hr.html" class="nav-item-btn ">
+      <span class="nav-icon">👥</span>
+      <span class="nav-label">HR</span>
+    </a>
+    <a href="directory.html" class="nav-item-btn ">
       <span class="nav-icon">📱</span>
       <span class="nav-label">More</span>
-    </button>
+    </a>
   </nav>
 
-  <!-- 5. 360° DOSSIER MOBILE BOTTOM SHEET -->
+  <!-- 360° UNIVERSAL DOSSIER BOTTOM SHEET -->
   <div id="dossierSheetBackdrop" class="mobile-bottom-sheet-backdrop" onclick="BalsonsMobileApp.closeDossier()"></div>
   <div id="dossierBottomSheet" class="mobile-bottom-sheet">
     <div class="sheet-handle-bar" onclick="BalsonsMobileApp.closeDossier()">
@@ -450,12 +288,10 @@
       </div>
       <button class="btn-sheet-close" onclick="BalsonsMobileApp.closeDossier()">✕</button>
     </div>
-    <div class="sheet-body" id="sheetPunchlistContainer">
-      <!-- Rendered by BalsonsMobileApp.renderPunchlist() -->
-    </div>
+    <div class="sheet-body" id="sheetPunchlistContainer"></div>
   </div>
 
-  <!-- 6. USER SWITCHER & CREDENTIALS MOBILE BOTTOM SHEET -->
+  <!-- USER SWITCHER BOTTOM SHEET -->
   <div id="credSheetBackdrop" class="mobile-bottom-sheet-backdrop" onclick="BalsonsMobileApp.closeUserSwitcher()"></div>
   <div id="credBottomSheet" class="mobile-bottom-sheet">
     <div class="sheet-handle-bar" onclick="BalsonsMobileApp.closeUserSwitcher()">
@@ -464,13 +300,11 @@
     <div class="sheet-header">
       <div>
         <h3>🔐 Switch Active Authorized Session</h3>
-        <p style="font-size:11px; color:var(--b-text-muted); margin-top:2px;">Select user to authenticate immediately in field mode</p>
+        <p style="font-size:11px; color:var(--b-text-muted); margin-top:2px;">Select user to authenticate immediately in mobile field mode</p>
       </div>
       <button class="btn-sheet-close" onclick="BalsonsMobileApp.closeUserSwitcher()">✕</button>
     </div>
-    <div class="sheet-body" id="sheetCredContainer">
-      <!-- Rendered by BalsonsMobileApp.renderCredentialsList() -->
-    </div>
+    <div class="sheet-body" id="sheetCredContainer"></div>
   </div>
 
   <script src="assets/js/balsons-mobile-app.js"></script>

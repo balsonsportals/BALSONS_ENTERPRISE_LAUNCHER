@@ -768,3 +768,383 @@ body {
   border-radius: 6px;
   white-space: nowrap;
 }
+
+/* =========================================================================
+   BALSONS MOBILE PORTALS - FULL ENTERPRISE RICH COMPONENT SUITE
+   Supports full-end desktop features adapted for mobile touchscreens & tablets
+   ========================================================================= */
+
+/* 1. MOBILE RESPONSIVE DATA TABLE */
+.m-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--b-bg-surface);
+  border: 1px solid var(--b-border);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+table.m-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11.5px;
+  min-width: 600px;
+}
+
+table.m-table th {
+  background: var(--b-bg-subtle);
+  color: var(--b-text-secondary);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 2px solid var(--b-border);
+  white-space: nowrap;
+}
+
+table.m-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--b-border);
+  color: var(--b-text-primary);
+  vertical-align: middle;
+}
+
+table.m-table tr:last-child td {
+  border-bottom: none;
+}
+
+table.m-table tr:hover {
+  background: rgba(0, 151, 167, 0.03);
+}
+
+/* 2. MOBILE FILTER & SEARCH TOOLBARS */
+.m-toolbar-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.m-search-input-box {
+  display: flex;
+  align-items: center;
+  background: var(--b-bg-surface);
+  border: 1px solid var(--b-border);
+  border-radius: 10px;
+  padding: 8px 12px;
+  gap: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+
+.m-search-input-box input {
+  border: none;
+  background: none;
+  font-size: 12px;
+  color: var(--b-text-primary);
+  width: 100%;
+  outline: none;
+}
+
+.m-filter-pills-scroll {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+}
+
+.m-filter-pill {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--b-border);
+  background: var(--b-bg-surface);
+  font-size: 11px;
+  font-weight: 700;
+  color: #000000 !important; /* STRICTLY BLACK IN LIGHT MODE (BEDS STANDARD) */
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+[data-theme="dark"] .m-filter-pill {
+  color: #ffffff !important; /* STRICTLY WHITE IN DARK MODE (BEDS STANDARD) */
+}
+
+.m-filter-pill.active {
+  background: var(--b-cyan-primary) !important;
+  color: #ffffff !important;
+  border-color: var(--b-cyan-primary);
+  box-shadow: 0 2px 6px var(--b-cyan-glow);
+}
+
+/* 3. 8-STATE LIFECYCLE CHIPS & STEPPER */
+.m-state-stepper {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 4px 0;
+  margin: 8px 0;
+}
+
+.m-state-chip {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 9.5px;
+  font-weight: 800;
+  border: 1px solid var(--b-border);
+  background: var(--b-bg-subtle);
+  color: var(--b-text-muted);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.m-state-chip.completed {
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+  border-color: #10b981;
+}
+
+.m-state-chip.current {
+  background: var(--b-cyan-primary);
+  color: #ffffff;
+  border-color: var(--b-cyan-primary);
+  box-shadow: 0 2px 6px var(--b-cyan-glow);
+}
+
+/* 4. EXPANDABLE WORKSPACE CARDS */
+.m-card {
+  background: var(--b-bg-surface);
+  border: 1px solid var(--b-border);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.m-card:active {
+  border-color: var(--b-cyan-primary);
+}
+
+.m-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.m-card-header-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.m-card-header-title h4 {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--b-text-primary);
+  line-height: 1.2;
+}
+
+.m-card-header-title span {
+  font-size: 11px;
+  color: var(--b-text-muted);
+  margin-top: 2px;
+}
+
+/* 5. KEY-VALUE DETAIL GRIDS */
+.m-kv-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 12px;
+  background: var(--b-bg-subtle);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin: 10px 0;
+  border: 1px solid var(--b-border);
+}
+
+.m-kv-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.m-kv-lbl {
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--b-text-muted);
+  letter-spacing: 0.3px;
+}
+
+.m-kv-val {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--b-text-primary);
+  margin-top: 1px;
+  font-family: var(--b-font-mono);
+}
+
+/* 6. TRAFFIC LIGHT STATUS BADGES */
+.tl-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.tl-green {
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+  border: 1px solid #10b981;
+}
+
+.tl-yellow {
+  background: rgba(245, 158, 11, 0.12);
+  color: #d97706;
+  border: 1px solid #f59e0b;
+}
+
+.tl-red {
+  background: rgba(239, 68, 68, 0.12);
+  color: #dc2626;
+  border: 1px solid #ef4444;
+}
+
+.tl-blue {
+  background: rgba(59, 130, 246, 0.12);
+  color: #2563eb;
+  border: 1px solid #3b82f6;
+}
+
+.tl-purple {
+  background: rgba(139, 92, 246, 0.12);
+  color: #7c3aed;
+  border: 1px solid #8b5cf6;
+}
+
+/* 7. ODIA BILINGUAL BADGES */
+.odia-text {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 10.5px;
+  color: var(--b-cyan-primary);
+  font-weight: 600;
+}
+
+/* 8. FORM CONTROLS (TOUCH OPTIMIZED 44PX) */
+.m-form-group {
+  margin-bottom: 12px;
+}
+
+.m-form-lbl {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--b-text-secondary);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.m-form-input, .m-form-select, .m-form-textarea {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--b-border);
+  border-radius: 8px;
+  background: var(--b-bg-surface);
+  color: var(--b-text-primary);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.m-form-textarea {
+  height: 80px;
+  padding: 10px 12px;
+  resize: vertical;
+}
+
+.m-form-input:focus, .m-form-select:focus, .m-form-textarea:focus {
+  border-color: var(--b-cyan-primary);
+  box-shadow: 0 0 0 2px var(--b-cyan-glow);
+}
+
+.m-btn-action {
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+
+.m-btn-action:active {
+  transform: scale(0.97);
+}
+
+.m-btn-primary {
+  background: var(--b-cyan-primary);
+  color: #ffffff;
+  box-shadow: 0 2px 8px var(--b-cyan-glow);
+}
+
+.m-btn-secondary {
+  background: var(--b-bg-subtle);
+  border: 1px solid var(--b-border);
+  color: var(--b-text-primary);
+}
+
+.m-btn-danger {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.m-btn-success {
+  background: #059669;
+  color: #ffffff;
+}
+
+/* 9. FORMAL PRINTABLE PO / PTW PREVIEW CARD */
+.m-doc-preview {
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 11px;
+  line-height: 1.4;
+  margin-top: 10px;
+}
+
+[data-theme="dark"] .m-doc-preview {
+  background: #0d1a24;
+  color: #f1f5f9;
+  border-color: #1e3345;
+}
+
+.m-doc-title {
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--b-cyan-primary);
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+}

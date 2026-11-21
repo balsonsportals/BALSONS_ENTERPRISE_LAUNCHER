@@ -3,104 +3,246 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
-  <title>Safety & Risk Manager (Mobile) | BALSONS Mobile</title>
+  <title>Safety & PTW Risk Manager | BALSONS Mobile</title>
   <link rel="icon" type="image/png" href="assets/images/balsons-logo.png">
   <link rel="manifest" href="manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/balsons-mobile.css">
+  <style>
+    .safety-tab-panel { display: none; }
+    .safety-tab-panel.active { display: block; }
+  </style>
 </head>
 <body>
 
-  <!-- TOP MOBILE HEADER -->
+  <!-- 1. TOP MOBILE HEADER -->
   <header class="mobile-header">
     <div class="mobile-header-left">
       <a href="index.html" style="text-decoration:none; display:flex; align-items:center; gap:8px;">
-        <span style="font-size:20px;">🦺</span>
+        <img src="assets/images/balsons-logo.png" alt="BALSONS Logo" class="mobile-brand-logo" onerror="this.onerror=null; this.src='../assets/images/balsons-logo.png';">
         <div class="mobile-header-title">
           <h1>Safety</h1>
-          <span>BALSONS Mobile</span>
+          <span>PTW & Risk V2.1</span>
         </div>
       </a>
     </div>
     <div class="mobile-header-right">
-      <button class="btn-header-action" id="activeUserPill" onclick="BalsonsMobileApp.openUserSwitcher()">
-        👤 User
+      <button class="btn-header-action" id="activeUserPill" onclick="BalsonsMobileApp.openUserSwitcher()" title="Tap to switch active user">
+        👤 Admin (2026)
       </button>
-      <button class="btn-header-action" id="btnMobileTheme" onclick="BalsonsMobileApp.toggleTheme()">
+      <button class="btn-header-action" id="btnMobileTheme" onclick="BalsonsMobileApp.toggleTheme()" title="Toggle Light/Dark Theme">
         🌙
       </button>
-      <a href="../index.html" class="btn-header-action btn-desktop-switch" title="Desktop View">
+      <a href="../index.html" class="btn-header-action btn-desktop-switch" title="Switch to Full Desktop Portal View">
         💻 Desktop
       </a>
     </div>
   </header>
 
-  <!-- MAIN BODY -->
   <main style="padding:16px; max-width:900px; margin:0 auto; width:100%;">
-    <div style="margin-bottom:14px;">
-      <h2 style="font-size:16px; font-weight:900; color:var(--b-text-primary);">Safety & Risk Manager (Mobile)</h2>
-      <p style="font-size:11px; color:var(--b-text-muted);">Permits-To-Work, Wind Interlocks & 4-Eye Rigging Clearance</p>
+    <!-- HERO STATUS BANNER -->
+    <div class="mobile-hero-card" style="background:linear-gradient(135deg, #0b1924 0%, #991b1b 100%);">
+      <div class="m-hero-top">
+        <div class="m-hero-title">
+          <h2>Safety & Risk Governance</h2>
+          <p>Zero Harm Enforcement • 4-Eye Approval • Wind Interlock</p>
+        </div>
+        <span class="m-hero-badge" style="background:#dc2626;">
+          <span style="width:6px; height:6px; border-radius:50%; background:#f87171; display:inline-block;"></span>
+          ZERO HARM V2.1
+        </span>
+      </div>
+
+      <div class="m-kpi-row">
+        <div class="m-kpi-item">
+          <span class="m-kpi-lbl">Active PTWs</span>
+          <span class="m-kpi-val">8 Valid</span>
+          <span class="m-kpi-sub">0 Violations</span>
+        </div>
+        <div class="m-kpi-item">
+          <span class="m-kpi-lbl">Wind Sensor</span>
+          <span class="m-kpi-val">6.4 m/s</span>
+          <span class="m-kpi-sub">Limit: 9.8 m/s</span>
+        </div>
+        <div class="m-kpi-item">
+          <span class="m-kpi-lbl">Crane Interlock</span>
+          <span class="m-kpi-val" style="color:#34d399;">SAFE</span>
+          <span class="m-kpi-sub">All Cranes Go</span>
+        </div>
+      </div>
     </div>
 
-    
-      <div class="mobile-touch-card" style="border-left: 4px solid var(--b-status-green);">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <div>
-            <div style="font-size:11px; font-weight:700; color:var(--b-text-muted); text-transform:uppercase;">Site Anemometer</div>
-            <div style="font-size:22px; font-weight:900; font-family:var(--b-font-mono); color:var(--b-text-primary);">4.2 m/s</div>
-            <div style="font-size:10px; color:#10b981; font-weight:700;">SAFE LIFTING WEATHER (Limit: 9.8 m/s)</div>
+    <!-- WORKSPACE TABS -->
+    <div class="m-filter-pills-scroll" style="margin-bottom:14px;">
+      <button class="m-filter-pill active" onclick="switchSafetyTab('ptws', this)">🦺 Permit-To-Work (4)</button>
+      <button class="m-filter-pill" onclick="switchSafetyTab('wind', this)">🌪️ Wind & Crane Interlock</button>
+      <button class="m-filter-pill" onclick="switchSafetyTab('form31', this)">🩺 Form 31 Medical (40)</button>
+      <button class="m-filter-pill" onclick="switchSafetyTab('tbts', this)">📢 Daily TBT Muster (42)</button>
+    </div>
+
+    <!-- 1. PTW REGISTER TAB -->
+    <div id="tab-safety-ptws" class="safety-tab-panel active">
+      <div class="m-card">
+        <div class="m-card-header">
+          <div class="m-card-header-title">
+            <h4>Live Permit-To-Work (PTW) System (4-Eye Sign-Off)</h4>
+            <span>Executing Engineer + HSE Steward Verification</span>
           </div>
-          <button class="btn-mobile-act-primary" style="background:#dc2626; flex:none; padding:0 12px; height:34px;" onclick="BalsonsMobileApp.simulatePTWCheck()">
-            Verify 4-Eye PTW
-          </button>
+          <span class="tl-badge tl-green">3 APPROVED • 1 PENDING</span>
+        </div>
+
+        <div class="m-table-wrap">
+          <table class="m-table">
+            <thead>
+              <tr>
+                <th>PTW Number</th>
+                <th>Permit Classification</th>
+                <th>Location / Package</th>
+                <th>Sign-Off Status</th>
+                <th>Validity Expiry</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>PTW-2026-089</strong></td>
+                <td><span class="tl-badge tl-red">CRITICAL TANDEM LIFT</span></td>
+                <td>Line Axle Bay 1<br><small style="color:var(--b-text-muted);">WP-AXLE-01</small></td>
+                <td><span class="tl-badge tl-green">4-EYE APPROVED</span></td>
+                <td>2026-11-21 18:00</td>
+                <td><span class="tl-badge tl-green">ACTIVE</span></td>
+              </tr>
+              <tr>
+                <td><strong>PTW-2026-090</strong></td>
+                <td><span class="tl-badge tl-blue">HEIGHT WORK (>2M)</span></td>
+                <td>Line Wheel Plinth<br><small style="color:var(--b-text-muted);">WP-WHEEL-01</small></td>
+                <td><span class="tl-badge tl-green">4-EYE APPROVED</span></td>
+                <td>2026-11-21 17:30</td>
+                <td><span class="tl-badge tl-green">ACTIVE</span></td>
+              </tr>
+              <tr>
+                <td><strong>PTW-2026-091</strong></td>
+                <td><span class="tl-badge tl-yellow">HOT WORK (WELDING)</span></td>
+                <td>Machine Shop Gantry<br><small style="color:var(--b-text-muted);">WP-MS-02</small></td>
+                <td><span class="tl-badge tl-yellow">PENDING HSE</span></td>
+                <td>2026-11-21 16:00</td>
+                <td><button class="m-btn-action m-btn-primary" style="padding:4px 8px; font-size:10.5px;" onclick="BalsonsMobileApp.showToast('✓ PTW-2026-091 Approved by HSE Lead')">Sign 4-Eye</button></td>
+              </tr>
+              <tr style="background:rgba(239,68,68,0.06);">
+                <td><strong>PTW-2026-092</strong></td>
+                <td><span class="tl-badge tl-purple">CONFINED SPACE</span></td>
+                <td>Hydraulic Pit Line Wheel<br><small style="color:var(--b-text-muted);">WP-WHEEL-02</small></td>
+                <td><span class="tl-badge tl-red">GAS CHECK REQ</span></td>
+                <td style="color:#dc2626;">2026-11-21 12:00</td>
+                <td><span class="tl-badge tl-red">SUSPENDED</span></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
+    </div>
 
-      <h3 style="font-size:13px; font-weight:800; text-transform:uppercase; color:var(--b-text-secondary); margin-bottom:10px;">
-        ⚡ Active Permits-To-Work (Today)
-      </h3>
-
-      <div class="mobile-touch-card">
-        <div class="mt-header">
-          <div class="mt-header-title">
-            <h3>PTW-2026-LIFT-042 (Heavy Tandem Lift)</h3>
-            <p>Demag 600T + Liebherr 500T • Area 1 Line Axle</p>
+    <!-- 2. WIND INTERLOCK TAB -->
+    <div id="tab-safety-wind" class="safety-tab-panel">
+      <div class="m-card">
+        <div class="m-card-header">
+          <div class="m-card-header-title">
+            <h4>Live Anemometer & Crane Wind Interlock Monitor</h4>
+            <span>Mandatory OSHA / Factories Act High-Wind Interlock (9.8 m/s Cutoff)</span>
           </div>
-          <span class="mt-badge tag-chip tag-red">ACTIVE PTW</span>
+          <span class="tl-badge tl-green">GREEN: SAFE</span>
         </div>
-        <div style="font-size:11px; color:var(--b-text-secondary); margin-bottom:10px;">
-          4-Eye Sign-Off: <strong>Dilip Rout</strong> (Ops) & <strong>Gajendra Rao</strong> (HSE) Verified.
+        <div style="text-align:center; padding:18px 0;">
+          <div style="font-size:36px; font-weight:900; font-family:var(--b-font-mono); color:#10b981;">6.4 m/s</div>
+          <p style="font-size:12px; color:var(--b-text-muted); margin-top:4px;">Current Wind Gust Velocity (Demag CC2800 Boom Tip Anemometer)</p>
+          <div style="display:inline-block; background:rgba(16,185,129,0.15); border:1px solid #10b981; border-radius:20px; padding:6px 16px; margin-top:12px; font-size:12px; font-weight:800; color:#059669;">
+            ✓ CRANE HOIST PERMISSION: AUTHORIZED (3.4 m/s BELOW SAFETY LIMIT)
+          </div>
         </div>
-        <button class="btn-mobile-act-secondary" style="width:100%;" onclick="alert('Permit PTW-2026-LIFT-042 details:
-- Ground Bearing Pressure: 42 t/m2
-- Crane Matting: 100mm Steel Plating Verified
-- Radio Comms: Channel 4 Exclusive')">
-          Inspect Safety Checklist
-        </button>
       </div>
-        
+    </div>
 
-    <!-- DESKTOP SWITCH BANNER -->
+    <!-- 3. FORM 31 MEDICAL TAB -->
+    <div id="tab-safety-form31" class="safety-tab-panel">
+      <div class="m-card">
+        <div class="m-card-header">
+          <div class="m-card-header-title">
+            <h4>Form 31 Medical Fitness & Vertigo Certification</h4>
+            <span>Odisha Factories Rules 1950 Statutory Compliance</span>
+          </div>
+          <span class="tl-badge tl-green">100% COMPLIANT</span>
+        </div>
+        <p style="font-size:12px; color:var(--b-text-secondary); margin-bottom:12px;">
+          All 42 deployed rigging specialists and crane operators have valid annual Form 31 medical fitness certificates, audiometric hearing tests, and vertigo tolerance clearance.
+        </p>
+      </div>
+    </div>
+
+    <!-- 4. DAILY TBT TAB -->
+    <div id="tab-safety-tbts" class="safety-tab-panel">
+      <div class="m-card">
+        <div class="m-card-header">
+          <div class="m-card-header-title">
+            <h4>Daily Tool Box Talk (TBT) & Safety Passport Muster</h4>
+            <span>Morning Shift Alignment & Hazard Pre-Briefing</span>
+          </div>
+          <span class="tl-badge tl-green">42 SIGNATURES</span>
+        </div>
+        <p style="font-size:12px; color:var(--b-text-secondary); margin-bottom:10px;">
+          <strong>Today's Topic (2026-11-21):</strong> Tandem Lifting Hand Signals & Wind Interlock Thresholds.<br>
+          <strong>Conducted by:</strong> Gajendra Rao (HSE Lead) & Dilip Rout (Area Manager). Attendees: 42 personnel.
+        </p>
+      </div>
+    </div>
+
+    <!-- TELEMETRY & DUAL-SYNC LINK -->
+    <div class="m-card" style="background:rgba(220,38,38,0.05); border:1px solid #dc2626;">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <strong style="font-size:12px; color:var(--b-text-primary);">📊 Safety Database Sheet:</strong>
+          <div style="font-family:var(--b-font-mono); font-size:11px; color:#dc2626;">1SyOGt6HEu6HJCufAbB2_P6BgF6pEppt28J_8cARaOP0</div>
+        </div>
+        <a href="https://docs.google.com/spreadsheets/d/1SyOGt6HEu6HJCufAbB2_P6BgF6pEppt28J_8cARaOP0/edit" target="_blank" class="m-btn-action m-btn-primary" style="background:#dc2626; padding:4px 10px; font-size:11px;">
+          Open Sheet ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- DESKTOP SWITCH CALLOUT -->
     <div class="switch-desktop-banner">
       <div class="switch-banner-text">
         <strong>💻 Need Full Screen Desktop Mode?</strong>
-        <div>Access complete desktop tables and full multi-monitor dashboards.</div>
+        <div>Switch to high-density desktop dashboards with multi-window layouts.</div>
       </div>
-      <a href="../index.html" class="btn-switch-now">Switch to Desktop ↗</a>
+      <a href="../BALSONS%20SAFETY%20MANAGER/index.html" class="btn-switch-now">Switch to Desktop ↗</a>
     </div>
   </main>
 
-  <!-- BOTTOM NAVIGATION -->
+  <script>
+    function switchSafetyTab(tabKey, btnEl) {
+      document.querySelectorAll('.safety-tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.m-filter-pill').forEach(b => b.classList.remove('active'));
+      const target = document.getElementById('tab-safety-' + tabKey);
+      if (target) target.classList.add('active');
+      if (btnEl) btnEl.classList.add('active');
+    }
+  </script>
+
+  <!-- BOTTOM NAVIGATION (SMARTPHONE 1-THUMB & TABLET DOCKED) -->
   <nav class="mobile-bottom-nav">
-    <a href="index.html" class="nav-item-btn">
+    <a href="index.html" class="nav-item-btn ">
       <span class="nav-icon">🌐</span>
       <span class="nav-label">Hub</span>
     </a>
     <a href="operations.html" class="nav-item-btn ">
       <span class="nav-icon">🏗️</span>
-      <span class="nav-label">Operations</span>
+      <span class="nav-label">Ops</span>
+    </a>
+    <a href="purchase.html" class="nav-item-btn ">
+      <span class="nav-icon">🛒</span>
+      <span class="nav-label">Purch</span>
     </a>
     <a href="store.html" class="nav-item-btn ">
       <span class="nav-icon">📦</span>
@@ -110,13 +252,21 @@
       <span class="nav-icon">🦺</span>
       <span class="nav-label">Safety</span>
     </a>
+    <a href="gate.html" class="nav-item-btn ">
+      <span class="nav-icon">🚧</span>
+      <span class="nav-label">Gate</span>
+    </a>
+    <a href="hr.html" class="nav-item-btn ">
+      <span class="nav-icon">👥</span>
+      <span class="nav-label">HR</span>
+    </a>
     <a href="directory.html" class="nav-item-btn ">
       <span class="nav-icon">📱</span>
       <span class="nav-label">More</span>
     </a>
   </nav>
 
-  <!-- 360° DOSSIER BOTTOM SHEET -->
+  <!-- 360° UNIVERSAL DOSSIER BOTTOM SHEET -->
   <div id="dossierSheetBackdrop" class="mobile-bottom-sheet-backdrop" onclick="BalsonsMobileApp.closeDossier()"></div>
   <div id="dossierBottomSheet" class="mobile-bottom-sheet">
     <div class="sheet-handle-bar" onclick="BalsonsMobileApp.closeDossier()">
@@ -141,7 +291,7 @@
     <div class="sheet-header">
       <div>
         <h3>🔐 Switch Active Authorized Session</h3>
-        <p style="font-size:11px; color:var(--b-text-muted); margin-top:2px;">Select user to authenticate immediately in field mode</p>
+        <p style="font-size:11px; color:var(--b-text-muted); margin-top:2px;">Select user to authenticate immediately in mobile field mode</p>
       </div>
       <button class="btn-sheet-close" onclick="BalsonsMobileApp.closeUserSwitcher()">✕</button>
     </div>
