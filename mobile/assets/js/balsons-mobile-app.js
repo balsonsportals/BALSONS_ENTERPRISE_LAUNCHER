@@ -11,8 +11,10 @@ const BalsonsMobileApp = {
 
   // Canonical Accounts Matrix
   accounts: [
-    { username: 'superadmin', name: 'Prashant Muley', role: 'Super Administrator', badge: 'BAL-ADM-001', pass: 'Balsons@Super2026!', pin: '2026', scope: 'ALL 6 Portals' },
-    { username: 'director.mgmt', name: 'Satish Chandra', role: 'Project Director', badge: 'BAL-DIR-001', pass: 'Balsons@Mgmt2026!', pin: '1001', scope: 'Ops, Store, Safety' },
+    { username: 'superadmin', name: 'Prashant Muley', role: 'Super Administrator', badge: 'BAL-ADM-001', pass: 'Balsons@Super2026!', pin: '2026', scope: 'ALL 7 Portals' },
+    { username: 'director.mgmt', name: 'Satish Chandra', role: 'Project Director', badge: 'BAL-DIR-001', pass: 'Balsons@Mgmt2026!', pin: '1001', scope: 'Ops, Store, Safety, Purch' },
+    { username: 'admin.purch', name: 'Rohan Sharma', role: 'Purchase Lead / Commercial Head', badge: 'BAL-PUR-001', pass: 'Purch@Admin2026!', pin: '3001', scope: 'Purchase Manager (Full Commercial Write)' },
+    { username: 'indenter.ops', name: 'Suresh Verma', role: 'Indenter / Site Engineer', badge: 'BAL-PUR-002', pass: 'Indent@Ops2026!', pin: '3002', scope: 'Purchase (PR Drafting & Tech Specs)' },
     { username: 'dilip.rout', name: 'Dilip Rout', role: 'Operations Area Manager', badge: 'BAL-OPS-001', pass: 'Ops@Dilip2026!', pin: '1002', scope: 'Line-Axle / Line-Wheel' },
     { username: 'sarat.mishra', name: 'Sarat Mishra', role: 'Machine Shop Area Manager', badge: 'BAL-OPS-002', pass: 'Ops@Sarat2026!', pin: '1003', scope: 'Machine Shop 7 Streams' },
     { username: 'admin.store', name: 'Gagan Bihari Das', role: 'Store Portal Admin', badge: 'BAL-STR-001', pass: 'Store@Admin2026!', pin: '4001', scope: 'Store & Tackle Form 11' },
