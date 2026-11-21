@@ -29,7 +29,7 @@
       </a>
     </div>
     <div class="mobile-header-right">
-      <button class="btn-header-action" id="activeUserPill" onclick="BalsonsMobileApp.openUserSwitcher()" title="Tap to switch active user">
+      <button class="btn-header-action" id="activeUserPill" onclick="BalsonsMobileApp.openUserSwitcher()" title="Tap to switch active user session">
         👤 Admin (2026)
       </button>
       <button class="btn-header-action" id="btnMobileTheme" onclick="BalsonsMobileApp.toggleTheme()" title="Toggle Light/Dark Theme">
@@ -93,6 +93,14 @@
           <span class="tl-badge tl-green">4 VALID • 1 QUARANTINE</span>
         </div>
 
+        <!-- FILTER CHIPS FOR TACKLE -->
+        <div class="m-filter-pills-scroll" id="storeFilterBar" style="margin-bottom:10px;">
+          <button class="m-filter-pill active" onclick="BalsonsMobileApp.filterStoreTackles('ALL', this)">All (5)</button>
+          <button class="m-filter-pill" onclick="BalsonsMobileApp.filterStoreTackles('VALID', this)">Valid (3)</button>
+          <button class="m-filter-pill" onclick="BalsonsMobileApp.filterStoreTackles('EXPIRING_SOON', this)">Expiring Soon (1)</button>
+          <button class="m-filter-pill" onclick="BalsonsMobileApp.filterStoreTackles('EXPIRED_QUARANTINE', this)">Quarantined (1)</button>
+        </div>
+
         <div class="m-table-wrap">
           <table class="m-table">
             <thead>
@@ -105,47 +113,8 @@
                 <th>Status (English / ଓଡ଼ିଆ)</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td><strong>STR-TK-001</strong></td>
-                <td>100T Four-Legged Wire Rope Sling (36mm)<br><small style="color:var(--b-text-muted);">Rack A-04</small></td>
-                <td><strong>100.0 MT</strong></td>
-                <td><code>TPI/FORM11/2026/894</code></td>
-                <td>2027-03-09</td>
-                <td><span class="tl-badge tl-green">VALID (କାର୍ଯ୍ୟକ୍ଷମ)</span></td>
-              </tr>
-              <tr>
-                <td><strong>STR-TK-002</strong></td>
-                <td>55T Grade-80 Alloy Steel Bow Shackle<br><small style="color:var(--b-text-muted);">Bin B-12</small></td>
-                <td><strong>55.0 MT</strong></td>
-                <td><code>TPI/FORM11/2026/912</code></td>
-                <td>2027-04-01</td>
-                <td><span class="tl-badge tl-green">VALID (କାର୍ଯ୍ୟକ୍ଷମ)</span></td>
-              </tr>
-              <tr>
-                <td><strong>STR-TK-003</strong></td>
-                <td>200T Modular Spreader Lifting Beam (12m)<br><small style="color:var(--b-text-muted);">Yard Bay 1</small></td>
-                <td><strong>200.0 MT</strong></td>
-                <td><code>TPI/FORM11/2026/410</code></td>
-                <td>2026-11-30</td>
-                <td><span class="tl-badge tl-yellow">EXPIRING (ଶୀଘ୍ର ନବୀକରଣ)</span></td>
-              </tr>
-              <tr style="background:rgba(239,68,68,0.06);">
-                <td><strong>STR-TK-004</strong></td>
-                <td>10T Webbing Sling Endless (Polyester)<br><small style="color:var(--b-text-muted);">Quarantine Cage</small></td>
-                <td><strong>10.0 MT</strong></td>
-                <td><code>TPI/FORM11/2025/112</code></td>
-                <td style="color:#dc2626; font-weight:700;">2026-05-04</td>
-                <td><span class="tl-badge tl-red">QUARANTINE (କାର୍ଯ୍ୟକ୍ଷମ ନୁହେଁ)</span></td>
-              </tr>
-              <tr>
-                <td><strong>STR-TK-005</strong></td>
-                <td>30T Grade 100 Short-Link Chain Block<br><small style="color:var(--b-text-muted);">Rack C-02</small></td>
-                <td><strong>30.0 MT</strong></td>
-                <td><code>TPI/FORM11/2026/978</code></td>
-                <td>2027-04-30</td>
-                <td><span class="tl-badge tl-green">VALID (କାର୍ଯ୍ୟକ୍ଷମ)</span></td>
-              </tr>
+            <tbody id="storeTacklesTbody">
+              <!-- Rendered dynamically -->
             </tbody>
           </table>
         </div>
@@ -224,7 +193,7 @@
                 <th>Issued To</th>
                 <th>Timestamp</th>
                 <th>Work Package</th>
-                <th>Custody Status</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -234,7 +203,7 @@
                 <td>Manoj Das (Lead Rigger)</td>
                 <td>2026-11-21 07:30</td>
                 <td>WP-AXLE-01</td>
-                <td><span class="tl-badge tl-blue">IN FIELD</span></td>
+                <td><button class="m-btn-action m-btn-primary" style="padding:4px 8px; font-size:10.5px;" onclick="BalsonsMobileApp.returnToolCustody('ISS-001')">Return Tool</button></td>
               </tr>
               <tr>
                 <td><strong>ISS-002</strong></td>
@@ -242,7 +211,7 @@
                 <td>Ramesh Kumar (Rigger)</td>
                 <td>2026-11-21 08:15</td>
                 <td>WP-WHEEL-01</td>
-                <td><span class="tl-badge tl-blue">IN FIELD</span></td>
+                <td><button class="m-btn-action m-btn-primary" style="padding:4px 8px; font-size:10.5px;" onclick="BalsonsMobileApp.returnToolCustody('ISS-002')">Return Tool</button></td>
               </tr>
               <tr>
                 <td><strong>ISS-003</strong></td>

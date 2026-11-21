@@ -25,7 +25,7 @@
       </a>
     </div>
     <div class="mobile-header-right">
-      <button class="btn-header-action" id="activeUserPill" onclick="BalsonsMobileApp.openUserSwitcher()" title="Tap to switch active user">
+      <button class="btn-header-action" id="activeUserPill" onclick="BalsonsMobileApp.openUserSwitcher()" title="Tap to switch active user session">
         👤 Admin (2026)
       </button>
       <button class="btn-header-action" id="btnMobileTheme" onclick="BalsonsMobileApp.toggleTheme()" title="Toggle Light/Dark Theme">
@@ -64,13 +64,32 @@
         </div>
         <div class="m-kpi-item">
           <span class="m-kpi-lbl">Site Muster</span>
-          <span class="m-kpi-val">42 Crew</span>
+          <span class="m-kpi-val" id="liveSiteMusterCountHub">42 Crew</span>
           <span class="m-kpi-sub">Gate Verified</span>
         </div>
       </div>
     </div>
 
-    <!-- QUICK SPECIALIZED PORTALS GRID -->
+    <!-- QUICK TURNSTILE SWIPE WIDGET ON HUB -->
+    <div class="m-card" style="border:1px solid var(--b-cyan-primary); background:rgba(0,151,167,0.04); margin-bottom:16px;">
+      <div class="m-card-header">
+        <div class="m-card-header-title">
+          <h4>⚡ Quick Field Turnstile Check-In</h4>
+          <span>Tap to simulate instant rigger muster roll swipe</span>
+        </div>
+        <span class="tl-badge tl-cyan">FAST ACCESS</span>
+      </div>
+      <div style="display:flex; gap:8px;">
+        <button class="m-btn-action m-btn-primary" style="flex:1; background:#059669;" onclick="BalsonsMobileApp.simulateTurnstileSwipe('BAL-OPS-003', 'IN')">
+          🎟️ Manoj Das (Swipe IN)
+        </button>
+        <button class="m-btn-action m-btn-secondary" style="flex:1;" onclick="BalsonsMobileApp.simulateTurnstileSwipe('BAL-OPS-003', 'OUT')">
+          🎟️ Swipe OUT
+        </button>
+      </div>
+    </div>
+
+    <!-- SPECIALIZED PORTALS GRID -->
     <h3 style="font-size:13px; font-weight:800; text-transform:uppercase; color:var(--b-text-secondary); margin-bottom:10px; letter-spacing:0.5px;">
       🏛️ Specialized Mobile Portals (Full End-to-End Suite)
     </h3>

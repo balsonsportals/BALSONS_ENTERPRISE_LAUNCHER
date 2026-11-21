@@ -29,7 +29,7 @@
       </a>
     </div>
     <div class="mobile-header-right">
-      <button class="btn-header-action" id="activeUserPill" onclick="BalsonsMobileApp.openUserSwitcher()" title="Tap to switch active user">
+      <button class="btn-header-action" id="activeUserPill" onclick="BalsonsMobileApp.openUserSwitcher()" title="Tap to switch active user session">
         👤 Admin (2026)
       </button>
       <button class="btn-header-action" id="btnMobileTheme" onclick="BalsonsMobileApp.toggleTheme()" title="Toggle Light/Dark Theme">
@@ -102,7 +102,7 @@
                 <th>PR ID</th>
                 <th>Requisition Details</th>
                 <th>Indent Value</th>
-                <th>DoA Approval Tier</th>
+                <th>DoA Authority Tier</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>
@@ -113,7 +113,7 @@
                 <td>High-Tensile Rigging Shackles & Slings<br><small style="color:var(--b-text-muted);">Suresh Verma (Ops)</small></td>
                 <td><strong>₹14,50,000</strong></td>
                 <td><span class="tl-badge tl-purple">Tier 3 (≤₹25L)</span></td>
-                <td><span class="tl-badge tl-green">APPROVED</span></td>
+                <td id="pr-status-PR-2026-001"><span class="tl-badge tl-green">APPROVED</span></td>
                 <td><button class="m-btn-action m-btn-secondary" style="padding:4px 8px; font-size:10.5px;" onclick="BalsonsMobileApp.openDossier('PR', 'PR-2026-001')">Dossier</button></td>
               </tr>
               <tr>
@@ -121,7 +121,7 @@
                 <td>Calibrated Torque Multipliers (2,500 Nm)<br><small style="color:var(--b-text-muted);">Gagan Bihari Das (Store)</small></td>
                 <td><strong>₹4,85,000</strong></td>
                 <td><span class="tl-badge tl-blue">Tier 2 (≤₹5L)</span></td>
-                <td><span class="tl-badge tl-green">APPROVED</span></td>
+                <td id="pr-status-PR-2026-002"><span class="tl-badge tl-green">APPROVED</span></td>
                 <td><button class="m-btn-action m-btn-secondary" style="padding:4px 8px; font-size:10.5px;" onclick="BalsonsMobileApp.openDossier('PR', 'PR-2026-002')">Dossier</button></td>
               </tr>
               <tr>
@@ -129,15 +129,15 @@
                 <td>Retractable Fall Arrest Lifelines (50 Nos)<br><small style="color:var(--b-text-muted);">Gajendra Rao (HSE)</small></td>
                 <td><strong>₹38,000</strong></td>
                 <td><span class="tl-badge tl-green">Tier 1 (≤₹50k)</span></td>
-                <td><span class="tl-badge tl-yellow">PENDING</span></td>
-                <td><button class="m-btn-action m-btn-primary" style="padding:4px 8px; font-size:10.5px;" onclick="BalsonsMobileApp.openDossier('PR', 'PR-2026-003')">Review</button></td>
+                <td id="pr-status-PR-2026-003"><span class="tl-badge tl-yellow">PENDING</span></td>
+                <td><button class="m-btn-action m-btn-primary" style="padding:4px 8px; font-size:10.5px;" onclick="BalsonsMobileApp.approvePR('PR-2026-003')">Approve DoA</button></td>
               </tr>
               <tr>
                 <td><strong>PR-2026-004</strong></td>
                 <td>Hydraulic Tandem Equalizer Beam 300T<br><small style="color:var(--b-text-muted);">Dilip Rout (Ops Lead)</small></td>
                 <td><strong>₹32,00,000</strong></td>
                 <td><span class="tl-badge tl-red">Tier 4 (>₹25L)</span></td>
-                <td><span class="tl-badge tl-yellow">SUBMITTED</span></td>
+                <td id="pr-status-PR-2026-004"><span class="tl-badge tl-yellow">SUBMITTED</span></td>
                 <td><button class="m-btn-action m-btn-secondary" style="padding:4px 8px; font-size:10.5px;" onclick="BalsonsMobileApp.openDossier('PR', 'PR-2026-004')">Dossier</button></td>
               </tr>
             </tbody>

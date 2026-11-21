@@ -1,6 +1,6 @@
 /**
  * =========================================================================
- * BALSONS MOBILE ECOSYSTEM - FULL PRODUCTION APPLICATION SUITE (V6.0)
+ * BALSONS MOBILE ECOSYSTEM - MASTER PRODUCTION APPLICATION SUITE (V6.0)
  * BEDS V1.0 Mobile & Tablet Framework for JTRWF Heavy Industrial Execution
  * Governed by Global Super Administrator Policy V1.0 (SAM-2026 Standard)
  * =========================================================================
@@ -25,7 +25,7 @@ const BalsonsMobileApp = {
     { username: 'client.jtrwf', name: 'Client Auditor', role: 'Client Inspection Auditor', badge: 'BAL-AUD-001', pass: 'Client@JTRWF2026!', pin: '9001', scope: 'Operations (360° Dossiers Read-Only)' }
   ],
 
-  // 2. OPERATIONS & HEAVY RIGGING WORK PACKAGES (3 EXECUTION AREAS, 8 STATES)
+  // 2. OPERATIONS & HEAVY RIGGING WORK PACKAGES
   LIFECYCLE_STATES: ['STAGED', 'RIGGED', 'LIFTED', 'ALIGNED', 'TORQUED', 'TPI_INSPECTED', 'CLIENT_CLEARED', 'COMMISSIONED'],
 
   workPackages: [
@@ -219,7 +219,7 @@ const BalsonsMobileApp = {
     }
   ],
 
-  // 3. PURCHASE & COMMERCIAL SOURCING DATA (6 WORKSPACES)
+  // 3. PURCHASE & COMMERCIAL SOURCING DATA
   purchaseData: {
     prs: [
       { id: 'PR-2026-001', title: 'High-Tensile Rigging Shackles & Heavy Grommet Slings', dept: 'Operations & Rigging', amount: 1450000, doaTier: 'Tier 3 (≤₹25L)', status: 'APPROVED', date: '2026-11-15', indenter: 'Suresh Verma' },
@@ -231,17 +231,6 @@ const BalsonsMobileApp = {
       { id: 'RFQ-2026-001', prRef: 'PR-2026-001', title: 'Supply of Heavy Grommet Slings 150T SWL', vendorsInvited: 3, quotesRecv: 3, status: 'EVALUATING', deadline: '2026-11-25' },
       { id: 'RFQ-2026-002', prRef: 'PR-2026-002', title: 'Calibrated Torque Multipliers & Calibration Certs', vendorsInvited: 4, quotesRecv: 3, status: 'CS_PREPARED', deadline: '2026-11-24' },
       { id: 'RFQ-2026-003', prRef: 'PR-2026-004', title: 'Fabrication of 300T Tandem Equalizer Beam', vendorsInvited: 2, quotesRecv: 2, status: 'OPEN', deadline: '2026-11-30' }
-    ],
-    csMatrix: [
-      {
-        rfqRef: 'RFQ-2026-001',
-        title: 'Comparative Statement: Heavy Grommet Slings',
-        quotes: [
-          { vendor: 'Jindal Heavy Lifting Ltd', exWorks: 1200000, freight: 45000, gst: 224100, landedCost: 1469100, rank: 'L1', status: 'RECOMMENDED' },
-          { vendor: 'Texmaco Infrastructure Co', exWorks: 1280000, freight: 50000, gst: 239400, landedCost: 1569400, rank: 'L2', status: 'COMPETITIVE' },
-          { vendor: 'L&T Heavy Engineering', exWorks: 1400000, freight: 60000, gst: 262800, landedCost: 1722800, rank: 'L3', status: 'HIGH' }
-        ]
-      }
     ],
     pos: [
       { id: 'PO-2026-001', rfqRef: 'RFQ-2026-001', vendor: 'Jindal Heavy Lifting Ltd', poValue: 1469100, rev: 'REV-0', status: 'ISSUED', deliveryDate: '2026-12-05', paymentTerms: '30 Days PDC against TPI Form 11 Cert' },
@@ -261,6 +250,7 @@ const BalsonsMobileApp = {
 
   // 4. STORE & TACKLE FORM 11 INVENTORY DATA
   storeData: {
+    activeFilter: 'ALL',
     tackles: [
       { id: 'STR-TK-001', desc: '100T Four-Legged Wire Rope Sling (36mm)', tpiCert: 'TPI/FORM11/2026/894', swl: '100.0 MT', testDate: '2026-09-10', validUntil: '2027-03-09', status: 'VALID', odiaStatus: 'କାର୍ଯ୍ୟକ୍ଷମ', loc: 'Rack A-04' },
       { id: 'STR-TK-002', desc: '55T Grade-80 Alloy Steel Bow Shackle (Green Pin)', tpiCert: 'TPI/FORM11/2026/912', swl: '55.0 MT', testDate: '2026-10-02', validUntil: '2027-04-01', status: 'VALID', odiaStatus: 'କାର୍ଯ୍ୟକ୍ଷମ', loc: 'Bin B-12' },
@@ -275,7 +265,7 @@ const BalsonsMobileApp = {
     ],
     issues: [
       { id: 'ISS-001', tool: 'STR-TK-001 (100T Sling)', issuedTo: 'Manoj Das (Lead Rigger)', date: '2026-11-21 07:30', wpRef: 'WP-AXLE-01', status: 'ACTIVE' },
-      { id: 'ISS-002', tool: 'TOOL-CAL-01 (Torque Wrench)', issuedTo: 'Ramesh Kumar', date: '2026-11-21 08:15', wpRef: 'WP-WHEEL-01', status: 'ACTIVE' },
+      { id: 'ISS-002', tool: 'TOOL-CAL-01 (Torque Multiplier)', issuedTo: 'Ramesh Kumar', date: '2026-11-21 08:15', wpRef: 'WP-WHEEL-01', status: 'ACTIVE' },
       { id: 'ISS-003', tool: 'STR-TK-002 (55T Shackle)', issuedTo: 'Dilip Rout', date: '2026-11-20 09:00', wpRef: 'WP-MS-02', status: 'RETURNED' }
     ]
   },
@@ -290,22 +280,18 @@ const BalsonsMobileApp = {
       { id: 'PTW-2026-090', type: 'HEIGHT_WORK (>2M)', location: 'Line Wheel Plinth', wpRef: 'WP-WHEEL-01', fourEyeSign: 'APPROVED (4-EYE)', hseSteward: 'Gajendra Rao', engineer: 'Ramesh Kumar', status: 'VALID', expires: '2026-11-21 17:30' },
       { id: 'PTW-2026-091', type: 'HOT_WORK (WELDING)', location: 'Machine Shop Gantry', wpRef: 'WP-MS-02', fourEyeSign: 'PENDING_HSE', hseSteward: 'Pending Sign-Off', engineer: 'Sarat Mishra', status: 'PENDING', expires: '2026-11-21 16:00' },
       { id: 'PTW-2026-092', type: 'CONFINED_SPACE', location: 'Hydraulic Pit Line Wheel', wpRef: 'WP-WHEEL-02', fourEyeSign: 'REJECTED (GAS CHECK REQ)', hseSteward: 'Gajendra Rao', engineer: 'Manoj Das', status: 'SUSPENDED', expires: '2026-11-21 12:00' }
-    ],
-    tbts: [
-      { date: '2026-11-21', topic: 'Tandem Lifting Hand Signals & Wind Interlock Thresholds', attendees: 42, conductor: 'Gajendra Rao / Dilip Rout' },
-      { date: '2026-11-20', topic: '100% Double-Lanyard Tie-Off at Machine Shop Gantry', attendees: 38, conductor: 'Gajendra Rao' }
     ]
   },
 
   // 6. GATE ENTRY & RFID TURNSTILE MUSTER DATA
   gateData: {
     siteMusterCount: 42,
-    barrierState: 'LOCKED (ARM_DOWN)',
+    barrierState: 'LOCKED',
     recentTurnstileSwipes: [
-      { time: '07:54 AM', badge: 'BAL-OPS-003', name: 'Manoj Das', role: 'Lead Heavy Rigger', kyc: 'VERIFIED', ptw: 'ACTIVE', decision: 'ACCESS_GRANTED' },
-      { time: '07:58 AM', badge: 'BAL-OPS-004', name: 'Ramesh Kumar', role: 'Certified Rigger', kyc: 'VERIFIED', ptw: 'ACTIVE', decision: 'ACCESS_GRANTED' },
-      { time: '08:05 AM', badge: 'BAL-CTR-098', name: 'Contract Welder #3', role: 'Contractor', kyc: 'AADHAAR_VERIFIED', ptw: 'EXPIRED', decision: 'ACCESS_DENIED (NO_PTW)' },
-      { time: '08:12 AM', badge: 'BAL-ADM-001', name: 'Prashant Muley', role: 'Super Administrator', kyc: 'MASTER_VERIFIED', ptw: 'EXEMPT', decision: 'ACCESS_GRANTED' }
+      { time: '07:54 AM', badge: 'BAL-OPS-003', name: 'Manoj Das', role: 'Lead Heavy Rigger', kyc: 'VERIFIED', ptw: 'ACTIVE', decision: 'ACCESS_GRANTED', dir: 'IN' },
+      { time: '07:58 AM', badge: 'BAL-OPS-004', name: 'Ramesh Kumar', role: 'Certified Rigger', kyc: 'VERIFIED', ptw: 'ACTIVE', decision: 'ACCESS_GRANTED', dir: 'IN' },
+      { time: '08:05 AM', badge: 'BAL-CTR-098', name: 'Contract Welder #3', role: 'Contractor', kyc: 'AADHAAR_VERIFIED', ptw: 'EXPIRED', decision: 'ACCESS_DENIED (NO_PTW)', dir: 'IN' },
+      { time: '08:12 AM', badge: 'BAL-ADM-001', name: 'Prashant Muley', role: 'Super Administrator', kyc: 'MASTER_VERIFIED', ptw: 'EXEMPT', decision: 'ACCESS_GRANTED', dir: 'IN' }
     ],
     vehiclePasses: [
       { id: 'GP-VEH-041', truckNo: 'OD-02-AK-9844', driver: 'Bikram Jena', carrier: 'VRL Heavy Haulage', cargo: 'Grommet Slings 150T (PO-2026-001)', grossWeight: '28.4 MT', gateStatus: 'ENTERED' },
@@ -315,16 +301,18 @@ const BalsonsMobileApp = {
 
   // 7. HUMAN RESOURCES (HR) WORKFORCE KYC & STATUTORY LEDGER
   hrData: {
-    totalWorkforce: 42,
-    kycVerifiedCount: 42,
-    medicalValidCount: 40,
+    activeDept: 'ALL',
+    searchQuery: '',
     employees: [
-      { id: 'BAL-OPS-001', name: 'Dilip Rout', role: 'Operations Area Manager', phone: '+91 94370 11223', kyc: 'AADHAAR_VERIFIED', form31: 'VALID (04-2027)', cert: 'TPI Rigger Level 3 / Lifting Supervisor', attendance: 'PRESENT' },
-      { id: 'BAL-OPS-002', name: 'Sarat Mishra', role: 'Machine Shop Area Manager', phone: '+91 98610 44556', kyc: 'AADHAAR_VERIFIED', form31: 'VALID (06-2027)', cert: 'Mechanical Alignment Specialist', attendance: 'PRESENT' },
-      { id: 'BAL-OPS-003', name: 'Manoj Das', role: 'Lead Heavy Rigger', phone: '+91 97780 77889', kyc: 'AADHAAR_VERIFIED', form31: 'VALID (10-2027)', cert: 'Heavy Rigger Class 1 / Signalman', attendance: 'PRESENT' },
-      { id: 'BAL-OPS-004', name: 'Ramesh Kumar', role: 'Senior Certified Rigger', phone: '+91 91240 33445', kyc: 'AADHAAR_VERIFIED', form31: 'VALID (08-2027)', cert: 'Height Worker & Rigger Class 2', attendance: 'PRESENT' },
-      { id: 'BAL-SAF-001', name: 'Gajendra Rao', role: 'HSE Steward & Safety Lead', phone: '+91 99370 66778', kyc: 'AADHAAR_VERIFIED', form31: 'VALID (03-2027)', cert: 'NEBOSH IGC / CSP Officer', attendance: 'PRESENT' },
-      { id: 'BAL-STR-001', name: 'Gagan Bihari Das', role: 'Store Portal Admin', phone: '+91 94380 99001', kyc: 'AADHAAR_VERIFIED', form31: 'VALID (05-2027)', cert: 'Tackle Certification Auditor', attendance: 'PRESENT' }
+      { id: 'BAL-OPS-001', name: 'Dilip Rout', role: 'Operations Area Manager', dept: 'OPERATIONS', phone: '+91 94370 11223', kyc: 'AADHAAR_VERIFIED', form31: 'VALID (04-2027)', cert: 'TPI Rigger Level 3 / Lifting Supervisor', attendance: 'PRESENT' },
+      { id: 'BAL-OPS-002', name: 'Sarat Mishra', role: 'Machine Shop Area Manager', dept: 'MACHINE_SHOP', phone: '+91 98610 44556', kyc: 'AADHAAR_VERIFIED', form31: 'VALID (06-2027)', cert: 'Mechanical Alignment Specialist', attendance: 'PRESENT' },
+      { id: 'BAL-OPS-003', name: 'Manoj Das', role: 'Lead Heavy Rigger', dept: 'HEAVY_RIGGING', phone: '+91 97780 77889', kyc: 'AADHAAR_VERIFIED', form31: 'VALID (10-2027)', cert: 'Heavy Rigger Class 1 / Signalman', attendance: 'PRESENT' },
+      { id: 'BAL-OPS-004', name: 'Ramesh Kumar', role: 'Senior Certified Rigger', dept: 'HEAVY_RIGGING', phone: '+91 91240 33445', kyc: 'AADHAAR_VERIFIED', form31: 'VALID (08-2027)', cert: 'Height Worker & Rigger Class 2', attendance: 'PRESENT' },
+      { id: 'BAL-SAF-001', name: 'Gajendra Rao', role: 'HSE Steward & Safety Lead', dept: 'SAFETY', phone: '+91 99370 66778', kyc: 'AADHAAR_VERIFIED', form31: 'VALID (03-2027)', cert: 'NEBOSH IGC / CSP Officer', attendance: 'PRESENT' },
+      { id: 'BAL-STR-001', name: 'Gagan Bihari Das', role: 'Store Portal Admin', dept: 'STORE', phone: '+91 94380 99001', kyc: 'AADHAAR_VERIFIED', form31: 'VALID (05-2027)', cert: 'Tackle Certification Auditor', attendance: 'PRESENT' },
+      { id: 'BAL-SEC-001', name: 'Bikash Mohapatra', role: 'Gate Security Admin', dept: 'SECURITY', phone: '+91 94390 22334', kyc: 'AADHAAR_VERIFIED', form31: 'VALID (12-2026)', cert: 'Access Control Officer', attendance: 'PRESENT' },
+      { id: 'BAL-PUR-001', name: 'Rohan Sharma', role: 'Purchase Lead / Commercial Head', dept: 'PROCUREMENT', phone: '+91 98110 55667', kyc: 'AADHAAR_VERIFIED', form31: 'VALID (01-2027)', cert: 'Contracts & Commercial Head', attendance: 'PRESENT' },
+      { id: 'BAL-PUR-002', name: 'Suresh Verma', role: 'Indenter / Site Engineer', dept: 'OPERATIONS', phone: '+91 98220 77889', kyc: 'AADHAAR_VERIFIED', form31: 'VALID (02-2027)', cert: 'Mechanical Requisitions Engineer', attendance: 'PRESENT' }
     ]
   },
 
@@ -386,7 +374,9 @@ const BalsonsMobileApp = {
     }
   },
 
-  // AREA SWITCHER IN OPERATIONS VIEW
+  // ==========================================
+  // OPERATIONS CONTROLLERS
+  // ==========================================
   setArea: function (areaName, btnElement) {
     this.activeArea = areaName;
     const pills = document.querySelectorAll('#opsAreaPills .segment-pill-btn');
@@ -395,7 +385,6 @@ const BalsonsMobileApp = {
     this.renderOperationsCards();
   },
 
-  // RENDER OPERATIONS WORK PACKAGES
   renderOperationsCards: function () {
     const container = document.getElementById('opsPackageListContainer');
     if (!container) return;
@@ -418,7 +407,6 @@ const BalsonsMobileApp = {
           </span>
         </div>
 
-        <!-- 8-STATE LIFECYCLE STEPPER -->
         <div style="font-size:10px; font-weight:800; text-transform:uppercase; color:var(--b-text-muted); margin-top:4px;">
           8-State Rigging Lifecycle:
         </div>
@@ -435,27 +423,13 @@ const BalsonsMobileApp = {
           }).join('')}
         </div>
 
-        <!-- KEY METRICS GRID -->
         <div class="m-kv-grid">
-          <div class="m-kv-item">
-            <span class="m-kv-lbl">Erection Tonnage</span>
-            <span class="m-kv-val">${wp.weightMT} MT</span>
-          </div>
-          <div class="m-kv-item">
-            <span class="m-kv-lbl">Baseline Man-Days</span>
-            <span class="m-kv-val">${wp.baselineMD} MD</span>
-          </div>
-          <div class="m-kv-item">
-            <span class="m-kv-lbl">Crane Assignment</span>
-            <span class="m-kv-val">${wp.craneCapacity}</span>
-          </div>
-          <div class="m-kv-item">
-            <span class="m-kv-lbl">Execution Lead</span>
-            <span class="m-kv-val">${wp.lead}</span>
-          </div>
+          <div class="m-kv-item"><span class="m-kv-lbl">Erection Tonnage</span><span class="m-kv-val">${wp.weightMT} MT</span></div>
+          <div class="m-kv-item"><span class="m-kv-lbl">Baseline Man-Days</span><span class="m-kv-val">${wp.baselineMD} MD</span></div>
+          <div class="m-kv-item"><span class="m-kv-lbl">Crane Assignment</span><span class="m-kv-val">${wp.craneCapacity}</span></div>
+          <div class="m-kv-item"><span class="m-kv-lbl">Execution Lead</span><span class="m-kv-val">${wp.lead}</span></div>
         </div>
 
-        <!-- PROGRESS BAR -->
         <div style="margin: 8px 0;">
           <div style="display:flex; justify-content:space-between; font-size:11px; font-weight:700; color:var(--b-text-secondary); margin-bottom:4px;">
             <span>Erection Completion Progress</span>
@@ -466,7 +440,6 @@ const BalsonsMobileApp = {
           </div>
         </div>
 
-        <!-- CARD ACTIONS -->
         <div style="display:flex; gap:8px; margin-top:12px;">
           <button class="m-btn-action m-btn-primary" style="flex:1;" onclick="BalsonsMobileApp.openDossier('WP', '${wp.id}')">
             📋 360° Dossier & Punchlist (${wp.punchlist.filter(p => p.done).length}/${wp.punchlist.length})
@@ -479,7 +452,6 @@ const BalsonsMobileApp = {
     `).join('');
   },
 
-  // ADVANCE STATE IN OPERATIONS
   cycleState: function (wpId) {
     const wp = this.workPackages.find(w => w.id === wpId);
     if (!wp) return;
@@ -504,7 +476,340 @@ const BalsonsMobileApp = {
     this.showToast(`✓ State updated to: ${targetState.replace('_', ' ')}`);
   },
 
+  togglePunchItem: function (wpId, punchId) {
+    const wp = this.workPackages.find(w => w.id === wpId);
+    if (!wp) return;
+    const item = wp.punchlist.find(p => p.id === punchId);
+    if (!item) return;
+
+    item.done = !item.done;
+    const doneCount = wp.punchlist.filter(p => p.done).length;
+    wp.progress = Math.round((doneCount / wp.punchlist.length) * 100);
+
+    this.openDossier('WP', wpId);
+    this.renderOperationsCards();
+    this.showToast(`${item.done ? '✓ Cleared' : '○ Re-opened'}: ${item.title}`);
+  },
+
+  syncWorkPackageCloud: function (wpId) {
+    this.showToast(`⚡ Dual-syncing ${wpId} with Sheet 1GeqDDmB...`);
+    setTimeout(() => {
+      this.showToast(`✓ Cloud synchronized: Sheet 1GeqDDmB updated successfully.`);
+    }, 800);
+  },
+
+  // ==========================================
+  // PURCHASE CONTROLLERS
+  // ==========================================
+  approvePR: function (prId) {
+    const pr = this.purchaseData.prs.find(p => p.id === prId);
+    if (!pr) return;
+    pr.status = 'APPROVED';
+    this.closeDossier();
+    this.showToast(`✓ Requisition ${prId} approved per ${pr.doaTier}`);
+    const rowEl = document.getElementById(`pr-status-${prId}`);
+    if (rowEl) {
+      rowEl.innerHTML = '<span class="tl-badge tl-green">APPROVED</span>';
+    }
+  },
+
+  // ==========================================
+  // STORE & FORM 11 CONTROLLERS
+  // ==========================================
+  filterStoreTackles: function (status, btnEl) {
+    this.storeData.activeFilter = status;
+    document.querySelectorAll('#storeFilterBar .m-filter-pill').forEach(b => b.classList.remove('active'));
+    if (btnEl) btnEl.classList.add('active');
+    this.renderStoreTackles();
+  },
+
+  renderStoreTackles: function () {
+    const tbody = document.getElementById('storeTacklesTbody');
+    if (!tbody) return;
+
+    const filtered = this.storeData.activeFilter === 'ALL'
+      ? this.storeData.tackles
+      : this.storeData.tackles.filter(t => t.status === this.storeData.activeFilter);
+
+    tbody.innerHTML = filtered.map(t => `
+      <tr style="${t.status === 'EXPIRED_QUARANTINE' ? 'background:rgba(239,68,68,0.06);' : ''}">
+        <td><strong>${t.id}</strong></td>
+        <td>${t.desc}<br><small style="color:var(--b-text-muted);">${t.loc}</small></td>
+        <td><strong>${t.swl}</strong></td>
+        <td><code>${t.tpiCert}</code></td>
+        <td style="${t.status === 'EXPIRED_QUARANTINE' ? 'color:#dc2626; font-weight:700;' : ''}">${t.validUntil}</td>
+        <td>
+          <span class="tl-badge ${t.status === 'VALID' ? 'tl-green' : t.status === 'EXPIRING_SOON' ? 'tl-yellow' : 'tl-red'}">
+            ${t.status === 'VALID' ? 'VALID (କାର୍ଯ୍ୟକ୍ଷମ)' : t.status === 'EXPIRING_SOON' ? 'EXPIRING (ଶୀଘ୍ର)' : 'QUARANTINE (ଅକ୍ଷମ)'}
+          </span>
+        </td>
+      </tr>
+    `).join('');
+  },
+
+  issueToolCustody: function (toolId, riggerName, wpRef) {
+    const newId = `ISS-00${this.storeData.issues.length + 1}`;
+    this.storeData.issues.unshift({
+      id: newId,
+      tool: toolId,
+      issuedTo: riggerName,
+      date: 'Just Now (2026-11-21)',
+      wpRef: wpRef,
+      status: 'ACTIVE'
+    });
+    this.showToast(`✓ Tool ${toolId} issued to ${riggerName}`);
+  },
+
+  returnToolCustody: function (issId) {
+    const item = this.storeData.issues.find(i => i.id === issId);
+    if (item) {
+      item.status = 'RETURNED';
+      this.showToast(`✓ Tool ${item.tool} returned to Store Bin`);
+    }
+  },
+
+  // ==========================================
+  // SAFETY & WIND INTERLOCK CONTROLLERS
+  // ==========================================
+  setWindSpeed: function (speedMPS) {
+    this.safetyData.windSpeedMPS = parseFloat(speedMPS);
+    const speedEl = document.getElementById('liveWindSpeedVal');
+    const badgeEl = document.getElementById('liveWindBadge');
+    const bannerEl = document.getElementById('craneInterlockAlertBanner');
+
+    if (speedEl) speedEl.innerHTML = `${speedMPS} m/s`;
+
+    if (this.safetyData.windSpeedMPS > this.safetyData.windLimitMPS) {
+      this.safetyData.craneInterlock = 'HALTED_INTERLOCKED';
+      if (speedEl) speedEl.style.color = '#ef4444';
+      if (badgeEl) {
+        badgeEl.className = 'tl-badge tl-red';
+        badgeEl.innerHTML = 'CRITICAL WIND: HALT CRANES';
+      }
+      if (bannerEl) {
+        bannerEl.style.display = 'block';
+        bannerEl.innerHTML = `⚠️ HIGH WIND ALERT (${speedMPS} m/s > 9.8 m/s): CRANE HOIST MOTORS INTERLOCKED! ALL TANDEM LIFTS SUSPENDED!`;
+      }
+      this.showToast(`🚨 HIGH WIND (${speedMPS} m/s): CRANE BOOMS HALTED BY INTERLOCK!`);
+    } else {
+      this.safetyData.craneInterlock = 'SAFE_TO_LIFT';
+      if (speedEl) speedEl.style.color = '#10b981';
+      if (badgeEl) {
+        badgeEl.className = 'tl-badge tl-green';
+        badgeEl.innerHTML = 'GREEN: SAFE TO LIFT';
+      }
+      if (bannerEl) bannerEl.style.display = 'none';
+      this.showToast(`✓ Normal Wind (${speedMPS} m/s): Crane Hoist Operations Permitted.`);
+    }
+  },
+
+  approvePTW: function (ptwId) {
+    const ptw = this.safetyData.activePTWs.find(p => p.id === ptwId);
+    if (!ptw) return;
+    ptw.fourEyeSign = 'APPROVED (4-EYE)';
+    ptw.status = 'VALID';
+    this.showToast(`✓ ${ptwId} 4-Eye Approval Completed by HSE Steward`);
+    const statusEl = document.getElementById(`ptw-status-${ptwId}`);
+    if (statusEl) statusEl.innerHTML = '<span class="tl-badge tl-green">4-EYE APPROVED</span>';
+  },
+
+  // ==========================================
+  // GATE ENTRY & TURNSTILE SIMULATOR
+  // ==========================================
+  simulateTurnstileSwipe: function (badgeId, direction) {
+    let emp = this.hrData.employees.find(e => e.id === badgeId);
+    let name = emp ? emp.name : 'Visitor / Unknown';
+    let role = emp ? emp.role : 'Contractor';
+    let kyc = emp ? emp.kyc : 'VERIFIED';
+    let ptw = 'ACTIVE';
+
+    if (badgeId === 'BAL-CTR-098') {
+      name = 'Contract Welder #3';
+      role = 'Contractor';
+      ptw = 'EXPIRED';
+    }
+
+    let isApproved = false;
+    let decisionReason = '';
+
+    // TRI-PORTAL BARRIER LOGIC: HR KYC == VERIFIED && PTW == ACTIVE
+    if (kyc.includes('VERIFIED') && ptw === 'ACTIVE') {
+      isApproved = true;
+      decisionReason = 'ACCESS_GRANTED';
+    } else {
+      isApproved = false;
+      decisionReason = ptw !== 'ACTIVE' ? 'ACCESS_DENIED (NO_PTW)' : 'ACCESS_DENIED (KYC_HOLD)';
+    }
+
+    // Barrier Visual Response
+    const barrierIndicator = document.getElementById('gateBarrierVisual');
+    const barrierLed = document.getElementById('gateLedIndicator');
+    const resultBox = document.getElementById('gateSwipeResultBox');
+
+    if (isApproved) {
+      if (direction === 'IN') {
+        this.gateData.siteMusterCount++;
+      } else {
+        this.gateData.siteMusterCount = Math.max(0, this.gateData.siteMusterCount - 1);
+      }
+      if (barrierLed) {
+        barrierLed.style.background = '#10b981';
+        barrierLed.style.boxShadow = '0 0 16px #10b981';
+      }
+      if (barrierIndicator) {
+        barrierIndicator.innerHTML = '🟢 BARRIER UNLATCHED: SWING OPEN';
+        barrierIndicator.style.color = '#059669';
+      }
+      if (resultBox) {
+        resultBox.innerHTML = `✓ ${direction} Permitted: ${name} (${badgeId}) • Reason: Tri-Portal Verified`;
+        resultBox.style.color = '#059669';
+      }
+      this.showToast(`✓ [TURNSTILE ${direction}] ${name}: Access Granted!`);
+    } else {
+      if (barrierLed) {
+        barrierLed.style.background = '#ef4444';
+        barrierLed.style.boxShadow = '0 0 16px #ef4444';
+      }
+      if (barrierIndicator) {
+        barrierIndicator.innerHTML = '🔴 BARRIER LOCKED: ACCESS DENIED';
+        barrierIndicator.style.color = '#dc2626';
+      }
+      if (resultBox) {
+        resultBox.innerHTML = `✕ Access Denied: ${name} (${badgeId}) • Reason: ${decisionReason}`;
+        resultBox.style.color = '#dc2626';
+      }
+      this.showToast(`🚨 [TURNSTILE LOCKED] ${name}: ${decisionReason}`);
+    }
+
+    // Update Muster Count Display
+    const countEl = document.getElementById('liveSiteMusterCount');
+    if (countEl) countEl.innerHTML = `${this.gateData.siteMusterCount} Crew`;
+
+    // Append to Swipe Log Table
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const logTbody = document.getElementById('gateSwipesTbody');
+    if (logTbody) {
+      const newRow = `
+        <tr style="${!isApproved ? 'background:rgba(239,68,68,0.06);' : ''}">
+          <td>${timeStr}</td>
+          <td><strong>${badgeId}</strong></td>
+          <td>${name}</td>
+          <td><span class="tl-badge tl-green">${kyc}</span></td>
+          <td><span class="tl-badge ${ptw === 'ACTIVE' ? 'tl-green' : 'tl-red'}">${ptw}</span></td>
+          <td><span class="tl-badge ${isApproved ? 'tl-green' : 'tl-red'}">${decisionReason}</span></td>
+        </tr>
+      `;
+      logTbody.insertAdjacentHTML('afterbegin', newRow);
+    }
+
+    // Restore Barrier after 3.5 seconds
+    setTimeout(() => {
+      if (barrierIndicator) {
+        barrierIndicator.innerHTML = '🔒 BARRIER RESTORED: READY';
+        barrierIndicator.style.color = 'var(--b-text-secondary)';
+      }
+      if (barrierLed) {
+        barrierLed.style.background = '#f59e0b';
+        barrierLed.style.boxShadow = 'none';
+      }
+    }, 3500);
+  },
+
+  // ==========================================
+  // HR & WORKFORCE SEARCH & FILTER
+  // ==========================================
+  filterHR: function (deptName, btnEl) {
+    this.hrData.activeDept = deptName;
+    document.querySelectorAll('#hrDeptPills .m-filter-pill').forEach(b => b.classList.remove('active'));
+    if (btnEl) btnEl.classList.add('active');
+    this.renderHRTable();
+  },
+
+  searchHR: function (query) {
+    this.hrData.searchQuery = query.toLowerCase().trim();
+    this.renderHRTable();
+  },
+
+  renderHRTable: function () {
+    const tbody = document.getElementById('hrWorkforceTbody');
+    if (!tbody) return;
+
+    const filtered = this.hrData.employees.filter(emp => {
+      const matchDept = this.hrData.activeDept === 'ALL' || emp.dept === this.hrData.activeDept;
+      const matchSearch = !this.hrData.searchQuery ||
+        emp.name.toLowerCase().includes(this.hrData.searchQuery) ||
+        emp.id.toLowerCase().includes(this.hrData.searchQuery) ||
+        emp.role.toLowerCase().includes(this.hrData.searchQuery);
+      return matchDept && matchSearch;
+    });
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:16px;">No workforce personnel found.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(emp => `
+      <tr>
+        <td><strong>${emp.id}</strong></td>
+        <td><strong>${emp.name}</strong><br><small style="color:var(--b-text-muted);">${emp.phone}</small></td>
+        <td>${emp.role}</td>
+        <td><span class="tl-badge tl-green">${emp.kyc}</span></td>
+        <td><span class="tl-badge tl-green">${emp.form31}</span></td>
+        <td><small>${emp.cert}</small></td>
+        <td><span class="tl-badge tl-green">${emp.attendance}</span></td>
+      </tr>
+    `).join('');
+  },
+
+  // ==========================================
+  // DIRECTORY CREDENTIALS COPY & TOGGLE
+  // ==========================================
+  toggleAllPasswords: function () {
+    const masks = document.querySelectorAll('.m-pw-val-text');
+    const isMasked = masks.length > 0 && masks[0].classList.contains('masked');
+    masks.forEach(m => {
+      if (isMasked) {
+        m.classList.remove('masked');
+        m.innerText = m.getAttribute('data-plain');
+      } else {
+        m.classList.add('masked');
+        m.innerText = '••••••••••••••';
+      }
+    });
+    this.showToast(isMasked ? '👁️ All passwords visible' : '🔒 All passwords masked');
+  },
+
+  toggleSinglePassword: function (spanId, btnEl) {
+    const el = document.getElementById(spanId);
+    if (!el) return;
+    if (el.classList.contains('masked')) {
+      el.classList.remove('masked');
+      el.innerText = el.getAttribute('data-plain');
+      if (btnEl) btnEl.innerText = '🔒';
+    } else {
+      el.classList.add('masked');
+      el.innerText = '••••••••••••••';
+      if (btnEl) btnEl.innerText = '👁️';
+    }
+  },
+
+  copyText: function (str, btnEl) {
+    navigator.clipboard.writeText(str).then(() => {
+      this.showToast(`📋 Copied: "${str}"`);
+      if (btnEl) {
+        const orig = btnEl.innerText;
+        btnEl.innerText = '✓';
+        setTimeout(() => { btnEl.innerText = orig; }, 1400);
+      }
+    }).catch(() => {
+      this.showToast(`Copied: ${str}`);
+    });
+  },
+
+  // ==========================================
   // 360° UNIVERSAL DOSSIER MODAL BOTTOM SHEET
+  // ==========================================
   openDossier: function (type, id) {
     const titleEl = document.getElementById('sheetDossierTitle');
     const subEl = document.getElementById('sheetDossierSub');
@@ -605,37 +910,9 @@ const BalsonsMobileApp = {
     if (sheet) sheet.classList.remove('open');
   },
 
-  togglePunchItem: function (wpId, punchId) {
-    const wp = this.workPackages.find(w => w.id === wpId);
-    if (!wp) return;
-    const item = wp.punchlist.find(p => p.id === punchId);
-    if (!item) return;
-
-    item.done = !item.done;
-    const doneCount = wp.punchlist.filter(p => p.done).length;
-    wp.progress = Math.round((doneCount / wp.punchlist.length) * 100);
-
-    this.openDossier('WP', wpId);
-    this.renderOperationsCards();
-    this.showToast(`${item.done ? '✓ Cleared' : '○ Re-opened'}: ${item.title}`);
-  },
-
-  syncWorkPackageCloud: function (wpId) {
-    this.showToast(`⚡ Dual-syncing ${wpId} with Sheet 1GeqDDmB...`);
-    setTimeout(() => {
-      this.showToast(`✓ Cloud synchronized: Sheet 1GeqDDmB updated successfully.`);
-    }, 800);
-  },
-
-  approvePR: function (prId) {
-    const pr = this.purchaseData.prs.find(p => p.id === prId);
-    if (!pr) return;
-    pr.status = 'APPROVED';
-    this.closeDossier();
-    this.showToast(`✓ Requisition ${prId} approved per ${pr.doaTier}`);
-  },
-
+  // ==========================================
   // USER SWITCHER SHEET
+  // ==========================================
   openUserSwitcher: function () {
     const container = document.getElementById('sheetCredContainer');
     if (!container) return;
@@ -692,7 +969,6 @@ const BalsonsMobileApp = {
   },
 
   bindEvents: function () {
-    // Escape key closes sheets
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         this.closeDossier();
@@ -702,9 +978,14 @@ const BalsonsMobileApp = {
   },
 
   renderCurrentView: function () {
-    // If on operations.html
     if (document.getElementById('opsPackageListContainer')) {
       this.renderOperationsCards();
+    }
+    if (document.getElementById('storeTacklesTbody')) {
+      this.renderStoreTackles();
+    }
+    if (document.getElementById('hrWorkforceTbody')) {
+      this.renderHRTable();
     }
   }
 };

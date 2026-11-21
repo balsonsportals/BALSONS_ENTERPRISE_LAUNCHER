@@ -25,7 +25,7 @@
       </a>
     </div>
     <div class="mobile-header-right">
-      <button class="btn-header-action" id="activeUserPill" onclick="BalsonsMobileApp.openUserSwitcher()" title="Tap to switch active user">
+      <button class="btn-header-action" id="activeUserPill" onclick="BalsonsMobileApp.openUserSwitcher()" title="Tap to switch active user session">
         👤 Admin (2026)
       </button>
       <button class="btn-header-action" id="btnMobileTheme" onclick="BalsonsMobileApp.toggleTheme()" title="Toggle Light/Dark Theme">
@@ -70,14 +70,32 @@
       </div>
     </div>
 
+    <!-- WORKFORCE SEARCH & FILTER BAR -->
+    <div class="m-toolbar-row">
+      <div class="m-search-input-box">
+        <span>🔍</span>
+        <input type="text" placeholder="Search rigger name, badge ID, or trade..." oninput="BalsonsMobileApp.searchHR(this.value)">
+      </div>
+      <div class="m-filter-pills-scroll" id="hrDeptPills">
+        <button class="m-filter-pill active" onclick="BalsonsMobileApp.filterHR('ALL', this)">All Depts (9)</button>
+        <button class="m-filter-pill" onclick="BalsonsMobileApp.filterHR('OPERATIONS', this)">Operations (2)</button>
+        <button class="m-filter-pill" onclick="BalsonsMobileApp.filterHR('HEAVY_RIGGING', this)">Heavy Rigging (2)</button>
+        <button class="m-filter-pill" onclick="BalsonsMobileApp.filterHR('MACHINE_SHOP', this)">Machine Shop (1)</button>
+        <button class="m-filter-pill" onclick="BalsonsMobileApp.filterHR('SAFETY', this)">Safety (1)</button>
+        <button class="m-filter-pill" onclick="BalsonsMobileApp.filterHR('STORE', this)">Store (1)</button>
+        <button class="m-filter-pill" onclick="BalsonsMobileApp.filterHR('SECURITY', this)">Gate (1)</button>
+        <button class="m-filter-pill" onclick="BalsonsMobileApp.filterHR('PROCUREMENT', this)">Purchase (1)</button>
+      </div>
+    </div>
+
     <!-- WORKFORCE DIRECTORY CARD -->
     <div class="m-card">
       <div class="m-card-header">
         <div class="m-card-header-title">
-          <h4>Authorized Field Engineering & Rigging Crew (42)</h4>
+          <h4>Authorized Field Engineering & Rigging Crew</h4>
           <span>Aadhaar KYC, TPI Certifications & Statutory Form 31</span>
         </div>
-        <span class="tl-badge tl-green">42 PRESENT</span>
+        <span class="tl-badge tl-green">VERIFIED ROSTER</span>
       </div>
 
       <div class="m-table-wrap">
@@ -93,61 +111,8 @@
               <th>Shift Status</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td><strong>BAL-OPS-001</strong></td>
-              <td>Dilip Rout</td>
-              <td>Operations Area Manager</td>
-              <td><span class="tl-badge tl-green">AADHAAR OK</span></td>
-              <td><span class="tl-badge tl-green">VALID (04-2027)</span></td>
-              <td>TPI Rigger Level 3</td>
-              <td><span class="tl-badge tl-green">PRESENT</span></td>
-            </tr>
-            <tr>
-              <td><strong>BAL-OPS-002</strong></td>
-              <td>Sarat Mishra</td>
-              <td>Machine Shop Area Manager</td>
-              <td><span class="tl-badge tl-green">AADHAAR OK</span></td>
-              <td><span class="tl-badge tl-green">VALID (06-2027)</span></td>
-              <td>Alignment Specialist</td>
-              <td><span class="tl-badge tl-green">PRESENT</span></td>
-            </tr>
-            <tr>
-              <td><strong>BAL-OPS-003</strong></td>
-              <td>Manoj Das</td>
-              <td>Lead Heavy Rigger</td>
-              <td><span class="tl-badge tl-green">AADHAAR OK</span></td>
-              <td><span class="tl-badge tl-green">VALID (10-2027)</span></td>
-              <td>Heavy Rigger Class 1</td>
-              <td><span class="tl-badge tl-green">PRESENT</span></td>
-            </tr>
-            <tr>
-              <td><strong>BAL-OPS-004</strong></td>
-              <td>Ramesh Kumar</td>
-              <td>Senior Certified Rigger</td>
-              <td><span class="tl-badge tl-green">AADHAAR OK</span></td>
-              <td><span class="tl-badge tl-green">VALID (08-2027)</span></td>
-              <td>Height Rigger Class 2</td>
-              <td><span class="tl-badge tl-green">PRESENT</span></td>
-            </tr>
-            <tr>
-              <td><strong>BAL-SAF-001</strong></td>
-              <td>Gajendra Rao</td>
-              <td>HSE Steward & Safety Lead</td>
-              <td><span class="tl-badge tl-green">AADHAAR OK</span></td>
-              <td><span class="tl-badge tl-green">VALID (03-2027)</span></td>
-              <td>NEBOSH IGC Certified</td>
-              <td><span class="tl-badge tl-green">PRESENT</span></td>
-            </tr>
-            <tr>
-              <td><strong>BAL-STR-001</strong></td>
-              <td>Gagan Bihari Das</td>
-              <td>Store Portal Admin</td>
-              <td><span class="tl-badge tl-green">AADHAAR OK</span></td>
-              <td><span class="tl-badge tl-green">VALID (05-2027)</span></td>
-              <td>Tackle Auditor</td>
-              <td><span class="tl-badge tl-green">PRESENT</span></td>
-            </tr>
+          <tbody id="hrWorkforceTbody">
+            <!-- Rendered dynamically -->
           </tbody>
         </table>
       </div>
