@@ -6,558 +6,1108 @@
   <title>BALSONS Enterprise Workspace • Central Portal Launcher</title>
   <link rel="icon" type="image/png" href="assets/images/balsons-logo.png" />
   <link rel="stylesheet" href="beds.css">
-  <script src="assets/js/balsons-sam-auth.js"></script>
   <style>
-    /* BEDS V1.0 Central Launcher Specific Styles */
-    header {
-      background-color: var(--beds-bg-panel);
-      border-bottom: 1px solid var(--beds-border);
-      padding: 14px 32px;
+    :root {
+      --super-teal: #102a35;
+      --super-teal-light: #183e4d;
+      --super-accent: #0097b2;
+      --super-gold: #d97706;
+      --super-border: #e2e8f0;
+      --super-bg: #f8fafc;
+      --super-card: #ffffff;
+    }
+
+    [data-theme="dark"] {
+      --super-teal: #08161c;
+      --super-teal-light: #0d222b;
+      --super-border: #1e3a45;
+      --super-bg: #091317;
+      --super-card: #0d222b;
+    }
+
+    body {
+      background-color: var(--beds-bg-page, #f8fafc);
+      color: var(--beds-text-primary, #1e293b);
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 1. MASTER EXECUTIVE HEADER */
+    header.exec-header {
+      background: var(--beds-bg-panel, #ffffff);
+      border-bottom: 1px solid var(--beds-border, #e2e8f0);
+      padding: 12px 32px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: sticky;
       top: 0;
-      z-index: 50;
-      box-shadow: 0 1px 3px rgba(16, 45, 53, 0.04);
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(16, 42, 53, 0.05);
     }
-    .brand-wrap {
+    .header-brand {
       display: flex;
       align-items: center;
       gap: 14px;
     }
-    .brand-titles h1 {
+    .header-brand img {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+    }
+    .brand-text h1 {
       font-size: 16px;
       font-weight: 800;
-      color: var(--beds-charcoal-heading);
-      letter-spacing: -0.2px;
+      color: var(--beds-charcoal-heading, #102a35);
+      margin: 0;
       line-height: 1.2;
+      letter-spacing: -0.2px;
     }
-    .brand-titles p {
+    .brand-text p {
       font-size: 11px;
-      color: var(--beds-teal-primary);
       font-weight: 700;
+      color: var(--beds-teal-primary, #0097a7);
+      margin: 1px 0 0 0;
       text-transform: uppercase;
       letter-spacing: 0.6px;
     }
+    .brand-slogan {
+      font-size: 10px;
+      font-style: italic;
+      color: var(--beds-text-muted, #64748b);
+      margin-top: 2px;
+    }
 
-    .header-controls {
+    .header-actions {
       display: flex;
       align-items: center;
       gap: 12px;
     }
-
-    /* Hero / Greeting Section */
-    .hero-banner {
-      background: var(--beds-bg-panel);
-      border-bottom: 1px solid var(--beds-border);
-      padding: 36px 32px;
-    }
-    .hero-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    .greeting-text h2 {
-      font-size: 26px;
-      font-weight: 800;
-      color: var(--beds-charcoal-heading);
-      margin-bottom: 6px;
-    }
-    .greeting-text p {
-      font-size: 14px;
-      color: var(--beds-text-secondary);
-    }
-    .project-pill {
+    .badge-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: var(--beds-bg-page);
-      border: 1px solid var(--beds-border);
-      padding: 6px 14px;
-      border-radius: var(--beds-radius-full);
+      background: var(--beds-bg-page, #f1f5f9);
+      border: 1px solid var(--beds-border, #e2e8f0);
+      padding: 6px 12px;
+      border-radius: 9999px;
       font-size: 12px;
       font-weight: 600;
-      color: var(--beds-text-primary);
+      color: var(--beds-text-secondary, #475569);
+    }
+    .online-indicator {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+    }
+    .user-session-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 151, 167, 0.08);
+      border: 1px solid rgba(0, 151, 167, 0.25);
+      padding: 5px 12px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--beds-teal-primary, #0097a7);
+    }
+    .btn-signout {
+      background: transparent;
+      border: 1px solid var(--beds-border, #cbd5e1);
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--beds-text-secondary, #475569);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-signout:hover {
+      background: #fee2e2;
+      border-color: #ef4444;
+      color: #b91c1c;
     }
 
-    /* Main Container */
-    main {
+    /* 2. EXECUTIVE SUPER VIEW RIBBON */
+    .super-view-ribbon {
+      background: linear-gradient(135deg, #102a35 0%, #163847 100%);
+      color: #ffffff;
+      padding: 24px 32px;
+      border-bottom: 1px solid rgba(0, 151, 167, 0.3);
+    }
+    .super-view-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .super-view-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .super-view-title h2 {
+      font-size: 20px;
+      font-weight: 800;
+      margin: 0;
+      color: #ffffff;
+      letter-spacing: 0.2px;
+    }
+    .super-view-title p {
+      font-size: 12.5px;
+      color: #94a3b8;
+      margin: 3px 0 0 0;
+    }
+    .super-view-tag {
+      background: rgba(0, 151, 167, 0.25);
+      border: 1px solid rgba(0, 151, 167, 0.5);
+      color: #38bdf8;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      letter-spacing: 0.4px;
+    }
+    .super-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .super-stat-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 14px 18px;
+      backdrop-filter: blur(8px);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .super-stat-card:hover {
+      background: rgba(255, 255, 255, 0.09);
+      transform: translateY(-2px);
+    }
+    .stat-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .stat-value {
+      font-size: 17px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.2px;
+    }
+    .stat-sub {
+      font-size: 11px;
+      color: #38bdf8;
+      margin-top: 3px;
+      font-weight: 600;
+    }
+
+    /* 3. MAIN WORKSPACE CONTAINER */
+    main.workspace-main {
       max-width: 1400px;
       width: 100%;
       margin: 0 auto;
-      padding: 32px;
+      padding: 28px 32px 48px;
+      box-sizing: border-box;
       flex: 1;
     }
 
-    /* Filter & Search Bar */
-    .launcher-toolbar {
+    /* Toolbar */
+    .workspace-toolbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 16px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       flex-wrap: wrap;
     }
-    .search-box {
+    .search-box-wrap {
       position: relative;
       flex: 1;
       max-width: 480px;
       min-width: 280px;
     }
-    .search-box input {
+    .search-box-wrap input {
       width: 100%;
       padding: 10px 14px 10px 38px;
-      border-radius: var(--beds-radius-md);
-      border: 1px solid var(--beds-border);
-      background: var(--beds-bg-panel);
-      color: var(--beds-text-primary);
+      border-radius: 8px;
+      border: 1px solid var(--beds-border, #cbd5e1);
+      background: var(--beds-bg-panel, #ffffff);
+      color: var(--beds-text-primary, #1e293b);
       font-size: 13px;
-    }
-    .search-box input:focus {
       outline: none;
-      border-color: var(--beds-teal-primary);
-      box-shadow: 0 0 0 3px var(--beds-teal-ring);
+      box-sizing: border-box;
+      transition: all 0.2s ease;
     }
-    .search-icon {
+    .search-box-wrap input:focus {
+      border-color: var(--beds-teal-primary, #0097a7);
+      box-shadow: 0 0 0 2px rgba(0, 151, 167, 0.2);
+    }
+    .search-box-icon {
       position: absolute;
       left: 12px;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--beds-text-muted);
       font-size: 14px;
+      color: #94a3b8;
+      pointer-events: none;
     }
-
-    .filter-tabs {
+    .filter-tabs-wrap {
       display: flex;
       gap: 8px;
+      flex-wrap: wrap;
     }
-    .filter-tab {
+    .filter-btn {
+      background: var(--beds-bg-panel, #ffffff);
+      border: 1px solid var(--beds-border, #cbd5e1);
       padding: 8px 14px;
-      border-radius: var(--beds-radius-md);
-      background: var(--beds-bg-panel);
-      border: 1px solid var(--beds-border);
-      color: var(--beds-text-secondary);
+      border-radius: 6px;
       font-size: 12px;
       font-weight: 600;
+      color: var(--beds-text-secondary, #475569);
       cursor: pointer;
-      transition: all var(--beds-transition);
+      transition: all 0.2s ease;
     }
-    .filter-tab:hover {
-      background: var(--beds-bg-panel-hover);
-      color: var(--beds-text-primary);
+    .filter-btn:hover {
+      background: #f1f5f9;
+      color: #102a35;
     }
-    .filter-tab.active {
-      background: var(--beds-teal-primary);
-      color: #FFFFFF;
-      border-color: var(--beds-teal-primary);
+    .filter-btn.active {
+      background: var(--beds-teal-primary, #0097a7);
+      border-color: var(--beds-teal-primary, #0097a7);
+      color: #ffffff;
     }
 
-    /* Section Headers */
-    .section-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--beds-charcoal-heading);
-      margin-bottom: 16px;
+    /* Section Headings */
+    .section-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      margin-top: 8px;
+    }
+    .section-header-row h3 {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--beds-charcoal-heading, #102a35);
+      margin: 0;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      gap: 8px;
     }
-    .section-title span {
+    .section-header-row span {
       font-size: 12px;
+      color: var(--beds-text-muted, #64748b);
       font-weight: 500;
-      color: var(--beds-text-muted);
     }
 
-    /* Application Grid */
-    .portal-grid {
+    /* Quick Shortcuts Strip */
+    .quick-shortcuts-row {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-      gap: 20px;
-      margin-bottom: 36px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-bottom: 32px;
     }
-    .portal-card {
-      background: var(--beds-bg-panel);
-      border: 1px solid var(--beds-border);
-      border-radius: var(--beds-radius-lg);
-      padding: 24px;
-      box-shadow: var(--beds-card-shadow);
+    .shortcut-card {
+      background: var(--beds-bg-panel, #ffffff);
+      border: 1px solid var(--beds-border, #e2e8f0);
+      border-radius: 8px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+    }
+    .shortcut-card:hover {
+      border-color: var(--beds-teal-primary, #0097a7);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(16, 42, 53, 0.06);
+    }
+    .shortcut-icon {
+      font-size: 22px;
+    }
+    .shortcut-info .shortcut-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--beds-charcoal-heading, #102a35);
+    }
+    .shortcut-info .shortcut-tag {
+      font-size: 11px;
+      color: var(--beds-text-muted, #64748b);
+      margin-top: 1px;
+    }
+
+    /* 4. SMART PORTAL DIRECTORY GRID */
+    .portal-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .clean-portal-card {
+      background: var(--beds-bg-panel, #ffffff);
+      border: 1px solid var(--beds-border, #e2e8f0);
+      border-radius: 12px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      transition: all var(--beds-transition);
+      box-shadow: 0 2px 8px rgba(16, 42, 53, 0.04);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
     }
-    .portal-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(16, 45, 53, 0.08);
-      border-color: var(--beds-teal-primary);
+    .clean-portal-card:hover {
+      border-color: var(--beds-teal-primary, #0097a7);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(16, 42, 53, 0.08);
     }
-    .portal-card-top {
+
+    .card-top-row {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
-    .portal-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: var(--beds-radius-md);
-      background: var(--beds-teal-subtle);
-      color: var(--beds-teal-primary);
+    .card-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .card-icon-box {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: rgba(16, 42, 53, 0.05);
+      border: 1px solid rgba(16, 42, 53, 0.08);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 22px;
-      border: 1px solid rgba(0, 151, 178, 0.2);
     }
-    .portal-info h3 {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--beds-charcoal-heading);
-      margin-bottom: 6px;
+    .card-title-text h4 {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--beds-charcoal-heading, #102a35);
+      margin: 0;
+      line-height: 1.25;
     }
-    .portal-info p {
-      font-size: 13px;
-      color: var(--beds-text-secondary);
-      line-height: 1.45;
-      margin-bottom: 20px;
-      min-height: 56px;
-    }
-    .portal-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 14px;
-      border-top: 1px solid var(--beds-border-subtle);
-    }
-    .fav-star {
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      color: var(--beds-text-muted);
-      transition: color var(--beds-transition);
-    }
-    .fav-star.active, .fav-star:hover {
-      color: #F59E0B;
-    }
-
-    /* Recently Accessed Bar */
-    .recent-list {
-      display: flex;
-      gap: 16px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      margin-bottom: 36px;
-    }
-    .recent-item {
-      background: var(--beds-bg-panel);
-      border: 1px solid var(--beds-border);
-      border-radius: var(--beds-radius-md);
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 240px;
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-      transition: all var(--beds-transition);
-    }
-    .recent-item:hover {
-      border-color: var(--beds-teal-primary);
-      background: var(--beds-bg-panel-hover);
-    }
-    .recent-item-icon {
-      font-size: 20px;
-    }
-    .recent-item-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--beds-charcoal-heading);
-    }
-    .recent-item-sub {
+    .card-title-text .card-domain-tag {
       font-size: 11px;
-      color: var(--beds-text-secondary);
+      font-weight: 600;
+      color: var(--beds-teal-primary, #0097a7);
+      display: inline-block;
+      margin-top: 2px;
     }
 
-    /* Architecture Notice Footer */
-    footer {
-      background: var(--beds-bg-panel);
-      border-top: 1px solid var(--beds-border);
-      padding: 24px 32px;
+    .operational-pill {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 9999px;
+      letter-spacing: 0.5px;
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+
+    /* PERSONNEL MATRIX BOX (Admin, Area Mgr, Max 3 Supervisors) */
+    .personnel-matrix-box {
+      background: var(--beds-bg-page, #f8fafc);
+      border: 1px solid var(--beds-border, #e2e8f0);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-top: 8px;
+      margin-bottom: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .personnel-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       font-size: 12px;
-      color: var(--beds-text-secondary);
+    }
+    .tier-badge {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      flex-shrink: 0;
+      width: 72px;
       text-align: center;
     }
-    footer a {
-      color: var(--beds-teal-primary);
-      text-decoration: none;
+    .tier-admin {
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+    }
+    .tier-area {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #bae6fd;
+    }
+    .personnel-details {
+      display: flex;
+      align-items: baseline;
+      gap: 5px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .personnel-name {
+      font-weight: 700;
+      color: var(--beds-text-primary, #1e293b);
+      font-size: 12px;
+    }
+    .personnel-desig {
+      font-size: 11px;
+      color: var(--beds-text-muted, #64748b);
+    }
+
+    .supervisors-container {
+      margin-top: 4px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--beds-border, #cbd5e1);
+    }
+    .supervisors-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--beds-text-secondary, #475569);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .supervisors-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .sup-chip {
+      background: #ffffff;
+      border: 1px solid var(--beds-border, #cbd5e1);
+      border-radius: 4px;
+      padding: 3px 8px;
+      font-size: 10.5px;
       font-weight: 600;
+      color: #334155;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    }
+    .sup-chip span.dot {
+      width: 5px;
+      height: 5px;
+      background: #0ea5e9;
+      border-radius: 50%;
+    }
+
+    /* Action Buttons */
+    .card-actions-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-portal-primary {
+      flex: 1;
+      background: linear-gradient(135deg, #102a35 0%, #173f4f 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      padding: 9px 12px;
+      font-size: 12.5px;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(16, 42, 53, 0.15);
+    }
+    .btn-portal-primary:hover {
+      background: linear-gradient(135deg, #163847 0%, #0097b2 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0, 151, 178, 0.25);
+    }
+    .btn-portal-secondary {
+      background: var(--beds-bg-page, #f1f5f9);
+      border: 1px solid var(--beds-border, #cbd5e1);
+      border-radius: 6px;
+      padding: 9px 12px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--beds-text-secondary, #475569);
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .btn-portal-secondary:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+    .btn-fav {
+      background: transparent;
+      border: 1px solid var(--beds-border, #cbd5e1);
+      border-radius: 6px;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #94a3b8;
+      font-size: 16px;
+      transition: all 0.2s ease;
+    }
+    .btn-fav.active, .btn-fav:hover {
+      color: #eab308;
+      border-color: #fde047;
+      background: #fefce8;
+    }
+
+    /* 5. MASTER FOOTER */
+    footer.exec-footer {
+      background: var(--beds-bg-panel, #ffffff);
+      border-top: 1px solid var(--beds-border, #e2e8f0);
+      padding: 24px 32px;
+      font-size: 12px;
+      color: var(--beds-text-muted, #64748b);
+      text-align: center;
+      margin-top: auto;
+    }
+    footer.exec-footer strong {
+      color: var(--beds-text-primary, #1e293b);
     }
   </style>
 </head>
 <body>
 
-  <!-- 1. TOP ENTERPRISE HEADER -->
-  <header>
-    <div class="brand-wrap">
-      <img src="assets/images/balsons-logo.png" alt="BALSONS Logo" style="height: 38px !important; max-height: 38px !important; width: auto !important; object-fit: contain !important;">
-      <div class="brand-titles">
+  <!-- 1. MASTER EXECUTIVE HEADER -->
+  <header class="exec-header">
+    <div class="header-brand">
+      <img src="assets/images/balsons-logo.png" alt="BALSONS Logo">
+      <div class="brand-text">
         <h1>BALSONS HEAVY LIFT & SHIFT</h1>
         <p>Enterprise Workspace • Central Portal Launcher</p>
-        <div style="font-size: 10.5px; font-style: italic; color: var(--beds-teal-primary); font-weight: 600; margin-top: 1px;">“Difficult We Do Easily, Impossible Takes Little Time...!”</div>
+        <div class="brand-slogan">“Difficult We Do Easily, Impossible Takes Little Time...!”</div>
       </div>
     </div>
-    <div class="header-controls">
-      <span class="project-pill">📍 JTRWF • Khordha, Odisha</span>
-      <span class="meta-badge" id="onlineBadge">🟢 Enterprise Online</span>
-      <button class="beds-btn beds-btn-icon" id="themeBtn" onclick="toggleTheme()" title="Switch Light/Dark Theme">
+    <div class="header-actions">
+      <span class="badge-pill">📍 JTRWF • Khordha, Odisha</span>
+      <span class="badge-pill">
+        <span class="online-indicator"></span> Enterprise Online
+      </span>
+      <button class="badge-pill" id="themeBtn" onclick="toggleTheme()" style="cursor: pointer;" title="Toggle Light/Dark Theme">
         🌙 Dark
       </button>
-      <div id="headerUserBadge" class="meta-badge" style="background: rgba(0, 151, 178, 0.1); color: var(--beds-teal-primary); font-weight: 700; cursor: pointer;" onclick="BalsonsSAMAuth.openGovernanceConsole('launcher')">
-        👑 Super Admin • All Access
+      <div id="headerUserBadge" class="user-session-chip">
+        👑 <strong>Prashant Mohanty</strong> · Super Administrator
       </div>
+      <button class="btn-signout" onclick="handleLauncherSignOut()" title="Sign Out of Session">
+        Sign Out
+      </button>
     </div>
   </header>
 
-  <!-- 2. GREETING HERO BANNER -->
-  <section class="hero-banner">
-    <div class="hero-container">
-      <div class="greeting-text">
-        <h2 id="timeGreeting">Good morning, BALSONS Team 👋</h2>
-        <p>Enterprise workspace & multi-portal ecosystem governed by <strong>Global Super Administrator Policy V1.0</strong>.</p>
+  <!-- 2. EXECUTIVE SUPER VIEW RIBBON -->
+  <section class="super-view-ribbon">
+    <div class="super-view-container">
+      <div class="super-view-header">
+        <div class="super-view-title">
+          <h2>Central Enterprise Super View</h2>
+          <p>Real-time operational status, key personnel matrix, and unified portal governance across all active divisions.</p>
+        </div>
+        <span class="super-view-tag">Executive Summary · JTRWF Base</span>
       </div>
-      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-        <span class="meta-badge" style="background: #0B192C; color: #38BDF8; font-weight: 800; border: 1px solid #0097B2;">🛡️ SINGLE SUPER ADMIN POLICY V1.0</span>
-        <span class="meta-badge">Design Baseline: <strong>BEDS V1.0 (Locked)</strong></span>
-        <span class="meta-badge" style="background: rgba(0, 151, 178, 0.12); color: var(--beds-teal-primary); font-weight: 700; border: 1px solid var(--beds-teal-primary);">⚡ SAM-2026 Unified Security</span>
+
+      <div class="super-stats-grid">
+        <div class="super-stat-card">
+          <div class="stat-label"><span>🌐</span> Active Workspaces</div>
+          <div class="stat-value">8 Portals</div>
+          <div class="stat-sub">100% Operational Readiness</div>
+        </div>
+        <div class="super-stat-card">
+          <div class="stat-label"><span>🛡️</span> Safety Mandate</div>
+          <div class="stat-value">Zero Incident</div>
+          <div class="stat-sub">High-Risk Lifting & PTW Governed</div>
+        </div>
+        <div class="super-stat-card">
+          <div class="stat-label"><span>👥</span> Key Personnel</div>
+          <div class="stat-value">Assigned & Verified</div>
+          <div class="stat-sub">1 Admin · 1 Area Mgr · Max 3 Supervisors</div>
+        </div>
+        <div class="super-stat-card">
+          <div class="stat-label"><span>👑</span> Authority Status</div>
+          <div class="stat-value">Super Admin Active</div>
+          <div class="stat-sub">Complete Cross-Portal Access</div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- 3. MAIN WORKSPACE CONTENT -->
-  <main>
+  <main class="workspace-main">
 
-    <!-- Toolbar: Search & Category Filters -->
-    <div class="launcher-toolbar">
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="portalSearch" placeholder="Search portals by name, keyword or role..." oninput="filterPortals()">
+    <!-- Search & Filter Toolbar -->
+    <div class="workspace-toolbar">
+      <div class="search-box-wrap">
+        <span class="search-box-icon">🔍</span>
+        <input type="text" id="portalSearch" placeholder="Search portals by name, keyword, admin or supervisor..." oninput="filterPortals()">
       </div>
-      <div class="filter-tabs">
-        <button class="filter-tab active" onclick="setCategory('all', this)">All Portals (8)</button>
-        <button class="filter-tab" onclick="setCategory('operations', this)">Operations & Logistics</button>
-        <button class="filter-tab" onclick="setCategory('safety', this)">Safety & Access</button>
-        <button class="filter-tab" onclick="setCategory('admin', this)">Commercial & HR</button>
+      <div class="filter-tabs-wrap">
+        <button class="filter-btn active" onclick="setCategory('all', this)">All Workspaces (8)</button>
+        <button class="filter-btn" onclick="setCategory('operations', this)">Operations & Rigging</button>
+        <button class="filter-btn" onclick="setCategory('safety', this)">HSE & Access Control</button>
+        <button class="filter-btn" onclick="setCategory('admin', this)">Commercial & HR</button>
       </div>
     </div>
 
-    <!-- Recently Accessed Section -->
-    <div class="section-title">
-      <h3>Recently Accessed Applications</h3>
-      <span>Your active workspaces</span>
+    <!-- Quick Shortcuts Row -->
+    <div class="section-header-row">
+      <h3><span>⚡</span> Quick Launch Shortcuts</h3>
+      <span>Frequently Accessed Workspaces</span>
     </div>
-    <div class="recent-list">
-      <a href="BALSONS GATE ENTRY MANAGER/frontend/index.html" class="recent-item">
-        <span class="recent-item-icon">🚧</span>
-        <div>
-          <div class="recent-item-title">Gate Entry & Site Access</div>
-          <div class="recent-item-sub">Opened 12 mins ago • JTRWF</div>
+    <div class="quick-shortcuts-row">
+      <a href="BALSONS GATE ENTRY MANAGER/frontend/index.html" class="shortcut-card">
+        <span class="shortcut-icon">🚧</span>
+        <div class="shortcut-info">
+          <div class="shortcut-title">Gate Entry & Site Access</div>
+          <div class="shortcut-tag">Turnstiles & Material Clearance</div>
         </div>
       </a>
-      <a href="BALSONS HR MANAGER/frontend/index.html" class="recent-item">
-        <span class="recent-item-icon">👥</span>
-        <div>
-          <div class="recent-item-title">HR & Payroll Manager</div>
-          <div class="recent-item-sub">Nov 2026 Draft • 68 Staff</div>
+      <a href="BALSONS STORE MANAGER/frontend/index.html" class="shortcut-card">
+        <span class="shortcut-icon">📦</span>
+        <div class="shortcut-info">
+          <div class="shortcut-title">Store & Rigging Tools</div>
+          <div class="shortcut-tag">Tool Master & Lifting Tackles</div>
         </div>
       </a>
-      <a href="BALSONS STORE MANAGER/" class="recent-item">
-        <span class="recent-item-icon">📦</span>
-        <div>
-          <div class="recent-item-title">Store & Rigging Tools</div>
-          <div class="recent-item-sub">Opened 2 hrs ago • 264 Items</div>
+      <a href="BALSONS SAFETY MANAGER/frontend/index.html" class="shortcut-card">
+        <span class="shortcut-icon">🦺</span>
+        <div class="shortcut-info">
+          <div class="shortcut-title">Safety & PTW Manager</div>
+          <div class="shortcut-tag">Permit-to-Work & HSE Audits</div>
         </div>
       </a>
-      <a href="BALSONS SAFETY MANAGER/" class="recent-item">
-        <span class="recent-item-icon">🦺</span>
-        <div>
-          <div class="recent-item-title">Safety & PTW Manager</div>
-          <div class="recent-item-sub">Opened yesterday • 14 Inductions</div>
+      <a href="BALSONS HR MANAGER/frontend/index.html" class="shortcut-card">
+        <span class="shortcut-icon">👥</span>
+        <div class="shortcut-info">
+          <div class="shortcut-title">HR & Payroll Manager</div>
+          <div class="shortcut-tag">Biometric Attendance & Wages</div>
         </div>
       </a>
     </div>
 
-    <!-- Portal Directory Grid -->
-    <div class="section-title">
-      <h3>Enterprise Application Directory</h3>
+    <!-- Portal Cards Grid -->
+    <div class="section-header-row">
+      <h3><span>🏢</span> Enterprise Application Directory</h3>
       <span id="portalCountText">Showing 8 of 8 applications</span>
     </div>
 
-    <div class="portal-grid" id="portalGrid">
+    <div class="portal-cards-grid" id="portalGrid">
 
-      <!-- 1. GATE ENTRY MANAGER (PRIMARY ACTIVE APPLICATION) -->
-      <div class="portal-card" data-portal-id="gate_entry" data-category="safety" data-title="Gate Entry Site Access Visitor Vehicle Muster Clearance RGP NRGP">
-        <div class="portal-card-top">
-          <div class="portal-icon">🚧</div>
-          <span class="status-pill status-success" id="pill-gate_entry">AVAILABLE</span>
+      <!-- 1. GATE ENTRY & SITE ACCESS -->
+      <div class="clean-portal-card" data-portal-id="gate_entry" data-category="safety" data-title="Gate Entry Site Access Visitor Vehicle Muster Clearance RGP NRGP Bikash Mohapatra Pradeep Nayak Manoj Das">
+        <div class="card-top-row">
+          <div class="card-title-group">
+            <div class="card-icon-box">🚧</div>
+            <div class="card-title-text">
+              <h4>Gate Entry & Site Access</h4>
+              <span class="card-domain-tag">Site Logistics & Clearance</span>
+            </div>
+          </div>
+          <span class="operational-pill">AVAILABLE</span>
         </div>
-        <div class="portal-info">
-          <h3>Gate Entry & Site Access</h3>
-          <p>Personnel & vehicle pre-clearance, 9-discipline HSE gate clearance engine, RGP/NRGP material passes, live muster roll-call.</p>
+
+        <div class="personnel-matrix-box">
+          <div class="personnel-row">
+            <span class="tier-badge tier-admin">👑 Admin</span>
+            <div class="personnel-details">
+              <span class="personnel-name">Bikash Mohapatra</span>
+              <span class="personnel-desig">(Gate In-Charge)</span>
+            </div>
+          </div>
+          <div class="personnel-row">
+            <span class="tier-badge tier-area">🏛️ Area Mgr</span>
+            <div class="personnel-details">
+              <span class="personnel-name">Satish Chandra</span>
+              <span class="personnel-desig">(Project Directorate)</span>
+            </div>
+          </div>
+          <div class="supervisors-container">
+            <div class="supervisors-label">👷 Shift Supervisors (Max 3):</div>
+            <div class="supervisors-chips">
+              <span class="sup-chip"><span class="dot"></span>Pradeep Nayak (Main Gate)</span>
+              <span class="sup-chip"><span class="dot"></span>Manoj Das (Turnstiles)</span>
+              <span class="sup-chip"><span class="dot"></span>Subhashree Jena (Material)</span>
+            </div>
+          </div>
         </div>
-        <div class="portal-footer" style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-          <button class="fav-star active" title="Toggle favorite">★</button>
-          <a href="BALSONS GATE ENTRY MANAGER/frontend/index.html" class="beds-btn beds-btn-primary portal-launch-btn">
+
+        <div class="card-actions-row">
+          <a href="BALSONS GATE ENTRY MANAGER/frontend/index.html" class="btn-portal-primary portal-launch-btn">
             Open workspace →
           </a>
-          <a href="BALSONS GATE ENTRY MANAGER/frontend/index.html#gate-dossier-360" class="beds-btn beds-btn-secondary portal-launch-btn" style="font-size: 11px; padding: 7px 10px;" title="360° Unified Workforce Dossier">
-            📄 360° Dossier
+          <a href="BALSONS GATE ENTRY MANAGER/frontend/index.html#gate-dossier-360" class="btn-portal-secondary" title="View 360 Dossier">
+            Dossier 360
           </a>
+          <button class="btn-fav" onclick="toggleFav(this)" title="Toggle Favorite">★</button>
         </div>
       </div>
 
       <!-- 2. STORE & INVENTORY MANAGER -->
-      <div class="portal-card" data-portal-id="store" data-category="operations" data-title="Store Inventory Tools Tackles Rigging Equipment Consumables Issue Return">
-        <div class="portal-card-top">
-          <div class="portal-icon">📦</div>
-          <span class="status-pill status-success" id="pill-store">AVAILABLE</span>
+      <div class="clean-portal-card" data-portal-id="store_tools" data-category="operations" data-title="Store Inventory Tools Rigging Lifting Tackles Form 11 Gagan Bihari Das Ashok Mohanty Kailash Sahu Bijay Barik">
+        <div class="card-top-row">
+          <div class="card-title-group">
+            <div class="card-icon-box">📦</div>
+            <div class="card-title-text">
+              <h4>Store & Inventory Manager</h4>
+              <span class="card-domain-tag">Rigging Tool Master & Tackles</span>
+            </div>
+          </div>
+          <span class="operational-pill">AVAILABLE</span>
         </div>
-        <div class="portal-info">
-          <h3>Store & Inventory Manager</h3>
-          <p>Material custody, 264-item rigging tool master, Form 11 lifting tackles register, daily tool loans, damaged equipment quarantine, and RGP/NRGP gate pass studio.</p>
+
+        <div class="personnel-matrix-box">
+          <div class="personnel-row">
+            <span class="tier-badge tier-admin">👑 Admin</span>
+            <div class="personnel-details">
+              <span class="personnel-name">Gagan Bihari Das</span>
+              <span class="personnel-desig">(Store In-Charge)</span>
+            </div>
+          </div>
+          <div class="personnel-row">
+            <span class="tier-badge tier-area">🏛️ Area Mgr</span>
+            <div class="personnel-details">
+              <span class="personnel-name">Satish Chandra</span>
+              <span class="personnel-desig">(Project Directorate)</span>
+            </div>
+          </div>
+          <div class="supervisors-container">
+            <div class="supervisors-label">👷 Shift Supervisors (Max 3):</div>
+            <div class="supervisors-chips">
+              <span class="sup-chip"><span class="dot"></span>Ashok Mohanty (Rigging)</span>
+              <span class="sup-chip"><span class="dot"></span>Kailash Sahu (Yard Tools)</span>
+              <span class="sup-chip"><span class="dot"></span>Bijay Barik (Issue & Return)</span>
+            </div>
+          </div>
         </div>
-        <div class="portal-footer" style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-          <button class="fav-star active" title="Toggle favorite">★</button>
-          <a href="BALSONS STORE MANAGER/frontend/index.html" class="beds-btn beds-btn-primary portal-launch-btn">
+
+        <div class="card-actions-row">
+          <a href="BALSONS STORE MANAGER/frontend/index.html" class="btn-portal-primary portal-launch-btn">
             Open workspace →
           </a>
-          <a href="BALSONS STORE MANAGER/frontend/index.html#store-dossier-360" class="beds-btn beds-btn-secondary portal-launch-btn" style="font-size: 11px; padding: 7px 10px;" title="360° Unified Workforce Dossier">
-            📄 360° Dossier
+          <a href="BALSONS STORE MANAGER/frontend/index.html#store-dossier-360" class="btn-portal-secondary" title="View 360 Dossier">
+            Dossier 360
           </a>
+          <button class="btn-fav" onclick="toggleFav(this)" title="Toggle Favorite">★</button>
         </div>
       </div>
 
       <!-- 3. SAFETY & PTW MANAGER -->
-      <div class="portal-card" data-portal-id="safety" data-category="safety" data-title="Safety PTW Permit Work Height Vertigo Hazard JSA Induction Incident HSE">
-        <div class="portal-card-top">
-          <div class="portal-icon">🦺</div>
-          <span class="status-pill status-success" id="pill-safety">AVAILABLE</span>
+      <div class="clean-portal-card" data-portal-id="safety_ptw" data-category="safety" data-title="Safety PTW Permit Work JSA HSE Compliance Gajendra Rao Dilip Rout Niranjan Sahu Rakesh Panda">
+        <div class="card-top-row">
+          <div class="card-title-group">
+            <div class="card-icon-box">🦺</div>
+            <div class="card-title-text">
+              <h4>Safety & PTW Manager</h4>
+              <span class="card-domain-tag">HSE Permits & Rigging Safety</span>
+            </div>
+          </div>
+          <span class="operational-pill">AVAILABLE</span>
         </div>
-        <div class="portal-info">
-          <h3>Safety & PTW Manager</h3>
-          <p>Permit-to-Work issuance, Job Safety Analysis (JSA), mandatory height/vertigo clearances, PPE audits, and incident tracking.</p>
+
+        <div class="personnel-matrix-box">
+          <div class="personnel-row">
+            <span class="tier-badge tier-admin">👑 Admin</span>
+            <div class="personnel-details">
+              <span class="personnel-name">Gajendra Rao</span>
+              <span class="personnel-desig">(HSE Lead)</span>
+            </div>
+          </div>
+          <div class="personnel-row">
+            <span class="tier-badge tier-area">🏛️ Area Mgr</span>
+            <div class="personnel-details">
+              <span class="personnel-name">Satish Chandra</span>
+              <span class="personnel-desig">(Project Directorate)</span>
+            </div>
+          </div>
+          <div class="supervisors-container">
+            <div class="supervisors-label">👷 Shift Supervisors (Max 3):</div>
+            <div class="supervisors-chips">
+              <span class="sup-chip"><span class="dot"></span>Dilip Rout (Bay-3 Safety)</span>
+              <span class="sup-chip"><span class="dot"></span>Niranjan Sahu (Height HSE)</span>
+              <span class="sup-chip"><span class="dot"></span>Rakesh Panda (Permits)</span>
+            </div>
+          </div>
         </div>
-        <div class="portal-footer" style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-          <button class="fav-star active" title="Toggle favorite">★</button>
-          <a href="BALSONS SAFETY MANAGER/frontend/index.html" class="beds-btn beds-btn-primary portal-launch-btn">
+
+        <div class="card-actions-row">
+          <a href="BALSONS SAFETY MANAGER/frontend/index.html" class="btn-portal-primary portal-launch-btn">
             Open workspace →
           </a>
-          <a href="BALSONS SAFETY MANAGER/frontend/index.html#view-dossier-360" class="beds-btn beds-btn-secondary portal-launch-btn" style="font-size: 11px; padding: 7px 10px;" title="360° Unified Workforce Dossier">
-            📄 360° Dossier
+          <a href="BALSONS SAFETY MANAGER/frontend/index.html#view-dossier-360" class="btn-portal-secondary" title="View 360 Dossier">
+            Dossier 360
           </a>
+          <button class="btn-fav" onclick="toggleFav(this)" title="Toggle Favorite">★</button>
         </div>
       </div>
 
       <!-- 4. HR & PAYROLL MANAGER -->
-      <div class="portal-card" data-portal-id="hr_payroll" data-category="admin" data-title="HR Payroll Manpower Attendance Biometric Contractor Labor Wage Deployment Daily Pay Monthly PF ESIC">
-        <div class="portal-card-top">
-          <div class="portal-icon">👥</div>
-          <span class="status-pill status-success" id="pill-hr_payroll">AVAILABLE</span>
+      <div class="clean-portal-card" data-portal-id="hr_payroll" data-category="admin" data-title="HR Payroll Employee Attendance Wages Biometrics Priyanka Senapati Rashmi Ranjan Alok Patra Snehalata Mishra">
+        <div class="card-top-row">
+          <div class="card-title-group">
+            <div class="card-icon-box">👥</div>
+            <div class="card-title-text">
+              <h4>HR & Payroll Manager</h4>
+              <span class="card-domain-tag">Workforce & Dual-Wage Payroll</span>
+            </div>
+          </div>
+          <span class="operational-pill">AVAILABLE</span>
         </div>
-        <div class="portal-info">
-          <h3>HR & Payroll Manager</h3>
-          <p>Dual workforce payroll: Monthly salaried staff (with PF & ESIC) and Daily pay crew (exempt), attendance & shift OT, advance recovery, and automated slip generator.</p>
+
+        <div class="personnel-matrix-box">
+          <div class="personnel-row">
+            <span class="tier-badge tier-admin">👑 Admin</span>
+            <div class="personnel-details">
+              <span class="personnel-name">Priyanka Senapati</span>
+              <span class="personnel-desig">(HR Manager)</span>
+            </div>
+          </div>
+          <div class="personnel-row">
+            <span class="tier-badge tier-area">🏛️ Area Mgr</span>
+            <div class="personnel-details">
+              <span class="personnel-name">Satish Chandra</span>
+              <span class="personnel-desig">(Project Directorate)</span>
+            </div>
+          </div>
+          <div class="supervisors-container">
+            <div class="supervisors-label">👷 Shift Supervisors (Max 3):</div>
+            <div class="supervisors-chips">
+              <span class="sup-chip"><span class="dot"></span>Rashmi Ranjan (Timekeeping)</span>
+              <span class="sup-chip"><span class="dot"></span>Alok Patra (Daily Crew)</span>
+              <span class="sup-chip"><span class="dot"></span>Snehalata Mishra (Statutory)</span>
+            </div>
+          </div>
         </div>
-        <div class="portal-footer" style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-          <button class="fav-star" title="Toggle favorite">★</button>
-          <a href="BALSONS HR MANAGER/frontend/index.html" class="beds-btn beds-btn-primary portal-launch-btn">
+
+        <div class="card-actions-row">
+          <a href="BALSONS HR MANAGER/frontend/index.html" class="btn-portal-primary portal-launch-btn">
             Open workspace →
           </a>
-          <a href="http://localhost:8085/#dashboard" target="_blank" class="beds-btn beds-btn-secondary portal-launch-btn" style="font-size: 11px; padding: 7px 10px; background:#0B192C; color:#38BDF8; border-color:#0097B2;" title="HEG Division Real-Time Salary Engine">
-            💰 HEG Salary Portal
+          <a href="BALSONS HR MANAGER/frontend/register.html" target="_blank" class="btn-portal-secondary" title="Employee Self-Registration Portal">
+            Self-Register
           </a>
-          <a href="BALSONS HR MANAGER/frontend/register.html" target="_blank" class="beds-btn beds-btn-secondary portal-launch-btn" style="font-size: 11px; padding: 7px 10px;" title="Online Employee Self-Registration Form">
-            🔗 Registration
-          </a>
+          <button class="btn-fav" onclick="toggleFav(this)" title="Toggle Favorite">★</button>
         </div>
       </div>
 
-      <!-- 5. OPERATIONS MANAGER -->
-      <div class="portal-card" data-portal-id="operations" data-category="operations" data-title="Operations Erection Rigging Heavy Lift Puller Crane Assembly Schuler Line">
-        <div class="portal-card-top">
-          <div class="portal-icon">🏗️</div>
-          <span class="status-pill status-success" id="pill-operations">AVAILABLE</span>
+      <!-- 5. OPERATIONS & HEAVY LIFT PORTAL -->
+      <div class="clean-portal-card" data-portal-id="operations" data-category="operations" data-title="Operations Heavy Lift Crane SPMT Erection Haulage Satish Chandra Ashok Mohanty Dilip Rout Suresh Behera">
+        <div class="card-top-row">
+          <div class="card-title-group">
+            <div class="card-icon-box">🏗️</div>
+            <div class="card-title-text">
+              <h4>Operations & Heavy Lift Portal</h4>
+              <span class="card-domain-tag">Crane Logistics & Heavy Erection</span>
+            </div>
+          </div>
+          <span class="operational-pill">AVAILABLE</span>
         </div>
-        <div class="portal-info">
-          <h3>Operations Manager</h3>
-          <p>Heavy lift & erection scheduling, crane/puller mobilization, shift execution, and Schuler press assembly milestones.</p>
+
+        <div class="personnel-matrix-box">
+          <div class="personnel-row">
+            <span class="tier-badge tier-admin">👑 Admin</span>
+            <div class="personnel-details">
+              <span class="personnel-name">Satish Chandra</span>
+              <span class="personnel-desig">(Management Director)</span>
+            </div>
+          </div>
+          <div class="personnel-row">
+            <span class="tier-badge tier-area">🏛️ Area Mgr</span>
+            <div class="personnel-details">
+              <span class="personnel-name">Ashok Mohanty</span>
+              <span class="personnel-desig">(HOD Heavy Rigging)</span>
+            </div>
+          </div>
+          <div class="supervisors-container">
+            <div class="supervisors-label">👷 Shift Supervisors (Max 3):</div>
+            <div class="supervisors-chips">
+              <span class="sup-chip"><span class="dot"></span>Dilip Rout (Bay-3 Cranes)</span>
+              <span class="sup-chip"><span class="dot"></span>Suresh Behera (SPMT Haulage)</span>
+              <span class="sup-chip"><span class="dot"></span>Kartik Nayak (Rigging Lead)</span>
+            </div>
+          </div>
         </div>
-        <div class="portal-footer">
-          <button class="fav-star" title="Toggle favorite">★</button>
-          <a href="BALSONS OPERATIONS MANAGER/" class="beds-btn beds-btn-primary portal-launch-btn">
+
+        <div class="card-actions-row">
+          <a href="BALSONS OPERATIONS MANAGER/" class="btn-portal-primary portal-launch-btn">
             Open workspace →
           </a>
+          <button class="btn-fav" onclick="toggleFav(this)" title="Toggle Favorite">★</button>
         </div>
       </div>
 
-      <!-- 6. PURCHASE & VENDOR MANAGER -->
-      <div class="portal-card" data-portal-id="purchase" data-category="admin" data-title="Purchase Commercial Vendor Procurement RFQ PO Quotation Delivery">
-        <div class="portal-card-top">
-          <div class="portal-icon">📑</div>
-          <span class="status-pill status-success" id="pill-purchase">AVAILABLE</span>
+      <!-- 6. PURCHASE & PROCUREMENT MANAGER -->
+      <div class="clean-portal-card" data-portal-id="purchase" data-category="admin" data-title="Purchase Procurement Vendor RFQ GRN Commercial Gagan Bihari Das Sanjay Verma Amit Pradhan">
+        <div class="card-top-row">
+          <div class="card-title-group">
+            <div class="card-icon-box">🛒</div>
+            <div class="card-title-text">
+              <h4>Purchase & Procurement Manager</h4>
+              <span class="card-domain-tag">Vendor RFQ & Commercial GRN</span>
+            </div>
+          </div>
+          <span class="operational-pill">AVAILABLE</span>
         </div>
-        <div class="portal-info">
-          <h3>Purchase & Vendor Manager</h3>
-          <p>Material requisition floating, vendor quotation comparison, commercial approval matrices, and Purchase Order (PO) dispatch.</p>
+
+        <div class="personnel-matrix-box">
+          <div class="personnel-row">
+            <span class="tier-badge tier-admin">👑 Admin</span>
+            <div class="personnel-details">
+              <span class="personnel-name">Gagan Bihari Das</span>
+              <span class="personnel-desig">(Commercial In-Charge)</span>
+            </div>
+          </div>
+          <div class="personnel-row">
+            <span class="tier-badge tier-area">🏛️ Area Mgr</span>
+            <div class="personnel-details">
+              <span class="personnel-name">Satish Chandra</span>
+              <span class="personnel-desig">(Project Directorate)</span>
+            </div>
+          </div>
+          <div class="supervisors-container">
+            <div class="supervisors-label">👷 Shift Supervisors (Max 3):</div>
+            <div class="supervisors-chips">
+              <span class="sup-chip"><span class="dot"></span>Sanjay Verma (Commercial)</span>
+              <span class="sup-chip"><span class="dot"></span>Amit Pradhan (Vendor Sourcing)</span>
+              <span class="sup-chip"><span class="dot"></span>Pravat Rout (Material Audit)</span>
+            </div>
+          </div>
         </div>
-        <div class="portal-footer">
-          <button class="fav-star" title="Toggle favorite">★</button>
-          <a href="BALSONS PURCHASE MANAGER/" class="beds-btn beds-btn-primary portal-launch-btn">
+
+        <div class="card-actions-row">
+          <a href="BALSONS PURCHASE MANAGER/" class="btn-portal-primary portal-launch-btn">
             Open workspace →
           </a>
+          <button class="btn-fav" onclick="toggleFav(this)" title="Toggle Favorite">★</button>
         </div>
       </div>
 
-      <!-- 7. ENGINEERING TOOLBOX -->
-      <div class="portal-card" data-portal-id="toolbox" data-category="operations" data-title="Engineering Toolbox Rigging Calculations COG Bearing Pressure Slings">
-        <div class="portal-card-top">
-          <div class="portal-icon">📐</div>
-          <span class="status-pill status-warning" id="pill-toolbox">MAINTENANCE</span>
+      <!-- 7. CENTRAL SYNC HUB & REPORTS -->
+      <div class="clean-portal-card" data-portal-id="sync_reports" data-category="admin" data-title="Central Sync Hub Reporting Cross-Portal Analytics Audit Prashant Mohanty Gajendra Rao Priyanka Senapati">
+        <div class="card-top-row">
+          <div class="card-title-group">
+            <div class="card-icon-box">📊</div>
+            <div class="card-title-text">
+              <h4>Central Sync Hub & Reports</h4>
+              <span class="card-domain-tag">Cross-Portal Analytics & Audit</span>
+            </div>
+          </div>
+          <span class="operational-pill">AVAILABLE</span>
         </div>
-        <div class="portal-info">
-          <h3>Engineering Toolbox</h3>
-          <p>Heavy rigging calculations, center-of-gravity (COG) estimators, crane outrigger ground bearing pressure, and sling tension checks.</p>
+
+        <div class="personnel-matrix-box">
+          <div class="personnel-row">
+            <span class="tier-badge tier-admin">👑 Admin</span>
+            <div class="personnel-details">
+              <span class="personnel-name">Prashant Mohanty</span>
+              <span class="personnel-desig">(Executive Super Admin)</span>
+            </div>
+          </div>
+          <div class="personnel-row">
+            <span class="tier-badge tier-area">🏛️ Area Mgr</span>
+            <div class="personnel-details">
+              <span class="personnel-name">Satish Chandra</span>
+              <span class="personnel-desig">(Project Directorate)</span>
+            </div>
+          </div>
+          <div class="supervisors-container">
+            <div class="supervisors-label">👷 Shift Supervisors (Max 3):</div>
+            <div class="supervisors-chips">
+              <span class="sup-chip"><span class="dot"></span>Gajendra Rao (Safety Data)</span>
+              <span class="sup-chip"><span class="dot"></span>Priyanka Senapati (Manpower)</span>
+              <span class="sup-chip"><span class="dot"></span>Gagan Bihari Das (Assets)</span>
+            </div>
+          </div>
         </div>
-        <div class="portal-footer">
-          <button class="fav-star" title="Toggle favorite">★</button>
-          <button class="beds-btn beds-btn-secondary" disabled>
-            Under scheduled maintenance
-          </button>
+
+        <div class="card-actions-row">
+          <a href="BALSONS REPOTS PORTAL/" class="btn-portal-primary portal-launch-btn">
+            Open workspace →
+          </a>
+          <button class="btn-fav" onclick="toggleFav(this)" title="Toggle Favorite">★</button>
         </div>
       </div>
 
-      <!-- 8. SITE EXPENSE MANAGER -->
-      <div class="portal-card" data-portal-id="expenses" data-category="admin" data-title="Site Expense Imprest Petty Cash Fuel Diesel Vouchers Reconciliation">
-        <div class="portal-card-top">
-          <div class="portal-icon">💳</div>
-          <span class="status-pill status-success" id="pill-expenses">AVAILABLE</span>
+      <!-- 8. SITE EXPENSE & IMPREST MANAGER -->
+      <div class="clean-portal-card" data-portal-id="expenses" data-category="admin" data-title="Site Expense Imprest Petty Cash Fuel Diesel Vouchers Reconciliation Bikash Mohapatra Dilip Rout Kailash Sahu">
+        <div class="card-top-row">
+          <div class="card-title-group">
+            <div class="card-icon-box">💳</div>
+            <div class="card-title-text">
+              <h4>Site Expense & Imprest Manager</h4>
+              <span class="card-domain-tag">Site Imprest Cash & Diesel Logs</span>
+            </div>
+          </div>
+          <span class="operational-pill">AVAILABLE</span>
         </div>
-        <div class="portal-info">
-          <h3>Site Expense Manager</h3>
-          <p>Site imprest cash management, crane diesel fuel logs, daily petty voucher digitization, and GST receipt audit trails.</p>
+
+        <div class="personnel-matrix-box">
+          <div class="personnel-row">
+            <span class="tier-badge tier-admin">👑 Admin</span>
+            <div class="personnel-details">
+              <span class="personnel-name">Bikash Mohapatra</span>
+              <span class="personnel-desig">(Site Accounts)</span>
+            </div>
+          </div>
+          <div class="personnel-row">
+            <span class="tier-badge tier-area">🏛️ Area Mgr</span>
+            <div class="personnel-details">
+              <span class="personnel-name">Satish Chandra</span>
+              <span class="personnel-desig">(Project Directorate)</span>
+            </div>
+          </div>
+          <div class="supervisors-container">
+            <div class="supervisors-label">👷 Shift Supervisors (Max 3):</div>
+            <div class="supervisors-chips">
+              <span class="sup-chip"><span class="dot"></span>Dilip Rout (Fuel Logistics)</span>
+              <span class="sup-chip"><span class="dot"></span>Kailash Sahu (Consumables)</span>
+              <span class="sup-chip"><span class="dot"></span>Rashmi Ranjan (Site Vouchers)</span>
+            </div>
+          </div>
         </div>
-        <div class="portal-footer">
-          <button class="fav-star" title="Toggle favorite">★</button>
-          <a href="#" class="beds-btn beds-btn-primary portal-launch-btn">
+
+        <div class="card-actions-row">
+          <a href="#" class="btn-portal-primary portal-launch-btn">
             Open workspace →
           </a>
+          <button class="btn-fav" onclick="toggleFav(this)" title="Toggle Favorite">★</button>
         </div>
       </div>
 
@@ -565,44 +1115,50 @@
 
   </main>
 
-  <!-- 4. ENTERPRISE FOOTER -->
-  <footer>
+  <!-- 4. MASTER EXECUTIVE FOOTER -->
+  <footer class="exec-footer">
     <p>
-      <strong>BALSONS Heavy Lift & Shift</strong> • Enterprise Portal Ecosystem (SAM-2026 / BEDS V1.0 Locked Baseline)
+      <strong>BALSONS Heavy Lift & Shift</strong> • Enterprise Portal Ecosystem · JTRWF Khordha Base
     </p>
-    <p style="font-style: italic; font-weight: 600; color: var(--beds-teal-primary); margin: 4px 0;">“Difficult We Do Easily, Impossible Takes Little Time...!”</p>
-    <p style="font-size: 11px; color: var(--beds-text-muted); margin: 0 0 6px 0;">Secure Login | Authorized Access Only</p>
-    <p style="margin-top: 6px; color: var(--beds-text-muted);">
-      Global Super Administrator Policy V1.0: Exactly ONE Super Administrator with complete global access across all portals. All other roles receive assigned access exclusively.
+    <p style="font-style: italic; color: var(--beds-teal-primary, #0097a7); margin: 4px 0; font-weight: 600;">
+      “Difficult We Do Easily, Impossible Takes Little Time...!”
+    </p>
+    <p style="font-size: 11px; margin: 4px 0 0 0;">
+      Authorized Access Only · Role Enforced: 1 Admin · 1 Area Manager · Max 3 Supervisors per Domain
     </p>
   </footer>
 
+  <!-- CONTROLLER SCRIPTS -->
   <script>
-    // Greeting by time of day
-    const hour = new Date().getHours();
-    const greetingEl = document.getElementById('timeGreeting');
-    if (hour < 12) greetingEl.textContent = 'Good morning, BALSONS Team 👋';
-    else if (hour < 17) greetingEl.textContent = 'Good afternoon, BALSONS Team 👋';
-    else greetingEl.textContent = 'Good evening, BALSONS Team 👋';
-
-    // BEDS Theme Toggle
+    // Theme Toggle
     function toggleTheme() {
       const current = document.documentElement.getAttribute('data-theme') || 'light';
       const next = current === 'light' ? 'dark' : 'light';
       document.documentElement.setAttribute('data-theme', next);
       localStorage.setItem('beds_theme_preference', next);
-      document.getElementById('themeBtn').textContent = next === 'light' ? '🌙 Dark' : '☀️ Light';
+      const btn = document.getElementById('themeBtn');
+      if (btn) btn.textContent = next === 'light' ? '🌙 Dark' : '☀️ Light';
     }
     const savedTheme = localStorage.getItem('beds_theme_preference') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
     const themeBtn = document.getElementById('themeBtn');
     if (themeBtn) themeBtn.textContent = savedTheme === 'light' ? '🌙 Dark' : '☀️ Light';
 
+    // Sign Out Handler
+    function handleLauncherSignOut() {
+      if (window.BalsonsPortalLogin && typeof window.BalsonsPortalLogin.logout === 'function') {
+        window.BalsonsPortalLogin.logout();
+      } else {
+        localStorage.removeItem('balsons_global_auth_session');
+        window.location.reload();
+      }
+    }
+
     // Category Filter
     let activeCategory = 'all';
     function setCategory(cat, btn) {
       activeCategory = cat;
-      document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       filterPortals();
     }
@@ -610,7 +1166,7 @@
     // Live Search Filter
     function filterPortals() {
       const query = document.getElementById('portalSearch').value.toLowerCase().trim();
-      const cards = document.querySelectorAll('.portal-card');
+      const cards = document.querySelectorAll('.clean-portal-card');
       let visibleCount = 0;
 
       cards.forEach(card => {
@@ -631,72 +1187,27 @@
     }
 
     // Toggle Favorite star
-    document.querySelectorAll('.fav-star').forEach(star => {
-      star.addEventListener('click', (e) => {
-        e.stopPropagation();
-        star.classList.toggle('active');
-      });
-    });
-
-    // Synchronize Portal Cards Access with Active SAM Session
-    function syncPortalCards(session) {
-      session = session || BalsonsSAMAuth.getSession();
-      
-      const headerBadge = document.getElementById('headerUserBadge');
-      if (headerBadge) {
-        if (session.role === 'SUPER_ADMIN') {
-          headerBadge.innerHTML = '👑 <strong>Super Admin</strong> • All Access';
-          headerBadge.style.color = '#DC2626';
-          headerBadge.style.background = 'rgba(220, 38, 38, 0.1)';
-        } else {
-          headerBadge.innerHTML = `👤 <strong>${session.fullName.split(' ')[0]}</strong> • ${session.roleInfo.title}`;
-          headerBadge.style.color = '#0097B2';
-          headerBadge.style.background = 'rgba(0, 151, 178, 0.1)';
-        }
-      }
-
-      const cards = document.querySelectorAll('.portal-card[data-portal-id]');
-      cards.forEach(card => {
-        const pid = card.getAttribute('data-portal-id');
-        const isAllowed = BalsonsSAMAuth.canAccessPortal(pid);
-        const pill = document.getElementById('pill-' + pid);
-        const launchBtns = card.querySelectorAll('.portal-launch-btn');
-
-        if (isAllowed) {
-          card.style.opacity = '1.0';
-          card.style.filter = 'none';
-          if (pill && pid !== 'toolbox') {
-            pill.className = 'status-pill status-success';
-            pill.textContent = 'AVAILABLE';
-            pill.style.background = '';
-            pill.style.color = '';
-          }
-          launchBtns.forEach(btn => {
-            btn.onclick = null;
-            btn.style.cursor = 'pointer';
-          });
-        } else {
-          card.style.opacity = '0.55';
-          if (pill) {
-            pill.className = 'status-pill';
-            pill.style.background = '#FEE2E2';
-            pill.style.color = '#991B1B';
-            pill.style.fontWeight = '700';
-            pill.textContent = '🔒 RESTRICTED';
-          }
-          launchBtns.forEach(btn => {
-            btn.onclick = (e) => {
-              e.preventDefault();
-              alert(`ACCESS RESTRICTED (Policy Section 4):\nYour account '${session.fullName}' (${session.roleInfo.title}) is not authorized to access ${pid}.\n\nUnder BALSONS Global Policy V1.0, only the Super Administrator can grant access.`);
-            };
-          });
-        }
-      });
+    function toggleFav(star) {
+      star.classList.toggle('active');
     }
 
-    // Initialize SAM Governance
+    // Sync User Profile in Header
+    function updateHeaderUser() {
+      const chip = document.getElementById('headerUserBadge');
+      if (!chip) return;
+      if (window.BalsonsSuperAdmin && window.BalsonsSuperAdmin.currentUser) {
+        const u = window.BalsonsSuperAdmin.currentUser;
+        const icon = u.isSuperAdmin ? '👑' : (u.avatar || '👤');
+        chip.innerHTML = `${icon} <strong>${u.fullName.split(' ')[0]}</strong> · ${u.role}`;
+      } else {
+        chip.innerHTML = `👑 <strong>Prashant Mohanty</strong> · Super Administrator`;
+      }
+    }
+
+    // GitHub Pages Multi-Repo Link Resolution
     window.addEventListener('DOMContentLoaded', () => {
-      // GitHub Pages URL Auto-Mapping for multi-repo deployments
+      updateHeaderUser();
+
       if (window.location.hostname.includes('github.io')) {
         document.querySelectorAll('a[href]').forEach(a => {
           const href = a.getAttribute('href');
@@ -722,17 +1233,11 @@
           }
         });
       }
-
-      if (window.BalsonsSAMAuth) {
-        BalsonsSAMAuth.renderGlobalSuperAdminBar('launcher', (newSession) => {
-          syncPortalCards(newSession);
-        });
-        syncPortalCards();
-      }
     });
   </script>
+
+  <!-- Core Security & Login Controller with Smart Role Dropdown -->
   <script src="assets/js/beds-superadmin.js"></script>
   <script src="assets/js/beds-portal-login.js"></script>
-  <script src="assets/js/beds-workspace.js"></script>
 </body>
 </html>
