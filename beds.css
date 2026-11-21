@@ -1326,9 +1326,11 @@ table.beds-data-table tr:hover td, table.data-table tr:hover td {
 .beds-login-left-overlay {
   position: relative;
   z-index: 2;
-  background: linear-gradient(to top, rgba(16, 45, 53, 0.98) 0%, rgba(16, 45, 53, 0.75) 60%, transparent 100%);
-  padding: 24px 20px 20px;
+  background: #102D35;
+  border-top: 1px solid rgba(0, 151, 178, 0.4);
+  padding: 18px 20px 18px;
   color: #FFFFFF;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
 }
 .beds-login-portal-title {
   font-size: 22px;
