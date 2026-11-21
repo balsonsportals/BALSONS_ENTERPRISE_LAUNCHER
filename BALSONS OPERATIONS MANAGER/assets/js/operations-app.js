@@ -9,6 +9,8 @@
   'use strict';
 
   const DB_NAME = 'balsons_ops_db_v7_2';
+  const SPREADSHEET_ID = '1GeqDDmBgdVm3ZUp4c9iB36__iLJ9wADQQRhEIwVxa-E';
+  const SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/1GeqDDmBgdVm3ZUp4c9iB36__iLJ9wADQQRhEIwVxa-E/edit';
   const DB_VERSION = 1;
   let dbInstance = null;
 
