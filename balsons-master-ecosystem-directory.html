@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>BALSONS Enterprise Ecosystem • Master Portals, Databases & API Gateway Hub</title>
+  <link rel="icon" type="image/png" href="BALSONS%20OPERATIONS%20MANAGER/assets/images/balsons-logo.png">
+
+  <!-- Inter & JetBrains Mono Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="BALSONS%20OPERATIONS%20MANAGER/beds.css">
+  <style>
+    /* STRICT SUPPRESSION OF DEVELOPER SIMULATOR BARS */
+    #sam-global-topbar,
+    .sam-gov-bar,
+    .sam-gov-policy,
+    #beds-enterprise-topbar,
+    .beds-enterprise-topbar {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      min-height: 0 !important;
+      overflow: hidden !important;
+      pointer-events: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    :root {
+      --super-navy: #0d1e27;
+      --super-teal: #102a35;
+      --super-teal-light: #163847;
+      --super-cyan: #0097a7;
+      --super-cyan-glow: rgba(0, 151, 167, 0.35);
+      --super-gold: #d97706;
+      --super-gold-light: #fef3c7;
+      --super-border: #e2e8f0;
+      --super-bg: #f8fafc;
+      --super-card: #ffffff;
+      --super-shadow: 0 4px 20px rgba(16, 42, 53, 0.06);
+      --beds-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --beds-font-mono: 'JetBrains Mono', monospace;
+    }
+
+    [data-theme="dark"] {
+      --super-navy: #060e13;
+      --super-teal: #08161c;
+      --super-teal-light: #0d222b;
+      --super-cyan: #00b4d8;
+      --super-cyan-glow: rgba(0, 180, 216, 0.35);
+      --super-gold: #fbbf24;
+      --super-gold-light: rgba(251, 191, 36, 0.15);
+      --super-border: #1e3a45;
+      --super-bg: #071015;
+      --super-card: #0d222b;
+      --super-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    body {
+      background-color: var(--super-bg);
+      color: var(--beds-text-primary, #1e293b);
+      margin: 0;
+      font-family: var(--beds-font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* KEYFRAME ANIMATIONS */
+    @keyframes superFadeIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes ribbonEntrance {
+      from { opacity: 0; transform: translateY(-12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+      50% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+    }
+
+    /* 1. MASTER EXECUTIVE HEADER */
+    header.exec-header {
+      background: var(--beds-bg-panel, #ffffff);
+      border-bottom: 1px solid var(--super-border);
+      padding: 12px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--super-shadow);
+      animation: superFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .header-brand img {
+      height: 42px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+      transition: transform 0.25s ease;
+    }
+    .header-brand:hover img {
+      transform: scale(1.04);
+    }
+    .brand-text h1 {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--beds-charcoal-heading, #102a35);
+      margin: 0;
+      line-height: 1.2;
+      letter-spacing: -0.2px;
+    }
+    .brand-text p {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--super-cyan);
+      margin: 1px 0 0 0;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+    .brand-slogan {
+      font-size: 11px;
+      font-style: italic;
+      color: rgb(223, 35, 14);
+      margin-top: 2px;
+      font-weight: 700;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--super-bg);
+      border: 1px solid var(--super-border);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--beds-text-secondary, #475569);
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .badge-pill:hover {
+      border-color: var(--super-cyan);
+      transform: translateY(-1px);
+    }
+    .online-indicator {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      animation: pulseGlow 2s infinite ease-in-out;
+    }
+
+    /* 2. EXECUTIVE HUB BANNER */
+    .hub-hero-ribbon {
+      background: linear-gradient(135deg, var(--super-navy) 0%, var(--super-teal) 60%, var(--super-teal-light) 100%);
+      color: #ffffff;
+      padding: 28px 32px;
+      border-bottom: 1px solid var(--super-border);
+      animation: ribbonEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .hub-hero-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+    .hub-hero-title h2 {
+      font-size: 22px;
+      font-weight: 900;
+      margin: 0;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: -0.3px;
+    }
+    .hub-hero-title p {
+      font-size: 13px;
+      color: #94a3b8;
+      margin: 6px 0 0 0;
+      max-width: 850px;
+      line-height: 1.5;
+    }
+    .hub-hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .btn-super-act {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-super-act:hover {
+      background: #0097a7;
+      border-color: #0097a7;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0, 151, 167, 0.4);
+      color: #ffffff;
+    }
+
+    .hub-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .hub-stat-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 16px 18px;
+      backdrop-filter: blur(8px);
+      transition: all 0.25s ease;
+    }
+    .hub-stat-card:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: var(--super-cyan);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    }
+    .stat-lbl {
+      font-size: 11px;
+      font-weight: 700;
+      color: #cbd5e1;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .stat-num {
+      font-size: 26px;
+      font-weight: 900;
+      color: #ffffff;
+      font-family: var(--beds-font-mono);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    .stat-sub {
+      font-size: 11.5px;
+      color: #94a3b8;
+    }
+
+    /* 3. MAIN PORTAL CARDS DIRECTORY */
+    main.hub-main {
+      padding: 28px 32px;
+      flex: 1;
+      max-width: 1680px;
+      margin: 0 auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Toolbar Filter Row */
+    .filter-toolbar-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      background: var(--beds-bg-panel, #ffffff);
+      padding: 12px 18px;
+      border-radius: 10px;
+      border: 1px solid var(--super-border);
+      box-shadow: var(--super-shadow);
+    }
+    .filter-search-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--super-bg);
+      border: 1px solid var(--super-border);
+      border-radius: 6px;
+      padding: 8px 14px;
+      flex: 1;
+      min-width: 260px;
+      max-width: 480px;
+    }
+    .filter-search-box input {
+      border: none;
+      background: transparent;
+      outline: none;
+      width: 100%;
+      font-size: 13px;
+      color: var(--beds-text-primary);
+    }
+    .filter-pills-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .filter-pill-btn {
+      background: var(--super-bg);
+      border: 1px solid var(--super-border);
+      color: #000000 !important; /* STRICTLY BLACK IN LIGHT MODE (BEDS STANDARD) */
+      padding: 6px 12px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .filter-pill-btn:hover {
+      border-color: var(--super-cyan);
+      background: rgba(0, 151, 167, 0.08);
+      color: #000000 !important;
+    }
+    .filter-pill-btn.active {
+      background: var(--super-cyan) !important;
+      border-color: var(--super-cyan);
+      color: #ffffff !important;
+      box-shadow: 0 2px 8px var(--super-cyan-glow);
+    }
+    [data-theme="dark"] .filter-pill-btn {
+      color: #ffffff !important; /* STRICTLY WHITE IN DARK MODE (BEDS STANDARD) */
+    }
+    [data-theme="dark"] .filter-pill-btn:hover {
+      color: #ffffff !important;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* DIRECTORY CARDS GRID */
+    .portal-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+      gap: 22px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 600px) {
+      .portal-cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .portal-master-card {
+      background: var(--beds-bg-panel, #ffffff);
+      border: 1px solid var(--super-border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--super-shadow);
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .portal-master-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(16, 42, 53, 0.1);
+      border-color: var(--super-cyan);
+    }
+
+    .pm-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--super-border);
+      padding-bottom: 14px;
+    }
+    .pm-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    .pm-title-group h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--beds-charcoal-heading, #102a35);
+      line-height: 1.3;
+    }
+    .pm-title-group p {
+      margin: 3px 0 0 0;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--beds-text-muted);
+    }
+    .pm-version-badge {
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: auto;
+      white-space: nowrap;
+    }
+
+    .pm-desc {
+      font-size: 12.5px;
+      color: var(--beds-text-secondary);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    /* TELEMETRY LINKS BOX */
+    .pm-telemetry-box {
+      background: var(--super-bg);
+      border: 1px solid var(--super-border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12px;
+    }
+    .pm-link-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .pm-link-lbl {
+      font-weight: 700;
+      color: var(--beds-text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+    }
+    .pm-code-id {
+      font-family: var(--beds-font-mono);
+      font-weight: 700;
+      font-size: 11.5px;
+      background: rgba(0, 151, 167, 0.08);
+      color: var(--super-cyan);
+      padding: 2px 6px;
+      border-radius: 4px;
+      max-width: 220px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .pm-open-link {
+      color: #0097a7;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 11.5px;
+    }
+    .pm-open-link:hover {
+      text-decoration: underline;
+    }
+
+    /* FEATURES & UPDATIONS LIST */
+    .pm-features-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 18px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .pm-features-list li {
+      font-size: 12px;
+      color: var(--beds-text-primary);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.4;
+    }
+    .pm-features-list li span.check-icon {
+      color: #10b981;
+      font-weight: 800;
+      font-size: 13px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* CARD ACTION FOOTER */
+    .pm-card-actions {
+      margin-top: auto;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      padding-top: 14px;
+      border-top: 1px solid var(--super-border);
+    }
+    .btn-launch-primary {
+      background: var(--super-cyan);
+      color: #ffffff;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px var(--super-cyan-glow);
+    }
+    .btn-launch-primary:hover {
+      background: #008394;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px var(--super-cyan-glow);
+      color: #ffffff;
+    }
+    .btn-launch-secondary {
+      background: var(--super-bg);
+      border: 1px solid var(--super-border);
+      color: var(--beds-text-secondary);
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .btn-launch-secondary:hover {
+      border-color: var(--super-cyan);
+      color: var(--super-cyan);
+    }
+
+    /* MATRIX TABLE PANEL */
+    .matrix-panel {
+      background: var(--beds-bg-panel, #ffffff);
+      border: 1px solid var(--super-border);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: var(--super-shadow);
+      margin-bottom: 32px;
+    }
+    .matrix-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--super-border);
+      padding-bottom: 12px;
+    }
+    .matrix-panel-header h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--beds-charcoal-heading);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* TAG CHIPS */
+    .tag-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .tag-cyan { background: rgba(0, 151, 167, 0.1); color: #0097a7; }
+    .tag-green { background: rgba(16, 185, 129, 0.1); color: #059669; }
+    .tag-amber { background: rgba(245, 158, 11, 0.1); color: #d97706; }
+    .tag-red { background: rgba(220, 38, 38, 0.1); color: #dc2626; }
+    .tag-purple { background: rgba(124, 58, 237, 0.1); color: #7c3aed; }
+    .tag-blue { background: rgba(59, 130, 246, 0.1); color: #2563eb; }
+
+    /* FOOTER */
+    footer.hub-footer {
+      background: var(--beds-bg-panel);
+      border-top: 1px solid var(--super-border);
+      padding: 24px 32px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--beds-text-muted);
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. MASTER EXECUTIVE HEADER -->
+  <header class="exec-header">
+    <div class="header-brand">
+      <img src="BALSONS%20OPERATIONS%20MANAGER/assets/images/balsons-logo.png" alt="BALSONS Logo">
+      <div class="brand-text">
+        <h1>BALSONS HEAVY LIFT & SHIFT</h1>
+        <p>Enterprise Portals Ecosystem & Data Architecture Master Directory</p>
+        <div class="brand-slogan">“Difficult We Do Easily, Impossible Takes Little Time...!”</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <span class="badge-pill">
+        📍 JTRWF PROJECT • Khordha, Odisha
+      </span>
+      <span class="badge-pill">
+        <span class="online-indicator"></span> 6/6 Portals Online
+      </span>
+      <button class="badge-pill" id="themeBtn" onclick="toggleTheme()" style="cursor: pointer;" title="Toggle Light/Dark Theme">
+        🌙 Dark
+      </button>
+      <a href="index.html" class="badge-pill" style="background: rgba(0, 151, 167, 0.1); border-color: #0097a7; color: #0097a7; font-weight: 800;">
+        🚀 Central Launcher
+      </a>
+    </div>
+  </header>
+
+  <!-- 2. EXECUTIVE HUB BANNER -->
+  <section class="hub-hero-ribbon">
+    <div class="hub-hero-header">
+      <div class="hub-hero-title">
+        <h2><span>🌐</span> BALSONS Enterprise Ecosystem Directory & Governance Gateway</h2>
+        <p>
+          Master Technical Baseline for Jupiter Tatravagonka Railwheel Factory (JTRWF). Governs all integrated operational portals, dedicated Google Sheets databases, Clasp Apps Script API gateways, and synchronized execution records under SAM-2026 and BEDS V1.0 standards.
+        </p>
+      </div>
+      <div class="hub-hero-actions">
+        <button class="btn-super-act" onclick="copyAllEcosystemLinks()" title="Copy all portal and database links to clipboard">
+          📋 Copy All Links
+        </button>
+        <button class="btn-super-act" onclick="window.print()" title="Print / Export PDF Ecosystem Report">
+          🖨️ Print A4 Directory
+        </button>
+        <a href="https://github.com/balsonsportals" target="_blank" class="btn-super-act" title="Open GitHub Organization Repositories">
+          🐙 GitHub Org ↗
+        </a>
+      </div>
+    </div>
+
+    <div class="hub-stats-grid">
+      <div class="hub-stat-card">
+        <div class="stat-lbl"><span>🏛️</span> Portals Deployed</div>
+        <div class="stat-num">6 Live</div>
+        <div class="stat-sub">100% Responsive & Offline-First</div>
+      </div>
+      <div class="hub-stat-card">
+        <div class="stat-lbl"><span>📊</span> Dedicated DB Sheets</div>
+        <div class="stat-num">5 Sheets</div>
+        <div class="stat-sub">Strict System-Boundary Segregation</div>
+      </div>
+      <div class="hub-stat-card">
+        <div class="stat-lbl"><span>⚡</span> Apps Script Gateways</div>
+        <div class="stat-num">5 Clasp APIs</div>
+        <div class="stat-sub">Bi-Directional JSON & REST Hooks</div>
+      </div>
+      <div class="hub-stat-card">
+        <div class="stat-lbl"><span>🛡️</span> Security & Compliance</div>
+        <div class="stat-num">Form 11 & PTW</div>
+        <div class="stat-sub">Tri-Portal Gate Access Interlocked</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. MAIN DIRECTORY BODY -->
+  <main class="hub-main">
+
+    <!-- Filter & Search Toolbar -->
+    <div class="filter-toolbar-row">
+      <div class="filter-search-box">
+        <span>🔍</span>
+        <input type="text" id="portalSearchInput" placeholder="Search portals by name, sheet ID, clasp script ID, or capability..." oninput="filterPortals()">
+      </div>
+      <div class="filter-pills-group">
+        <button class="filter-pill-btn active" onclick="setFilter('ALL', this)">All Portals (6)</button>
+        <button class="filter-pill-btn" onclick="setFilter('OPERATIONS', this)">Operations & Erection</button>
+        <button class="filter-pill-btn" onclick="setFilter('STORE', this)">Store & Tackle Form 11</button>
+        <button class="filter-pill-btn" onclick="setFilter('SAFETY', this)">Safety & PTW Risk</button>
+        <button class="filter-pill-btn" onclick="setFilter('GATE', this)">Gate Entry & Muster</button>
+        <button class="filter-pill-btn" onclick="setFilter('HR', this)">Human Resources</button>
+      </div>
+    </div>
+
+    <!-- PORTALS DIRECTORY GRID -->
+    <div class="portal-cards-grid" id="portalCardsContainer">
+
+      <!-- CARD 1: OPERATIONS & HEAVY RIGGING EXECUTION MANAGER -->
+      <div class="portal-master-card" data-category="OPERATIONS">
+        <div class="pm-header">
+          <div class="pm-icon-box" style="background: rgba(0, 151, 167, 0.12); color: #0097a7;">🏗️</div>
+          <div class="pm-title-group">
+            <h3>Operations & Heavy Rigging Manager</h3>
+            <p>Execution Planning, 8-State Lifecycles, Cranes & Work Packages</p>
+          </div>
+          <span class="pm-version-badge tag-chip tag-cyan">V7.2 BASELINE</span>
+        </div>
+
+        <div class="pm-desc">
+          Controls onsite mechanical erection, multi-axle modular trailer haulage, tandem heavy crane coordination, shift handovers, and commercial SOW reconciliation across 3 execution zones and 7 Machine Shop workstreams.
+        </div>
+
+        <div class="pm-telemetry-box">
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>📊</span> Dedicated Sheet DB:</span>
+            <code class="pm-code-id" title="1GeqDDmBgdVm3ZUp4c9iB36__iLJ9wADQQRhEIwVxa-E">1GeqDDmB...xa-E</code>
+            <a href="https://docs.google.com/spreadsheets/d/1GeqDDmBgdVm3ZUp4c9iB36__iLJ9wADQQRhEIwVxa-E/edit" target="_blank" class="pm-open-link">Open Sheet ↗</a>
+          </div>
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>⚡</span> Apps Script Gateway:</span>
+            <code class="pm-code-id" title="1an3LeD6Ich14qtWZ5GFgJMaa3dYQSboZRwFy9g_gf9zWicPDB9KpFNny">1an3LeD6...FNny</code>
+            <a href="https://script.google.com/d/1an3LeD6Ich14qtWZ5GFgJMaa3dYQSboZRwFy9g_gf9zWicPDB9KpFNny/edit" target="_blank" class="pm-open-link">Open Script ↗</a>
+          </div>
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>🌐</span> Live Production URL:</span>
+            <a href="https://balsonsportals.github.io/BALSONS%20OPERATIONS%20MANAGER/index.html" target="_blank" class="pm-open-link" style="font-weight:800;">balsonsportals.github.io/.../index.html ↗</a>
+          </div>
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>🐙</span> Git Repository:</span>
+            <a href="https://github.com/balsonsportals/BALSONS_OPERATIONS_PORTAL.git" target="_blank" class="pm-open-link">BALSONS_OPERATIONS_PORTAL.git ↗</a>
+          </div>
+        </div>
+
+        <ul class="pm-features-list">
+          <li><span class="check-icon">✓</span> <strong>Area-Wise Segmentation:</strong> Area 1 (Line Axle, 717 MD), Area 2 (Line Wheel, 1,075 MD), Area 3 (Machine Shop Bay, 7 workstreams).</li>
+          <li><span class="check-icon">✓</span> <strong>Universal 360° Dossier:</strong> One-click comprehensive dossier for Work Packages, Heavy Machinery Assets, and Execution Areas with interactive punchlist checklists.</li>
+          <li><span class="check-icon">✓</span> <strong>Mandatory Real-Time Dual-Sync:</strong> IndexedDB offline store automatically syncs mutations to dedicated Google Sheet <code>1GeqDDmB...</code>.</li>
+          <li><span class="check-icon">✓</span> <strong>Persistent Login Guarantee:</strong> Stays securely logged in on mobile and PC across page refreshes.</li>
+        </ul>
+
+        <div class="pm-card-actions">
+          <a href="BALSONS%20OPERATIONS%20MANAGER/index.html" class="btn-launch-primary">Launch Portal ➔</a>
+          <a href="https://docs.google.com/spreadsheets/d/1GeqDDmBgdVm3ZUp4c9iB36__iLJ9wADQQRhEIwVxa-E/edit" target="_blank" class="btn-launch-secondary">Database Sheet ↗</a>
+          <a href="https://script.google.com/d/1an3LeD6Ich14qtWZ5GFgJMaa3dYQSboZRwFy9g_gf9zWicPDB9KpFNny/edit" target="_blank" class="btn-launch-secondary">Apps Script API ↗</a>
+        </div>
+      </div>
+
+      <!-- CARD 2: STORE & TACKLE INVENTORY MANAGER -->
+      <div class="portal-master-card" data-category="STORE">
+        <div class="pm-header">
+          <div class="pm-icon-box" style="background: rgba(16, 185, 129, 0.12); color: #059669;">📦</div>
+          <div class="pm-title-group">
+            <h3>Store & Tackle Inventory Manager</h3>
+            <p>Form 11 Lifting Tackle Certificates, Tool Issues & Store Radar</p>
+          </div>
+          <span class="pm-version-badge tag-chip tag-green">V3.2 / V5.3</span>
+        </div>
+
+        <div class="pm-desc">
+          Official custodian of heavy rigging tackle Form 11 certificate compliance, certified wire rope slings, master links, calibrated hydraulic torque wrenches, tool issuing/returns, and store radar inventory tracking.
+        </div>
+
+        <div class="pm-telemetry-box">
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>📊</span> Dedicated Sheet DB:</span>
+            <code class="pm-code-id" title="1u_ZKvvCVfEQDAtkoMR68q2d2hEK-eWBnvsS3AGfP6yQ">1u_ZKvvC...P6yQ</code>
+            <a href="https://docs.google.com/spreadsheets/d/1u_ZKvvCVfEQDAtkoMR68q2d2hEK-eWBnvsS3AGfP6yQ/edit" target="_blank" class="pm-open-link">Open Sheet ↗</a>
+          </div>
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>⚡</span> Apps Script Gateway:</span>
+            <code class="pm-code-id" title="1brrNLzFHk-qNEcP60mQEOsnm9kWnyRQNVx9flj8d5vL_DChuajbD0mN-">1brrNLzF...0mN-</code>
+            <a href="https://script.google.com/d/1brrNLzFHk-qNEcP60mQEOsnm9kWnyRQNVx9flj8d5vL_DChuajbD0mN-/edit" target="_blank" class="pm-open-link">Open Script ↗</a>
+          </div>
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>🌐</span> Live Production URL:</span>
+            <a href="https://balsonsportals.github.io/BALSONS%20STORE%20MANAGER/frontend/index.html" target="_blank" class="pm-open-link" style="font-weight:800;">balsonsportals.github.io/.../store/index.html ↗</a>
+          </div>
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>🐙</span> Git Repository:</span>
+            <a href="https://github.com/balsonsportals/BALSONS_STORE_MANAGER.git" target="_blank" class="pm-open-link">BALSONS_STORE_MANAGER.git ↗</a>
+          </div>
+        </div>
+
+        <ul class="pm-features-list">
+          <li><span class="check-icon">✓</span> <strong>Form 11 Tackle Compliance:</strong> Live TPI inspection validity tracker; prevents tool issuance if certificate is expired.</li>
+          <li><span class="check-icon">✓</span> <strong>360° Workforce Tool Dossier:</strong> Inspects issued tools, torque certificates, and custody history by employee badge.</li>
+          <li><span class="check-icon">✓</span> <strong>Multi-Lingual Engine:</strong> Instant bilingual toggle between English and Hindi (हिन्दी) for onsite store keepers.</li>
+          <li><span class="check-icon">✓</span> <strong>Inventory Barcode & Quick Issue:</strong> Instant tool dispatch with gate returnable gate pass (RGP) tracking.</li>
+        </ul>
+
+        <div class="pm-card-actions">
+          <a href="BALSONS%20STORE%20MANAGER/frontend/index.html" class="btn-launch-primary" style="background:#059669;">Launch Portal ➔</a>
+          <a href="https://docs.google.com/spreadsheets/d/1u_ZKvvCVfEQDAtkoMR68q2d2hEK-eWBnvsS3AGfP6yQ/edit" target="_blank" class="btn-launch-secondary">Database Sheet ↗</a>
+          <a href="https://script.google.com/d/1brrNLzFHk-qNEcP60mQEOsnm9kWnyRQNVx9flj8d5vL_DChuajbD0mN-/edit" target="_blank" class="btn-launch-secondary">Apps Script API ↗</a>
+        </div>
+      </div>
+
+      <!-- CARD 3: SAFETY & RISK MANAGER -->
+      <div class="portal-master-card" data-category="SAFETY">
+        <div class="pm-header">
+          <div class="pm-icon-box" style="background: rgba(220, 38, 38, 0.12); color: #dc2626;">🛡️</div>
+          <div class="pm-title-group">
+            <h3>Safety & Risk Manager</h3>
+            <p>Permit-To-Work (PTW), Form 31 Medical Fitness & 4-Eye Rigging Clearance</p>
+          </div>
+          <span class="pm-version-badge tag-chip tag-red">V2.1 / V5.3</span>
+        </div>
+
+        <div class="pm-desc">
+          Controls high-risk work permits (Hot Work, Height, Confined Space, Heavy Tandem Lifts), Form 31 medical fitness validity, safety induction passports, daily Toolbox Talks (TBT), and zero-harm audit registers.
+        </div>
+
+        <div class="pm-telemetry-box">
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>📊</span> Dedicated Sheet DB:</span>
+            <code class="pm-code-id" title="1SyOGt6HEu6HJCufAbB2_P6BgF6pEppt28J_8cARaOP0">1SyOGt6H...aOP0</code>
+            <a href="https://docs.google.com/spreadsheets/d/1SyOGt6HEu6HJCufAbB2_P6BgF6pEppt28J_8cARaOP0/edit" target="_blank" class="pm-open-link">Open Sheet ↗</a>
+          </div>
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>⚡</span> Apps Script Gateway:</span>
+            <code class="pm-code-id" title="1hDeYHxT2oU3G7i5YLPl5D_hzRiAEwpwKgUKsO1P3N0vMuum2e2Unitfj">1hDeYHxT...itfj</code>
+            <a href="https://script.google.com/d/1hDeYHxT2oU3G7i5YLPl5D_hzRiAEwpwKgUKsO1P3N0vMuum2e2Unitfj/edit" target="_blank" class="pm-open-link">Open Script ↗</a>
+          </div>
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>🌐</span> Live Production URL:</span>
+            <a href="https://balsonsportals.github.io/BALSONS%20SAFETY%20MANAGER/index.html" target="_blank" class="pm-open-link" style="font-weight:800;">balsonsportals.github.io/.../safety/index.html ↗</a>
+          </div>
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>🐙</span> Git Repository:</span>
+            <a href="https://github.com/balsonsportals/BALSONS_SAFETY_MANAGER.git" target="_blank" class="pm-open-link">BALSONS_SAFETY_MANAGER.git ↗</a>
+          </div>
+        </div>
+
+        <ul class="pm-features-list">
+          <li><span class="check-icon">✓</span> <strong>4-Eye Tandem Lift Review:</strong> Joint sign-off between Safety Steward and Area Rigging In-Charge.</li>
+          <li><span class="check-icon">✓</span> <strong>Environmental & Wind Interlocks:</strong> Wind speed exceeding 9.8 m/s triggers automatic suspension of heavy lifts.</li>
+          <li><span class="check-icon">✓</span> <strong>Tri-Portal Clearance Integration:</strong> Feeds real-time safety induction & fitness status directly to Gate Entry.</li>
+          <li><span class="check-icon">✓</span> <strong>Form 31 Medical Tracking:</strong> Automated warning when worker annual height/rigging medical examination approaches expiry.</li>
+        </ul>
+
+        <div class="pm-card-actions">
+          <a href="BALSONS%20SAFETY%20MANAGER/index.html" class="btn-launch-primary" style="background:#dc2626;">Launch Portal ➔</a>
+          <a href="https://docs.google.com/spreadsheets/d/1SyOGt6HEu6HJCufAbB2_P6BgF6pEppt28J_8cARaOP0/edit" target="_blank" class="btn-launch-secondary">Database Sheet ↗</a>
+          <a href="https://script.google.com/d/1hDeYHxT2oU3G7i5YLPl5D_hzRiAEwpwKgUKsO1P3N0vMuum2e2Unitfj/edit" target="_blank" class="btn-launch-secondary">Apps Script API ↗</a>
+        </div>
+      </div>
+
+      <!-- CARD 4: GATE ENTRY & SECURITY MANAGER -->
+      <div class="portal-master-card" data-category="GATE">
+        <div class="pm-header">
+          <div class="pm-icon-box" style="background: rgba(217, 119, 6, 0.12); color: #d97706;">🚪</div>
+          <div class="pm-title-group">
+            <h3>Gate Entry & Security Manager</h3>
+            <p>Tri-Portal Turnstile Clearance, Biometric Muster & Vehicle Passes</p>
+          </div>
+          <span class="pm-version-badge tag-chip tag-amber">V2.0 / V5.3</span>
+        </div>
+
+        <div class="pm-desc">
+          Automated gate decision engine that unlocks turnstiles ONLY when an employee possesses active HR onboarding AND verified Safety induction/medical clearance. Controls returnable/non-returnable material gate passes (RGP/NRGP).
+        </div>
+
+        <div class="pm-telemetry-box">
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>📊</span> Dedicated Sheet DB:</span>
+            <code class="pm-code-id" title="1yAuZOXc8WoC2TvTvnEWMrOyLl_50BRuJgDed_pdFT3o">1yAuZOXc...FT3o</code>
+            <a href="https://docs.google.com/spreadsheets/d/1yAuZOXc8WoC2TvTvnEWMrOyLl_50BRuJgDed_pdFT3o/edit" target="_blank" class="pm-open-link">Open Sheet ↗</a>
+          </div>
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>⚡</span> Apps Script Gateway:</span>
+            <code class="pm-code-id" title="1emZvUYjT-hTduELE4lSboVCtndFfGQ8KC2elpQ6Em9TF4RW6d2VF75J-">1emZvUYj...75J-</code>
+            <a href="https://script.google.com/d/1emZvUYjT-hTduELE4lSboVCtndFfGQ8KC2elpQ6Em9TF4RW6d2VF75J-/edit" target="_blank" class="pm-open-link">Open Script ↗</a>
+          </div>
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>🌐</span> Live Production URL:</span>
+            <a href="https://balsonsportals.github.io/BALSONS%20GATE%20ENTRY%20MANAGER/index.html" target="_blank" class="pm-open-link" style="font-weight:800;">balsonsportals.github.io/.../gate/index.html ↗</a>
+          </div>
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>🐙</span> Git Repository:</span>
+            <a href="https://github.com/balsonsportals/BALSONS_GATE_ENTRY_MANAGER.git" target="_blank" class="pm-open-link">BALSONS_GATE_ENTRY_MANAGER.git ↗</a>
+          </div>
+        </div>
+
+        <ul class="pm-features-list">
+          <li><span class="check-icon">✓</span> <strong>Tri-Portal Access Interlock:</strong> Zero turnstile entry without verified HR KYC and Safety Form 31 certificate.</li>
+          <li><span class="check-icon">✓</span> <strong>Real-Time Site Muster:</strong> Live head count tracking showing exactly who is inside the plant boundary.</li>
+          <li><span class="check-icon">✓</span> <strong>Material Gate Pass Validation:</strong> Automated RGP/NRGP check against Store Manager dispatches.</li>
+          <li><span class="check-icon">✓</span> <strong>Heavy Transport Vehicle Log:</strong> Multi-axle trailer site gate check-in and weighbridge integration.</li>
+        </ul>
+
+        <div class="pm-card-actions">
+          <a href="BALSONS%20GATE%20ENTRY%20MANAGER/index.html" class="btn-launch-primary" style="background:#d97706;">Launch Portal ➔</a>
+          <a href="https://docs.google.com/spreadsheets/d/1yAuZOXc8WoC2TvTvnEWMrOyLl_50BRuJgDed_pdFT3o/edit" target="_blank" class="btn-launch-secondary">Database Sheet ↗</a>
+          <a href="https://script.google.com/d/1emZvUYjT-hTduELE4lSboVCtndFfGQ8KC2elpQ6Em9TF4RW6d2VF75J-/edit" target="_blank" class="btn-launch-secondary">Apps Script API ↗</a>
+        </div>
+      </div>
+
+      <!-- CARD 5: HUMAN RESOURCES (HR) MANAGER -->
+      <div class="portal-master-card" data-category="HR">
+        <div class="pm-header">
+          <div class="pm-icon-box" style="background: rgba(37, 99, 235, 0.12); color: #2563eb;">👥</div>
+          <div class="pm-title-group">
+            <h3>Human Resources (HR) Manager</h3>
+            <p>Workforce Master Directory, Statutory Compliance & Onboarding</p>
+          </div>
+          <span class="pm-version-badge tag-chip tag-blue">V2.0 / V5.3</span>
+        </div>
+
+        <div class="pm-desc">
+          Master system of record for workforce identities, Aadhaar KYC verification, PF UAN and ESIC IP compliance, wage classifications, police background verification records, contractor allocations, and site colony quarters.
+        </div>
+
+        <div class="pm-telemetry-box">
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>📊</span> Dedicated Sheet DB:</span>
+            <code class="pm-code-id" title="1so_aH05vVxiUJsIK6VS-n7BpGrHWNgn_5EK7RuA3cuw">1so_aH05...3cuw</code>
+            <a href="https://docs.google.com/spreadsheets/d/1so_aH05vVxiUJsIK6VS-n7BpGrHWNgn_5EK7RuA3cuw/edit" target="_blank" class="pm-open-link">Open Sheet ↗</a>
+          </div>
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>⚡</span> Apps Script Gateway:</span>
+            <code class="pm-code-id" title="1_I-scIjBfFbJufFCppzT-fCp-cBC-5BKvk4RwS6UTVwno1KFu5MTxKs_">1_I-scIj...xKs_</code>
+            <a href="https://script.google.com/d/1_I-scIjBfFbJufFCppzT-fCp-cBC-5BKvk4RwS6UTVwno1KFu5MTxKs_/edit" target="_blank" class="pm-open-link">Open Script ↗</a>
+          </div>
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>🌐</span> Live Production URL:</span>
+            <a href="https://balsonsportals.github.io/BALSONS%20HR%20MANAGER/index.html" target="_blank" class="pm-open-link" style="font-weight:800;">balsonsportals.github.io/.../hr/index.html ↗</a>
+          </div>
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>🐙</span> Git Repository:</span>
+            <a href="https://github.com/balsonsportals/BALSONS_HR_MANAGER.git" target="_blank" class="pm-open-link">BALSONS_HR_MANAGER.git ↗</a>
+          </div>
+        </div>
+
+        <ul class="pm-features-list">
+          <li><span class="check-icon">✓</span> <strong>Statutory Governance:</strong> Enforces 100% PF UAN, ESIC IP, and clean police verification before onboarding.</li>
+          <li><span class="check-icon">✓</span> <strong>Unified Employee ID:</strong> Issues <code>EMP-2026-XXXX</code> standard identifiers consumed across all portals.</li>
+          <li><span class="check-icon">✓</span> <strong>Contractor Trade Breakdown:</strong> Tracks riggers, millwrights, hydraulic technicians, and crane operators.</li>
+          <li><span class="check-icon">✓</span> <strong>Site Camp & Colony Allocation:</strong> Manages worker barrack assignments and emergency contact directories.</li>
+        </ul>
+
+        <div class="pm-card-actions">
+          <a href="BALSONS%20HR%20MANAGER/index.html" class="btn-launch-primary" style="background:#2563eb;">Launch Portal ➔</a>
+          <a href="https://docs.google.com/spreadsheets/d/1so_aH05vVxiUJsIK6VS-n7BpGrHWNgn_5EK7RuA3cuw/edit" target="_blank" class="btn-launch-secondary">Database Sheet ↗</a>
+          <a href="https://script.google.com/d/1_I-scIjBfFbJufFCppzT-fCp-cBC-5BKvk4RwS6UTVwno1KFu5MTxKs_/edit" target="_blank" class="btn-launch-secondary">Apps Script API ↗</a>
+        </div>
+      </div>
+
+      <!-- CARD 6: CENTRAL ENTERPRISE LAUNCHER -->
+      <div class="portal-master-card" data-category="ALL">
+        <div class="pm-header">
+          <div class="pm-icon-box" style="background: rgba(124, 58, 237, 0.12); color: #7c3aed;">🚀</div>
+          <div class="pm-title-group">
+            <h3>Central Enterprise Launcher</h3>
+            <p>Single Sign-On (SSO), Role Switching & Ecosystem Gateway</p>
+          </div>
+          <span class="pm-version-badge tag-chip tag-purple">V5.3 ECOSYSTEM</span>
+        </div>
+
+        <div class="pm-desc">
+          Executive launchpad providing unified single sign-on, centralized role switching, synchronized ecosystem navigation, and immediate access to all specialized portals for client executives, project directors, and site supervisors.
+        </div>
+
+        <div class="pm-telemetry-box">
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>🌐</span> Live Production URL:</span>
+            <a href="https://balsonsportals.github.io/index.html" target="_blank" class="pm-open-link" style="font-weight:800;">balsonsportals.github.io/index.html ↗</a>
+          </div>
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>🐙</span> Master GitHub Pages Repo:</span>
+            <a href="https://github.com/balsonsportals/balsonsportals.github.io.git" target="_blank" class="pm-open-link">balsonsportals.github.io.git ↗</a>
+          </div>
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>🛡️</span> Authentication Engine:</span>
+            <code class="pm-code-id">BALSONS-SAM-2026 Session</code>
+          </div>
+          <div class="pm-link-row">
+            <span class="pm-link-lbl"><span>🎨</span> Design Standard:</span>
+            <code class="pm-code-id">BEDS V1.0 (Strict Light/Dark)</code>
+          </div>
+        </div>
+
+        <ul class="pm-features-list">
+          <li><span class="check-icon">✓</span> <strong>Single Sign-On (SSO):</strong> Seamless authentication token recognized across all 5 domain portals.</li>
+          <li><span class="check-icon">✓</span> <strong>Persistent Login Guarantee:</strong> Retains authorized state in browser storage without logouts on page reload.</li>
+          <li><span class="check-icon">✓</span> <strong>Zero Simulator Intrusions:</strong> All developer simulator bars strictly suppressed in production mode.</li>
+          <li><span class="check-icon">✓</span> <strong>Executive Ribbon Overview:</strong> Real-time high-level KPIs across safety, manpower, and heavy lifting progress.</li>
+        </ul>
+
+        <div class="pm-card-actions">
+          <a href="index.html" class="btn-launch-primary" style="background:#7c3aed;">Launch Central Hub ➔</a>
+          <a href="https://github.com/balsonsportals/balsonsportals.github.io.git" target="_blank" class="btn-launch-secondary">GitHub Pages Repo ↗</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MASTER RELATIONAL ARCHITECTURE TABLE -->
+    <div class="matrix-panel">
+      <div class="matrix-panel-header">
+        <h3><span>📊</span> Master Ecosystem Data & API Gateway Architecture Matrix</h3>
+        <span class="tag-chip tag-green">All 5 Relational Databases Verified</span>
+      </div>
+      <p style="font-size:12.5px; color:var(--beds-text-secondary); margin-bottom:16px;">
+        Every portal is backed by a dedicated, purpose-built Google Spreadsheet database and Google Apps Script Clasp engine. Cross-portal data exchange occurs via authorized status sharing to preserve strict system boundaries:
+      </p>
+
+      <div class="table-responsive">
+        <table class="beds-table">
+          <thead>
+            <tr>
+              <th>Portal Application</th>
+              <th>Pillar Discipline</th>
+              <th>Dedicated Google Sheet Database</th>
+              <th>Apps Script Clasp API</th>
+              <th>Local Architecture</th>
+              <th>Live Hosted Endpoint</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong style="color:#0097a7;">Operations & Rigging Manager</strong></td>
+              <td><span class="tag-chip tag-cyan">HEAVY ERECTION</span></td>
+              <td>
+                <a href="https://docs.google.com/spreadsheets/d/1GeqDDmBgdVm3ZUp4c9iB36__iLJ9wADQQRhEIwVxa-E/edit" target="_blank" style="text-decoration:none; font-family:var(--beds-font-mono); font-weight:700; color:#0097a7;">
+                  1GeqDDmB...xa-E ↗
+                </a>
+              </td>
+              <td>
+                <a href="https://script.google.com/d/1an3LeD6Ich14qtWZ5GFgJMaa3dYQSboZRwFy9g_gf9zWicPDB9KpFNny/edit" target="_blank" style="text-decoration:none; font-family:var(--beds-font-mono); font-weight:700; color:#2563eb;">
+                  1an3LeD6...FNny ↗
+                </a>
+              </td>
+              <td>IndexedDB <code>balsons_ops_db_v7_2</code></td>
+              <td><a href="https://balsonsportals.github.io/BALSONS%20OPERATIONS%20MANAGER/index.html" target="_blank" style="color:#0097a7; font-weight:700;">GitHub Pages ↗</a></td>
+              <td><span class="tag-chip tag-green">OPERATIONAL V7.2</span></td>
+            </tr>
+            <tr>
+              <td><strong style="color:#059669;">Store & Tackle Manager</strong></td>
+              <td><span class="tag-chip tag-green">TACKLE & TOOLS</span></td>
+              <td>
+                <a href="https://docs.google.com/spreadsheets/d/1u_ZKvvCVfEQDAtkoMR68q2d2hEK-eWBnvsS3AGfP6yQ/edit" target="_blank" style="text-decoration:none; font-family:var(--beds-font-mono); font-weight:700; color:#059669;">
+                  1u_ZKvvC...P6yQ ↗
+                </a>
+              </td>
+              <td>
+                <a href="https://script.google.com/d/1brrNLzFHk-qNEcP60mQEOsnm9kWnyRQNVx9flj8d5vL_DChuajbD0mN-/edit" target="_blank" style="text-decoration:none; font-family:var(--beds-font-mono); font-weight:700; color:#2563eb;">
+                  1brrNLzF...0mN- ↗
+                </a>
+              </td>
+              <td>IndexedDB Form 11 Store Engine</td>
+              <td><a href="https://balsonsportals.github.io/BALSONS%20STORE%20MANAGER/frontend/index.html" target="_blank" style="color:#059669; font-weight:700;">GitHub Pages ↗</a></td>
+              <td><span class="tag-chip tag-green">OPERATIONAL V3.2</span></td>
+            </tr>
+            <tr>
+              <td><strong style="color:#dc2626;">Safety & Risk Manager</strong></td>
+              <td><span class="tag-chip tag-red">HSE & PTW</span></td>
+              <td>
+                <a href="https://docs.google.com/spreadsheets/d/1SyOGt6HEu6HJCufAbB2_P6BgF6pEppt28J_8cARaOP0/edit" target="_blank" style="text-decoration:none; font-family:var(--beds-font-mono); font-weight:700; color:#dc2626;">
+                  1SyOGt6H...aOP0 ↗
+                </a>
+              </td>
+              <td>
+                <a href="https://script.google.com/d/1hDeYHxT2oU3G7i5YLPl5D_hzRiAEwpwKgUKsO1P3N0vMuum2e2Unitfj/edit" target="_blank" style="text-decoration:none; font-family:var(--beds-font-mono); font-weight:700; color:#2563eb;">
+                  1hDeYHxT...itfj ↗
+                </a>
+              </td>
+              <td>Local-First Risk & PTW Cache</td>
+              <td><a href="https://balsonsportals.github.io/BALSONS%20SAFETY%20MANAGER/index.html" target="_blank" style="color:#dc2626; font-weight:700;">GitHub Pages ↗</a></td>
+              <td><span class="tag-chip tag-green">OPERATIONAL V2.1</span></td>
+            </tr>
+            <tr>
+              <td><strong style="color:#d97706;">Gate Entry & Security Manager</strong></td>
+              <td><span class="tag-chip tag-amber">ACCESS & MUSTER</span></td>
+              <td>
+                <a href="https://docs.google.com/spreadsheets/d/1yAuZOXc8WoC2TvTvnEWMrOyLl_50BRuJgDed_pdFT3o/edit" target="_blank" style="text-decoration:none; font-family:var(--beds-font-mono); font-weight:700; color:#d97706;">
+                  1yAuZOXc...FT3o ↗
+                </a>
+              </td>
+              <td>
+                <a href="https://script.google.com/d/1emZvUYjT-hTduELE4lSboVCtndFfGQ8KC2elpQ6Em9TF4RW6d2VF75J-/edit" target="_blank" style="text-decoration:none; font-family:var(--beds-font-mono); font-weight:700; color:#2563eb;">
+                  1emZvUYj...75J- ↗
+                </a>
+              </td>
+              <td>Tri-Portal Access Decision Engine</td>
+              <td><a href="https://balsonsportals.github.io/BALSONS%20GATE%20ENTRY%20MANAGER/index.html" target="_blank" style="color:#d97706; font-weight:700;">GitHub Pages ↗</a></td>
+              <td><span class="tag-chip tag-green">OPERATIONAL V2.0</span></td>
+            </tr>
+            <tr>
+              <td><strong style="color:#2563eb;">Human Resources (HR) Manager</strong></td>
+              <td><span class="tag-chip tag-blue">WORKFORCE KYC</span></td>
+              <td>
+                <a href="https://docs.google.com/spreadsheets/d/1so_aH05vVxiUJsIK6VS-n7BpGrHWNgn_5EK7RuA3cuw/edit" target="_blank" style="text-decoration:none; font-family:var(--beds-font-mono); font-weight:700; color:#2563eb;">
+                  1so_aH05...3cuw ↗
+                </a>
+              </td>
+              <td>
+                <a href="https://script.google.com/d/1_I-scIjBfFbJufFCppzT-fCp-cBC-5BKvk4RwS6UTVwno1KFu5MTxKs_/edit" target="_blank" style="text-decoration:none; font-family:var(--beds-font-mono); font-weight:700; color:#2563eb;">
+                  1_I-scIj...xKs_ ↗
+                </a>
+              </td>
+              <td>Aadhaar KYC & Statutory Ledger</td>
+              <td><a href="https://balsonsportals.github.io/BALSONS%20HR%20MANAGER/index.html" target="_blank" style="color:#2563eb; font-weight:700;">GitHub Pages ↗</a></td>
+              <td><span class="tag-chip tag-green">OPERATIONAL V2.0</span></td>
+            </tr>
+            <tr>
+              <td><strong style="color:#7c3aed;">Central Enterprise Launcher</strong></td>
+              <td><span class="tag-chip tag-purple">GLOBAL SSO HUB</span></td>
+              <td>Federated Tri-Portal Sync</td>
+              <td>Global Orchestrator</td>
+              <td>BEDS Session Storage Engine</td>
+              <td><a href="https://balsonsportals.github.io/index.html" target="_blank" style="color:#7c3aed; font-weight:700;">GitHub Pages ↗</a></td>
+              <td><span class="tag-chip tag-green">OPERATIONAL V5.3</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- 4. ENTERPRISE FOOTER -->
+  <footer class="hub-footer">
+    <div><strong>BALSONS Heavy Lift & Shift</strong> • Enterprise Ecosystem Master Directory & Architecture Baseline</div>
+    <div style="font-style: italic; color: rgb(223, 35, 14); font-weight: 700; margin-top: 4px;">
+      “Difficult We Do Easily, Impossible Takes Little Time...!”
+    </div>
+    <div style="font-size: 11px; color: var(--beds-text-muted); margin-top: 4px;">
+      Jupiter Tatravagonka Railwheel Factory (JTRWF) • Governed by Global Super Administrator Policy V1.0 • SAM-2026 / BEDS V1.0
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('balsons_theme', isDark ? 'light' : 'dark');
+      const themeBtn = document.getElementById('themeBtn');
+      if (themeBtn) themeBtn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
+    }
+
+    function setFilter(cat, btn) {
+      document.querySelectorAll('.filter-pill-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const cards = document.querySelectorAll('.portal-master-card');
+      cards.forEach(card => {
+        if (cat === 'ALL' || card.getAttribute('data-category') === cat || card.getAttribute('data-category') === 'ALL') {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function filterPortals() {
+      const q = (document.getElementById('portalSearchInput')?.value || '').toLowerCase();
+      const cards = document.querySelectorAll('.portal-master-card');
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (!q || text.includes(q)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function copyAllEcosystemLinks() {
+      const summaryText = `BALSONS ENTERPRISE ECOSYSTEM - MASTER PORTALS DIRECTORY
+Project: JTRWF Khordha, Odisha • Brand: "Difficult We Do Easily, Impossible Takes Little Time...!"
+
+1. CENTRAL ENTERPRISE LAUNCHER
+   - Live URL: https://balsonsportals.github.io/index.html
+   - GitHub Repo: https://github.com/balsonsportals/balsonsportals.github.io.git
+
+2. OPERATIONS & HEAVY RIGGING MANAGER (V7.2)
+   - Live URL: https://balsonsportals.github.io/BALSONS%20OPERATIONS%20MANAGER/index.html
+   - Dedicated Sheet DB: 1GeqDDmBgdVm3ZUp4c9iB36__iLJ9wADQQRhEIwVxa-E
+   - Sheet Link: https://docs.google.com/spreadsheets/d/1GeqDDmBgdVm3ZUp4c9iB36__iLJ9wADQQRhEIwVxa-E/edit
+   - Apps Script Gateway: 1an3LeD6Ich14qtWZ5GFgJMaa3dYQSboZRwFy9g_gf9zWicPDB9KpFNny
+   - Apps Script Link: https://script.google.com/d/1an3LeD6Ich14qtWZ5GFgJMaa3dYQSboZRwFy9g_gf9zWicPDB9KpFNny/edit
+   - Git Repo: https://github.com/balsonsportals/BALSONS_OPERATIONS_PORTAL.git
+
+3. STORE & TACKLE INVENTORY MANAGER (V3.2)
+   - Live URL: https://balsonsportals.github.io/BALSONS%20STORE%20MANAGER/frontend/index.html
+   - Dedicated Sheet DB: 1u_ZKvvCVfEQDAtkoMR68q2d2hEK-eWBnvsS3AGfP6yQ
+   - Sheet Link: https://docs.google.com/spreadsheets/d/1u_ZKvvCVfEQDAtkoMR68q2d2hEK-eWBnvsS3AGfP6yQ/edit
+   - Apps Script Gateway: 1brrNLzFHk-qNEcP60mQEOsnm9kWnyRQNVx9flj8d5vL_DChuajbD0mN-
+   - Apps Script Link: https://script.google.com/d/1brrNLzFHk-qNEcP60mQEOsnm9kWnyRQNVx9flj8d5vL_DChuajbD0mN-/edit
+   - Git Repo: https://github.com/balsonsportals/BALSONS_STORE_MANAGER.git
+
+4. SAFETY & RISK MANAGER (V2.1)
+   - Live URL: https://balsonsportals.github.io/BALSONS%20SAFETY%20MANAGER/index.html
+   - Dedicated Sheet DB: 1SyOGt6HEu6HJCufAbB2_P6BgF6pEppt28J_8cARaOP0
+   - Sheet Link: https://docs.google.com/spreadsheets/d/1SyOGt6HEu6HJCufAbB2_P6BgF6pEppt28J_8cARaOP0/edit
+   - Apps Script Gateway: 1hDeYHxT2oU3G7i5YLPl5D_hzRiAEwpwKgUKsO1P3N0vMuum2e2Unitfj
+   - Apps Script Link: https://script.google.com/d/1hDeYHxT2oU3G7i5YLPl5D_hzRiAEwpwKgUKsO1P3N0vMuum2e2Unitfj/edit
+   - Git Repo: https://github.com/balsonsportals/BALSONS_SAFETY_MANAGER.git
+
+5. GATE ENTRY & SECURITY MANAGER (V2.0)
+   - Live URL: https://balsonsportals.github.io/BALSONS%20GATE%20ENTRY%20MANAGER/index.html
+   - Dedicated Sheet DB: 1yAuZOXc8WoC2TvTvnEWMrOyLl_50BRuJgDed_pdFT3o
+   - Sheet Link: https://docs.google.com/spreadsheets/d/1yAuZOXc8WoC2TvTvnEWMrOyLl_50BRuJgDed_pdFT3o/edit
+   - Apps Script Gateway: 1emZvUYjT-hTduELE4lSboVCtndFfGQ8KC2elpQ6Em9TF4RW6d2VF75J-
+   - Apps Script Link: https://script.google.com/d/1emZvUYjT-hTduELE4lSboVCtndFfGQ8KC2elpQ6Em9TF4RW6d2VF75J-/edit
+   - Git Repo: https://github.com/balsonsportals/BALSONS_GATE_ENTRY_MANAGER.git
+
+6. HUMAN RESOURCES (HR) MANAGER (V2.0)
+   - Live URL: https://balsonsportals.github.io/BALSONS%20HR%20MANAGER/index.html
+   - Dedicated Sheet DB: 1so_aH05vVxiUJsIK6VS-n7BpGrHWNgn_5EK7RuA3cuw
+   - Sheet Link: https://docs.google.com/spreadsheets/d/1so_aH05vVxiUJsIK6VS-n7BpGrHWNgn_5EK7RuA3cuw/edit
+   - Apps Script Gateway: 1_I-scIjBfFbJufFCppzT-fCp-cBC-5BKvk4RwS6UTVwno1KFu5MTxKs_
+   - Apps Script Link: https://script.google.com/d/1_I-scIjBfFbJufFCppzT-fCp-cBC-5BKvk4RwS6UTVwno1KFu5MTxKs_/edit
+   - Git Repo: https://github.com/balsonsportals/BALSONS_HR_MANAGER.git
+`;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(summaryText).then(() => {
+          alert('✓ All portal live links, database sheet links, and script IDs copied to clipboard!');
+        });
+      } else {
+        alert('All links ready. See the on-screen directory or use Print A4.');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('balsons_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      const themeBtn = document.getElementById('themeBtn');
+      if (themeBtn) themeBtn.textContent = savedTheme === 'dark' ? '☀️ Light' : '🌙 Dark';
+    });
+  </script>
+</body>
+</html>
