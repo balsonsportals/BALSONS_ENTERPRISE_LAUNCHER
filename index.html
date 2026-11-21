@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BALSONS Enterprise Workspace • Central Portal Launcher</title>
+  <link rel="icon" type="image/png" href="assets/images/balsons-logo.png" />
+  <link rel="stylesheet" href="beds.css">
+  <script src="assets/js/balsons-sam-auth.js"></script>
+  <style>
+    /* BEDS V1.0 Central Launcher Specific Styles */
+    header {
+      background-color: var(--beds-bg-panel);
+      border-bottom: 1px solid var(--beds-border);
+      padding: 14px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 1px 3px rgba(16, 45, 53, 0.04);
+    }
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .brand-titles h1 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--beds-charcoal-heading);
+      letter-spacing: -0.2px;
+      line-height: 1.2;
+    }
+    .brand-titles p {
+      font-size: 11px;
+      color: var(--beds-teal-primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Hero / Greeting Section */
+    .hero-banner {
+      background: var(--beds-bg-panel);
+      border-bottom: 1px solid var(--beds-border);
+      padding: 36px 32px;
+    }
+    .hero-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .greeting-text h2 {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--beds-charcoal-heading);
+      margin-bottom: 6px;
+    }
+    .greeting-text p {
+      font-size: 14px;
+      color: var(--beds-text-secondary);
+    }
+    .project-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--beds-bg-page);
+      border: 1px solid var(--beds-border);
+      padding: 6px 14px;
+      border-radius: var(--beds-radius-full);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--beds-text-primary);
+    }
+
+    /* Main Container */
+    main {
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 32px;
+      flex: 1;
+    }
+
+    /* Filter & Search Bar */
+    .launcher-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .search-box {
+      position: relative;
+      flex: 1;
+      max-width: 480px;
+      min-width: 280px;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 10px 14px 10px 38px;
+      border-radius: var(--beds-radius-md);
+      border: 1px solid var(--beds-border);
+      background: var(--beds-bg-panel);
+      color: var(--beds-text-primary);
+      font-size: 13px;
+    }
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--beds-teal-primary);
+      box-shadow: 0 0 0 3px var(--beds-teal-ring);
+    }
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--beds-text-muted);
+      font-size: 14px;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+    }
+    .filter-tab {
+      padding: 8px 14px;
+      border-radius: var(--beds-radius-md);
+      background: var(--beds-bg-panel);
+      border: 1px solid var(--beds-border);
+      color: var(--beds-text-secondary);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--beds-transition);
+    }
+    .filter-tab:hover {
+      background: var(--beds-bg-panel-hover);
+      color: var(--beds-text-primary);
+    }
+    .filter-tab.active {
+      background: var(--beds-teal-primary);
+      color: #FFFFFF;
+      border-color: var(--beds-teal-primary);
+    }
+
+    /* Section Headers */
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--beds-charcoal-heading);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .section-title span {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--beds-text-muted);
+    }
+
+    /* Application Grid */
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+    .portal-card {
+      background: var(--beds-bg-panel);
+      border: 1px solid var(--beds-border);
+      border-radius: var(--beds-radius-lg);
+      padding: 24px;
+      box-shadow: var(--beds-card-shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all var(--beds-transition);
+      position: relative;
+    }
+    .portal-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(16, 45, 53, 0.08);
+      border-color: var(--beds-teal-primary);
+    }
+    .portal-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .portal-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--beds-radius-md);
+      background: var(--beds-teal-subtle);
+      color: var(--beds-teal-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      border: 1px solid rgba(0, 151, 178, 0.2);
+    }
+    .portal-info h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--beds-charcoal-heading);
+      margin-bottom: 6px;
+    }
+    .portal-info p {
+      font-size: 13px;
+      color: var(--beds-text-secondary);
+      line-height: 1.45;
+      margin-bottom: 20px;
+      min-height: 56px;
+    }
+    .portal-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid var(--beds-border-subtle);
+    }
+    .fav-star {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      color: var(--beds-text-muted);
+      transition: color var(--beds-transition);
+    }
+    .fav-star.active, .fav-star:hover {
+      color: #F59E0B;
+    }
+
+    /* Recently Accessed Bar */
+    .recent-list {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 36px;
+    }
+    .recent-item {
+      background: var(--beds-bg-panel);
+      border: 1px solid var(--beds-border);
+      border-radius: var(--beds-radius-md);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 240px;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      transition: all var(--beds-transition);
+    }
+    .recent-item:hover {
+      border-color: var(--beds-teal-primary);
+      background: var(--beds-bg-panel-hover);
+    }
+    .recent-item-icon {
+      font-size: 20px;
+    }
+    .recent-item-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--beds-charcoal-heading);
+    }
+    .recent-item-sub {
+      font-size: 11px;
+      color: var(--beds-text-secondary);
+    }
+
+    /* Architecture Notice Footer */
+    footer {
+      background: var(--beds-bg-panel);
+      border-top: 1px solid var(--beds-border);
+      padding: 24px 32px;
+      font-size: 12px;
+      color: var(--beds-text-secondary);
+      text-align: center;
+    }
+    footer a {
+      color: var(--beds-teal-primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. TOP ENTERPRISE HEADER -->
+  <header>
+    <div class="brand-wrap">
+      <img src="assets/images/balsons-logo.png" alt="BALSONS Logo" style="height: 38px !important; max-height: 38px !important; width: auto !important; object-fit: contain !important;">
+      <div class="brand-titles">
+        <h1>BALSONS HEAVY LIFT & SHIFT</h1>
+        <p>Enterprise Workspace • Central Portal Launcher</p>
+        <div style="font-size: 10.5px; font-style: italic; color: var(--beds-teal-primary); font-weight: 600; margin-top: 1px;">“Difficult We Do Easily, Impossible Takes Little Time...!”</div>
+      </div>
+    </div>
+    <div class="header-controls">
+      <span class="project-pill">📍 JTRWF • Khordha, Odisha</span>
+      <span class="meta-badge" id="onlineBadge">🟢 Enterprise Online</span>
+      <button class="beds-btn beds-btn-icon" id="themeBtn" onclick="toggleTheme()" title="Switch Light/Dark Theme">
+        🌙 Dark
+      </button>
+      <div id="headerUserBadge" class="meta-badge" style="background: rgba(0, 151, 178, 0.1); color: var(--beds-teal-primary); font-weight: 700; cursor: pointer;" onclick="BalsonsSAMAuth.openGovernanceConsole('launcher')">
+        👑 Super Admin • All Access
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. GREETING HERO BANNER -->
+  <section class="hero-banner">
+    <div class="hero-container">
+      <div class="greeting-text">
+        <h2 id="timeGreeting">Good morning, BALSONS Team 👋</h2>
+        <p>Enterprise workspace & multi-portal ecosystem governed by <strong>Global Super Administrator Policy V1.0</strong>.</p>
+      </div>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <span class="meta-badge" style="background: #0B192C; color: #38BDF8; font-weight: 800; border: 1px solid #0097B2;">🛡️ SINGLE SUPER ADMIN POLICY V1.0</span>
+        <span class="meta-badge">Design Baseline: <strong>BEDS V1.0 (Locked)</strong></span>
+        <span class="meta-badge" style="background: rgba(0, 151, 178, 0.12); color: var(--beds-teal-primary); font-weight: 700; border: 1px solid var(--beds-teal-primary);">⚡ SAM-2026 Unified Security</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. MAIN WORKSPACE CONTENT -->
+  <main>
+
+    <!-- Toolbar: Search & Category Filters -->
+    <div class="launcher-toolbar">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="portalSearch" placeholder="Search portals by name, keyword or role..." oninput="filterPortals()">
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="setCategory('all', this)">All Portals (8)</button>
+        <button class="filter-tab" onclick="setCategory('operations', this)">Operations & Logistics</button>
+        <button class="filter-tab" onclick="setCategory('safety', this)">Safety & Access</button>
+        <button class="filter-tab" onclick="setCategory('admin', this)">Commercial & HR</button>
+      </div>
+    </div>
+
+    <!-- Recently Accessed Section -->
+    <div class="section-title">
+      <h3>Recently Accessed Applications</h3>
+      <span>Your active workspaces</span>
+    </div>
+    <div class="recent-list">
+      <a href="BALSONS GATE ENTRY MANAGER/frontend/index.html" class="recent-item">
+        <span class="recent-item-icon">🚧</span>
+        <div>
+          <div class="recent-item-title">Gate Entry & Site Access</div>
+          <div class="recent-item-sub">Opened 12 mins ago • JTRWF</div>
+        </div>
+      </a>
+      <a href="BALSONS HR MANAGER/frontend/index.html" class="recent-item">
+        <span class="recent-item-icon">👥</span>
+        <div>
+          <div class="recent-item-title">HR & Payroll Manager</div>
+          <div class="recent-item-sub">Nov 2026 Draft • 68 Staff</div>
+        </div>
+      </a>
+      <a href="BALSONS STORE MANAGER/" class="recent-item">
+        <span class="recent-item-icon">📦</span>
+        <div>
+          <div class="recent-item-title">Store & Rigging Tools</div>
+          <div class="recent-item-sub">Opened 2 hrs ago • 264 Items</div>
+        </div>
+      </a>
+      <a href="BALSONS SAFETY MANAGER/" class="recent-item">
+        <span class="recent-item-icon">🦺</span>
+        <div>
+          <div class="recent-item-title">Safety & PTW Manager</div>
+          <div class="recent-item-sub">Opened yesterday • 14 Inductions</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Portal Directory Grid -->
+    <div class="section-title">
+      <h3>Enterprise Application Directory</h3>
+      <span id="portalCountText">Showing 8 of 8 applications</span>
+    </div>
+
+    <div class="portal-grid" id="portalGrid">
+
+      <!-- 1. GATE ENTRY MANAGER (PRIMARY ACTIVE APPLICATION) -->
+      <div class="portal-card" data-portal-id="gate_entry" data-category="safety" data-title="Gate Entry Site Access Visitor Vehicle Muster Clearance RGP NRGP">
+        <div class="portal-card-top">
+          <div class="portal-icon">🚧</div>
+          <span class="status-pill status-success" id="pill-gate_entry">AVAILABLE</span>
+        </div>
+        <div class="portal-info">
+          <h3>Gate Entry & Site Access</h3>
+          <p>Personnel & vehicle pre-clearance, 9-discipline HSE gate clearance engine, RGP/NRGP material passes, live muster roll-call.</p>
+        </div>
+        <div class="portal-footer" style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <button class="fav-star active" title="Toggle favorite">★</button>
+          <a href="BALSONS GATE ENTRY MANAGER/frontend/index.html" class="beds-btn beds-btn-primary portal-launch-btn">
+            Open workspace →
+          </a>
+          <a href="BALSONS GATE ENTRY MANAGER/frontend/index.html#gate-dossier-360" class="beds-btn beds-btn-secondary portal-launch-btn" style="font-size: 11px; padding: 7px 10px;" title="360° Unified Workforce Dossier">
+            📄 360° Dossier
+          </a>
+        </div>
+      </div>
+
+      <!-- 2. STORE & INVENTORY MANAGER -->
+      <div class="portal-card" data-portal-id="store" data-category="operations" data-title="Store Inventory Tools Tackles Rigging Equipment Consumables Issue Return">
+        <div class="portal-card-top">
+          <div class="portal-icon">📦</div>
+          <span class="status-pill status-success" id="pill-store">AVAILABLE</span>
+        </div>
+        <div class="portal-info">
+          <h3>Store & Inventory Manager</h3>
+          <p>Material custody, 264-item rigging tool master, Form 11 lifting tackles register, daily tool loans, damaged equipment quarantine, and RGP/NRGP gate pass studio.</p>
+        </div>
+        <div class="portal-footer" style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <button class="fav-star active" title="Toggle favorite">★</button>
+          <a href="BALSONS STORE MANAGER/frontend/index.html" class="beds-btn beds-btn-primary portal-launch-btn">
+            Open workspace →
+          </a>
+          <a href="BALSONS STORE MANAGER/frontend/index.html#store-dossier-360" class="beds-btn beds-btn-secondary portal-launch-btn" style="font-size: 11px; padding: 7px 10px;" title="360° Unified Workforce Dossier">
+            📄 360° Dossier
+          </a>
+        </div>
+      </div>
+
+      <!-- 3. SAFETY & PTW MANAGER -->
+      <div class="portal-card" data-portal-id="safety" data-category="safety" data-title="Safety PTW Permit Work Height Vertigo Hazard JSA Induction Incident HSE">
+        <div class="portal-card-top">
+          <div class="portal-icon">🦺</div>
+          <span class="status-pill status-success" id="pill-safety">AVAILABLE</span>
+        </div>
+        <div class="portal-info">
+          <h3>Safety & PTW Manager</h3>
+          <p>Permit-to-Work issuance, Job Safety Analysis (JSA), mandatory height/vertigo clearances, PPE audits, and incident tracking.</p>
+        </div>
+        <div class="portal-footer" style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <button class="fav-star active" title="Toggle favorite">★</button>
+          <a href="BALSONS SAFETY MANAGER/frontend/index.html" class="beds-btn beds-btn-primary portal-launch-btn">
+            Open workspace →
+          </a>
+          <a href="BALSONS SAFETY MANAGER/frontend/index.html#view-dossier-360" class="beds-btn beds-btn-secondary portal-launch-btn" style="font-size: 11px; padding: 7px 10px;" title="360° Unified Workforce Dossier">
+            📄 360° Dossier
+          </a>
+        </div>
+      </div>
+
+      <!-- 4. HR & PAYROLL MANAGER -->
+      <div class="portal-card" data-portal-id="hr_payroll" data-category="admin" data-title="HR Payroll Manpower Attendance Biometric Contractor Labor Wage Deployment Daily Pay Monthly PF ESIC">
+        <div class="portal-card-top">
+          <div class="portal-icon">👥</div>
+          <span class="status-pill status-success" id="pill-hr_payroll">AVAILABLE</span>
+        </div>
+        <div class="portal-info">
+          <h3>HR & Payroll Manager</h3>
+          <p>Dual workforce payroll: Monthly salaried staff (with PF & ESIC) and Daily pay crew (exempt), attendance & shift OT, advance recovery, and automated slip generator.</p>
+        </div>
+        <div class="portal-footer" style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <button class="fav-star" title="Toggle favorite">★</button>
+          <a href="BALSONS HR MANAGER/frontend/index.html" class="beds-btn beds-btn-primary portal-launch-btn">
+            Open workspace →
+          </a>
+          <a href="http://localhost:8085/#dashboard" target="_blank" class="beds-btn beds-btn-secondary portal-launch-btn" style="font-size: 11px; padding: 7px 10px; background:#0B192C; color:#38BDF8; border-color:#0097B2;" title="HEG Division Real-Time Salary Engine">
+            💰 HEG Salary Portal
+          </a>
+          <a href="BALSONS HR MANAGER/frontend/register.html" target="_blank" class="beds-btn beds-btn-secondary portal-launch-btn" style="font-size: 11px; padding: 7px 10px;" title="Online Employee Self-Registration Form">
+            🔗 Registration
+          </a>
+        </div>
+      </div>
+
+      <!-- 5. OPERATIONS MANAGER -->
+      <div class="portal-card" data-portal-id="operations" data-category="operations" data-title="Operations Erection Rigging Heavy Lift Puller Crane Assembly Schuler Line">
+        <div class="portal-card-top">
+          <div class="portal-icon">🏗️</div>
+          <span class="status-pill status-success" id="pill-operations">AVAILABLE</span>
+        </div>
+        <div class="portal-info">
+          <h3>Operations Manager</h3>
+          <p>Heavy lift & erection scheduling, crane/puller mobilization, shift execution, and Schuler press assembly milestones.</p>
+        </div>
+        <div class="portal-footer">
+          <button class="fav-star" title="Toggle favorite">★</button>
+          <a href="BALSONS OPERATIONS MANAGER/" class="beds-btn beds-btn-primary portal-launch-btn">
+            Open workspace →
+          </a>
+        </div>
+      </div>
+
+      <!-- 6. PURCHASE & VENDOR MANAGER -->
+      <div class="portal-card" data-portal-id="purchase" data-category="admin" data-title="Purchase Commercial Vendor Procurement RFQ PO Quotation Delivery">
+        <div class="portal-card-top">
+          <div class="portal-icon">📑</div>
+          <span class="status-pill status-success" id="pill-purchase">AVAILABLE</span>
+        </div>
+        <div class="portal-info">
+          <h3>Purchase & Vendor Manager</h3>
+          <p>Material requisition floating, vendor quotation comparison, commercial approval matrices, and Purchase Order (PO) dispatch.</p>
+        </div>
+        <div class="portal-footer">
+          <button class="fav-star" title="Toggle favorite">★</button>
+          <a href="BALSONS PURCHASE MANAGER/" class="beds-btn beds-btn-primary portal-launch-btn">
+            Open workspace →
+          </a>
+        </div>
+      </div>
+
+      <!-- 7. ENGINEERING TOOLBOX -->
+      <div class="portal-card" data-portal-id="toolbox" data-category="operations" data-title="Engineering Toolbox Rigging Calculations COG Bearing Pressure Slings">
+        <div class="portal-card-top">
+          <div class="portal-icon">📐</div>
+          <span class="status-pill status-warning" id="pill-toolbox">MAINTENANCE</span>
+        </div>
+        <div class="portal-info">
+          <h3>Engineering Toolbox</h3>
+          <p>Heavy rigging calculations, center-of-gravity (COG) estimators, crane outrigger ground bearing pressure, and sling tension checks.</p>
+        </div>
+        <div class="portal-footer">
+          <button class="fav-star" title="Toggle favorite">★</button>
+          <button class="beds-btn beds-btn-secondary" disabled>
+            Under scheduled maintenance
+          </button>
+        </div>
+      </div>
+
+      <!-- 8. SITE EXPENSE MANAGER -->
+      <div class="portal-card" data-portal-id="expenses" data-category="admin" data-title="Site Expense Imprest Petty Cash Fuel Diesel Vouchers Reconciliation">
+        <div class="portal-card-top">
+          <div class="portal-icon">💳</div>
+          <span class="status-pill status-success" id="pill-expenses">AVAILABLE</span>
+        </div>
+        <div class="portal-info">
+          <h3>Site Expense Manager</h3>
+          <p>Site imprest cash management, crane diesel fuel logs, daily petty voucher digitization, and GST receipt audit trails.</p>
+        </div>
+        <div class="portal-footer">
+          <button class="fav-star" title="Toggle favorite">★</button>
+          <a href="#" class="beds-btn beds-btn-primary portal-launch-btn">
+            Open workspace →
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- 4. ENTERPRISE FOOTER -->
+  <footer>
+    <p>
+      <strong>BALSONS Heavy Lift & Shift</strong> • Enterprise Portal Ecosystem (SAM-2026 / BEDS V1.0 Locked Baseline)
+    </p>
+    <p style="font-style: italic; font-weight: 600; color: var(--beds-teal-primary); margin: 4px 0;">“Difficult We Do Easily, Impossible Takes Little Time...!”</p>
+    <p style="font-size: 11px; color: var(--beds-text-muted); margin: 0 0 6px 0;">Secure Login | Authorized Access Only</p>
+    <p style="margin-top: 6px; color: var(--beds-text-muted);">
+      Global Super Administrator Policy V1.0: Exactly ONE Super Administrator with complete global access across all portals. All other roles receive assigned access exclusively.
+    </p>
+  </footer>
+
+  <script>
+    // Greeting by time of day
+    const hour = new Date().getHours();
+    const greetingEl = document.getElementById('timeGreeting');
+    if (hour < 12) greetingEl.textContent = 'Good morning, BALSONS Team 👋';
+    else if (hour < 17) greetingEl.textContent = 'Good afternoon, BALSONS Team 👋';
+    else greetingEl.textContent = 'Good evening, BALSONS Team 👋';
+
+    // BEDS Theme Toggle
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('beds_theme_preference', next);
+      document.getElementById('themeBtn').textContent = next === 'light' ? '🌙 Dark' : '☀️ Light';
+    }
+    const savedTheme = localStorage.getItem('beds_theme_preference') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    const themeBtn = document.getElementById('themeBtn');
+    if (themeBtn) themeBtn.textContent = savedTheme === 'light' ? '🌙 Dark' : '☀️ Light';
+
+    // Category Filter
+    let activeCategory = 'all';
+    function setCategory(cat, btn) {
+      activeCategory = cat;
+      document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterPortals();
+    }
+
+    // Live Search Filter
+    function filterPortals() {
+      const query = document.getElementById('portalSearch').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.portal-card');
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        const text = (card.getAttribute('data-title') + ' ' + card.innerText).toLowerCase();
+        const matchesCat = (activeCategory === 'all' || cat === activeCategory);
+        const matchesQuery = query === '' || text.includes(query);
+
+        if (matchesCat && matchesQuery) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      document.getElementById('portalCountText').textContent = `Showing ${visibleCount} of 8 applications`;
+    }
+
+    // Toggle Favorite star
+    document.querySelectorAll('.fav-star').forEach(star => {
+      star.addEventListener('click', (e) => {
+        e.stopPropagation();
+        star.classList.toggle('active');
+      });
+    });
+
+    // Synchronize Portal Cards Access with Active SAM Session
+    function syncPortalCards(session) {
+      session = session || BalsonsSAMAuth.getSession();
+      
+      const headerBadge = document.getElementById('headerUserBadge');
+      if (headerBadge) {
+        if (session.role === 'SUPER_ADMIN') {
+          headerBadge.innerHTML = '👑 <strong>Super Admin</strong> • All Access';
+          headerBadge.style.color = '#DC2626';
+          headerBadge.style.background = 'rgba(220, 38, 38, 0.1)';
+        } else {
+          headerBadge.innerHTML = `👤 <strong>${session.fullName.split(' ')[0]}</strong> • ${session.roleInfo.title}`;
+          headerBadge.style.color = '#0097B2';
+          headerBadge.style.background = 'rgba(0, 151, 178, 0.1)';
+        }
+      }
+
+      const cards = document.querySelectorAll('.portal-card[data-portal-id]');
+      cards.forEach(card => {
+        const pid = card.getAttribute('data-portal-id');
+        const isAllowed = BalsonsSAMAuth.canAccessPortal(pid);
+        const pill = document.getElementById('pill-' + pid);
+        const launchBtns = card.querySelectorAll('.portal-launch-btn');
+
+        if (isAllowed) {
+          card.style.opacity = '1.0';
+          card.style.filter = 'none';
+          if (pill && pid !== 'toolbox') {
+            pill.className = 'status-pill status-success';
+            pill.textContent = 'AVAILABLE';
+            pill.style.background = '';
+            pill.style.color = '';
+          }
+          launchBtns.forEach(btn => {
+            btn.onclick = null;
+            btn.style.cursor = 'pointer';
+          });
+        } else {
+          card.style.opacity = '0.55';
+          if (pill) {
+            pill.className = 'status-pill';
+            pill.style.background = '#FEE2E2';
+            pill.style.color = '#991B1B';
+            pill.style.fontWeight = '700';
+            pill.textContent = '🔒 RESTRICTED';
+          }
+          launchBtns.forEach(btn => {
+            btn.onclick = (e) => {
+              e.preventDefault();
+              alert(`ACCESS RESTRICTED (Policy Section 4):\nYour account '${session.fullName}' (${session.roleInfo.title}) is not authorized to access ${pid}.\n\nUnder BALSONS Global Policy V1.0, only the Super Administrator can grant access.`);
+            };
+          });
+        }
+      });
+    }
+
+    // Initialize SAM Governance
+    window.addEventListener('DOMContentLoaded', () => {
+      // GitHub Pages URL Auto-Mapping for multi-repo deployments
+      if (window.location.hostname.includes('github.io')) {
+        document.querySelectorAll('a[href]').forEach(a => {
+          const href = a.getAttribute('href');
+          if (!href) return;
+          if (href.includes('BALSONS GATE ENTRY MANAGER/frontend/index.html')) {
+            a.href = href.replace('BALSONS GATE ENTRY MANAGER/frontend/index.html', '/BALSONS_GATE_ENTRY_PORTAL/frontend/index.html');
+          } else if (href.includes('BALSONS HR MANAGER/frontend/index.html')) {
+            a.href = href.replace('BALSONS HR MANAGER/frontend/index.html', '/BALSONS_HR_PORTAL/frontend/index.html');
+          } else if (href.includes('BALSONS HR MANAGER/frontend/register.html')) {
+            a.href = href.replace('BALSONS HR MANAGER/frontend/register.html', '/BALSONS_HR_PORTAL/frontend/register.html');
+          } else if (href.includes('BALSONS SAFETY MANAGER/frontend/index.html')) {
+            a.href = href.replace('BALSONS SAFETY MANAGER/frontend/index.html', '/BALSONS_SAFETY_PORTAL/frontend/index.html');
+          } else if (href.includes('BALSONS STORE MANAGER/frontend/index.html')) {
+            a.href = href.replace('BALSONS STORE MANAGER/frontend/index.html', '/BALSONS_STORE_MANAGER/frontend/index.html');
+          } else if (href === 'BALSONS GATE ENTRY MANAGER/frontend/index.html') {
+            a.href = '/BALSONS_GATE_ENTRY_PORTAL/frontend/index.html';
+          } else if (href === 'BALSONS HR MANAGER/frontend/index.html') {
+            a.href = '/BALSONS_HR_PORTAL/frontend/index.html';
+          } else if (href === 'BALSONS STORE MANAGER/') {
+            a.href = '/BALSONS_STORE_MANAGER/frontend/index.html';
+          } else if (href === 'BALSONS SAFETY MANAGER/') {
+            a.href = '/BALSONS_SAFETY_PORTAL/frontend/index.html';
+          }
+        });
+      }
+
+      if (window.BalsonsSAMAuth) {
+        BalsonsSAMAuth.renderGlobalSuperAdminBar('launcher', (newSession) => {
+          syncPortalCards(newSession);
+        });
+        syncPortalCards();
+      }
+    });
+  </script>
+  <script src="assets/js/beds-superadmin.js"></script>
+  <script src="assets/js/beds-portal-login.js"></script>
+  <script src="assets/js/beds-workspace.js"></script>
+</body>
+</html>
