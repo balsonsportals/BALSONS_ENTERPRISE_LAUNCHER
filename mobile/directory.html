@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+  <title>Mobile Directory & Credentials | BALSONS Mobile</title>
+  <link rel="icon" type="image/png" href="assets/images/balsons-logo.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/balsons-mobile.css">
+</head>
+<body>
+
+  <!-- TOP MOBILE HEADER -->
+  <header class="mobile-header">
+    <div class="mobile-header-left">
+      <a href="index.html" style="text-decoration:none; display:flex; align-items:center; gap:8px;">
+        <span style="font-size:20px;">🌐</span>
+        <div class="mobile-header-title">
+          <h1>Directory</h1>
+          <span>BALSONS Mobile</span>
+        </div>
+      </a>
+    </div>
+    <div class="mobile-header-right">
+      <button class="btn-header-action" id="activeUserPill" onclick="BalsonsMobileApp.openUserSwitcher()">
+        👤 User
+      </button>
+      <button class="btn-header-action" id="btnMobileTheme" onclick="BalsonsMobileApp.toggleTheme()">
+        🌙
+      </button>
+      <a href="../index.html" class="btn-header-action btn-desktop-switch" title="Desktop View">
+        💻 Desktop
+      </a>
+    </div>
+  </header>
+
+  <!-- MAIN BODY -->
+  <main style="padding:16px; max-width:900px; margin:0 auto; width:100%;">
+    <div style="margin-bottom:14px;">
+      <h2 style="font-size:16px; font-weight:900; color:var(--b-text-primary);">Mobile Directory & Credentials</h2>
+      <p style="font-size:11px; color:var(--b-text-muted);">All Portal Live Links & Authorized User Credentials</p>
+    </div>
+
+    
+      <div class="mobile-touch-card">
+        <div class="mt-header">
+          <div class="mt-header-title">
+            <h3>🔐 Quick User Switcher & Credentials</h3>
+            <p>12 Verified Accounts • Global Super Administrator Policy V1.0</p>
+          </div>
+          <span class="mt-badge tag-chip tag-purple">SAM-2026</span>
+        </div>
+        <p style="font-size:11.5px; color:var(--b-text-secondary); margin-bottom:12px;">
+          Tap below to switch active authorized sessions on mobile:
+        </p>
+        <button class="btn-mobile-act-primary" style="background:#7c3aed; width:100%; margin-bottom:8px;" onclick="BalsonsMobileApp.openUserSwitcher()">
+          Switch Authorized User ➔
+        </button>
+        <a href="../balsons-master-ecosystem-directory.html" class="btn-mobile-act-secondary" style="width:100%; text-align:center;">
+          Open Full Master Directory Page ↗
+        </a>
+      </div>
+        
+
+    <!-- DESKTOP SWITCH BANNER -->
+    <div class="switch-desktop-banner">
+      <div class="switch-banner-text">
+        <strong>💻 Need Full Screen Desktop Mode?</strong>
+        <div>Access complete desktop tables and full multi-monitor dashboards.</div>
+      </div>
+      <a href="../index.html" class="btn-switch-now">Switch to Desktop ↗</a>
+    </div>
+  </main>
+
+  <!-- BOTTOM NAVIGATION -->
+  <nav class="mobile-bottom-nav">
+    <a href="index.html" class="nav-item-btn">
+      <span class="nav-icon">🌐</span>
+      <span class="nav-label">Hub</span>
+    </a>
+    <a href="operations.html" class="nav-item-btn ">
+      <span class="nav-icon">🏗️</span>
+      <span class="nav-label">Operations</span>
+    </a>
+    <a href="store.html" class="nav-item-btn ">
+      <span class="nav-icon">📦</span>
+      <span class="nav-label">Store</span>
+    </a>
+    <a href="safety.html" class="nav-item-btn ">
+      <span class="nav-icon">🦺</span>
+      <span class="nav-label">Safety</span>
+    </a>
+    <a href="directory.html" class="nav-item-btn active">
+      <span class="nav-icon">📱</span>
+      <span class="nav-label">More</span>
+    </a>
+  </nav>
+
+  <!-- 360° DOSSIER BOTTOM SHEET -->
+  <div id="dossierSheetBackdrop" class="mobile-bottom-sheet-backdrop" onclick="BalsonsMobileApp.closeDossier()"></div>
+  <div id="dossierBottomSheet" class="mobile-bottom-sheet">
+    <div class="sheet-handle-bar" onclick="BalsonsMobileApp.closeDossier()">
+      <div class="sheet-drag-pill"></div>
+    </div>
+    <div class="sheet-header">
+      <div>
+        <h3 id="sheetDossierTitle">360° Dossier</h3>
+        <p id="sheetDossierSub" style="font-size:11px; color:var(--b-text-muted); margin-top:2px;"></p>
+      </div>
+      <button class="btn-sheet-close" onclick="BalsonsMobileApp.closeDossier()">✕</button>
+    </div>
+    <div class="sheet-body" id="sheetPunchlistContainer"></div>
+  </div>
+
+  <!-- USER SWITCHER BOTTOM SHEET -->
+  <div id="credSheetBackdrop" class="mobile-bottom-sheet-backdrop" onclick="BalsonsMobileApp.closeUserSwitcher()"></div>
+  <div id="credBottomSheet" class="mobile-bottom-sheet">
+    <div class="sheet-handle-bar" onclick="BalsonsMobileApp.closeUserSwitcher()">
+      <div class="sheet-drag-pill"></div>
+    </div>
+    <div class="sheet-header">
+      <div>
+        <h3>🔐 Switch Active Authorized Session</h3>
+        <p style="font-size:11px; color:var(--b-text-muted); margin-top:2px;">Select user to authenticate immediately in field mode</p>
+      </div>
+      <button class="btn-sheet-close" onclick="BalsonsMobileApp.closeUserSwitcher()">✕</button>
+    </div>
+    <div class="sheet-body" id="sheetCredContainer"></div>
+  </div>
+
+  <script src="assets/js/balsons-mobile-app.js"></script>
+</body>
+</html>
