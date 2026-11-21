@@ -7,38 +7,102 @@
   <link rel="icon" type="image/png" href="assets/images/balsons-logo.png" />
   <link rel="stylesheet" href="beds.css">
   <style>
+    /* STRICT SUPPRESSION OF DEVELOPER BARS ACROSS PORTALS */
+    #sam-global-topbar,
+    .sam-gov-bar,
+    .sam-gov-policy,
+    #beds-enterprise-topbar,
+    .beds-enterprise-topbar {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      min-height: 0 !important;
+      overflow: hidden !important;
+      pointer-events: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
     :root {
+      --super-navy: #0d1e27;
       --super-teal: #102a35;
-      --super-teal-light: #183e4d;
-      --super-accent: #0097b2;
+      --super-teal-light: #163847;
+      --super-cyan: #0097a7;
+      --super-cyan-glow: rgba(0, 151, 167, 0.35);
       --super-gold: #d97706;
+      --super-gold-light: #fef3c7;
       --super-border: #e2e8f0;
       --super-bg: #f8fafc;
       --super-card: #ffffff;
+      --super-shadow: 0 4px 20px rgba(16, 42, 53, 0.06);
     }
 
     [data-theme="dark"] {
+      --super-navy: #060e13;
       --super-teal: #08161c;
       --super-teal-light: #0d222b;
+      --super-cyan: #00b4d8;
+      --super-cyan-glow: rgba(0, 180, 216, 0.35);
+      --super-gold: #fbbf24;
+      --super-gold-light: rgba(251, 191, 36, 0.15);
       --super-border: #1e3a45;
-      --super-bg: #091317;
+      --super-bg: #071015;
       --super-card: #0d222b;
+      --super-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     }
 
     body {
-      background-color: var(--beds-bg-page, #f8fafc);
+      background-color: var(--super-bg);
       color: var(--beds-text-primary, #1e293b);
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* KEYFRAME ANIMATIONS */
+    @keyframes superFadeIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes ribbonEntrance {
+      from { opacity: 0; transform: translateY(-12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes cardStagger {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+      }
+    }
+
+    @keyframes ambientShimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     /* 1. MASTER EXECUTIVE HEADER */
     header.exec-header {
       background: var(--beds-bg-panel, #ffffff);
-      border-bottom: 1px solid var(--beds-border, #e2e8f0);
+      border-bottom: 1px solid var(--super-border);
       padding: 12px 32px;
       display: flex;
       justify-content: space-between;
@@ -46,8 +110,10 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 1px 3px rgba(16, 42, 53, 0.05);
+      box-shadow: var(--super-shadow);
+      animation: superFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
+
     .header-brand {
       display: flex;
       align-items: center;
@@ -57,6 +123,11 @@
       height: 38px;
       width: auto;
       object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+      transition: transform 0.25s ease;
+    }
+    .header-brand:hover img {
+      transform: scale(1.04);
     }
     .brand-text h1 {
       font-size: 16px;
@@ -69,13 +140,13 @@
     .brand-text p {
       font-size: 11px;
       font-weight: 700;
-      color: var(--beds-teal-primary, #0097a7);
+      color: var(--super-cyan);
       margin: 1px 0 0 0;
       text-transform: uppercase;
       letter-spacing: 0.6px;
     }
     .brand-slogan {
-      font-size: 10px;
+      font-size: 10.5px;
       font-style: italic;
       color: var(--beds-text-muted, #64748b);
       margin-top: 2px;
@@ -90,13 +161,17 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: var(--beds-bg-page, #f1f5f9);
-      border: 1px solid var(--beds-border, #e2e8f0);
+      background: var(--super-bg);
+      border: 1px solid var(--super-border);
       padding: 6px 12px;
       border-radius: 9999px;
       font-size: 12px;
       font-weight: 600;
       color: var(--beds-text-secondary, #475569);
+      transition: all 0.2s ease;
+    }
+    .badge-pill:hover {
+      border-color: var(--super-cyan);
     }
     .online-indicator {
       display: inline-block;
@@ -104,7 +179,7 @@
       height: 8px;
       background: #10b981;
       border-radius: 50%;
-      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+      animation: pulseGlow 2s infinite ease-in-out;
     }
     .user-session-chip {
       display: inline-flex;
@@ -116,35 +191,56 @@
       border-radius: 9999px;
       font-size: 12px;
       font-weight: 700;
-      color: var(--beds-teal-primary, #0097a7);
+      color: var(--super-cyan);
     }
     .btn-signout {
       background: transparent;
-      border: 1px solid var(--beds-border, #cbd5e1);
+      border: 1px solid var(--super-border);
       border-radius: 6px;
-      padding: 5px 10px;
+      padding: 5px 12px;
       font-size: 11.5px;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--beds-text-secondary, #475569);
       cursor: pointer;
-      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .btn-signout:hover {
       background: #fee2e2;
       border-color: #ef4444;
       color: #b91c1c;
+      transform: translateY(-1px);
     }
 
-    /* 2. EXECUTIVE SUPER VIEW RIBBON */
+    /* 2. EXECUTIVE SUPER VIEW RIBBON (STUNNING ANIMATED) */
     .super-view-ribbon {
-      background: linear-gradient(135deg, #102a35 0%, #163847 100%);
+      background: linear-gradient(135deg, #0d1e27 0%, #102a35 45%, #163847 100%);
+      background-size: 200% 200%;
+      animation: ribbonEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) both, ambientShimmer 18s ease infinite;
       color: #ffffff;
       padding: 24px 32px;
       border-bottom: 1px solid rgba(0, 151, 167, 0.3);
+      position: relative;
+      overflow: hidden;
     }
+    .super-view-ribbon::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 151, 167, 0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
     .super-view-container {
       max-width: 1400px;
       margin: 0 auto;
+      position: relative;
+      z-index: 2;
     }
     .super-view-header {
       display: flex;
@@ -155,16 +251,19 @@
       gap: 12px;
     }
     .super-view-title h2 {
-      font-size: 20px;
+      font-size: 21px;
       font-weight: 800;
       margin: 0;
       color: #ffffff;
       letter-spacing: 0.2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
     .super-view-title p {
       font-size: 12.5px;
       color: #94a3b8;
-      margin: 3px 0 0 0;
+      margin: 4px 0 0 0;
     }
     .super-view-tag {
       background: rgba(0, 151, 167, 0.25);
@@ -172,9 +271,10 @@
       color: #38bdf8;
       font-size: 11.5px;
       font-weight: 700;
-      padding: 4px 12px;
+      padding: 5px 14px;
       border-radius: 9999px;
       letter-spacing: 0.4px;
+      box-shadow: 0 0 12px rgba(0, 151, 167, 0.25);
     }
     .super-stats-grid {
       display: grid;
@@ -182,16 +282,21 @@
       gap: 16px;
     }
     .super-stat-card {
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 10px;
-      padding: 14px 18px;
-      backdrop-filter: blur(8px);
-      transition: transform 0.2s ease, background 0.2s ease;
+      border-radius: 12px;
+      padding: 16px 20px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
     }
     .super-stat-card:hover {
       background: rgba(255, 255, 255, 0.09);
-      transform: translateY(-2px);
+      border-color: rgba(0, 180, 216, 0.45);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
     }
     .stat-label {
       font-size: 11px;
@@ -199,30 +304,30 @@
       color: #94a3b8;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
       display: flex;
       align-items: center;
       gap: 6px;
     }
     .stat-value {
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 800;
       color: #ffffff;
       letter-spacing: -0.2px;
     }
     .stat-sub {
-      font-size: 11px;
+      font-size: 11.5px;
       color: #38bdf8;
-      margin-top: 3px;
+      margin-top: 4px;
       font-weight: 600;
     }
 
-    /* 3. MAIN WORKSPACE CONTAINER */
+    /* 3. MAIN WORKSPACE CONTENT */
     main.workspace-main {
       max-width: 1400px;
       width: 100%;
       margin: 0 auto;
-      padding: 28px 32px 48px;
+      padding: 28px 32px 56px;
       box-sizing: border-box;
       flex: 1;
     }
@@ -244,26 +349,27 @@
     }
     .search-box-wrap input {
       width: 100%;
-      padding: 10px 14px 10px 38px;
+      padding: 11px 16px 11px 40px;
       border-radius: 8px;
-      border: 1px solid var(--beds-border, #cbd5e1);
+      border: 1px solid var(--super-border);
       background: var(--beds-bg-panel, #ffffff);
       color: var(--beds-text-primary, #1e293b);
       font-size: 13px;
       outline: none;
       box-sizing: border-box;
-      transition: all 0.2s ease;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
     }
     .search-box-wrap input:focus {
-      border-color: var(--beds-teal-primary, #0097a7);
-      box-shadow: 0 0 0 2px rgba(0, 151, 167, 0.2);
+      border-color: var(--super-cyan);
+      box-shadow: 0 0 0 3px var(--super-cyan-glow);
     }
     .search-box-icon {
       position: absolute;
-      left: 12px;
+      left: 14px;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 14px;
+      font-size: 15px;
       color: #94a3b8;
       pointer-events: none;
     }
@@ -274,23 +380,25 @@
     }
     .filter-btn {
       background: var(--beds-bg-panel, #ffffff);
-      border: 1px solid var(--beds-border, #cbd5e1);
-      padding: 8px 14px;
-      border-radius: 6px;
+      border: 1px solid var(--super-border);
+      padding: 9px 16px;
+      border-radius: 8px;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--beds-text-secondary, #475569);
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .filter-btn:hover {
-      background: #f1f5f9;
-      color: #102a35;
+      background: var(--super-bg);
+      color: var(--super-teal);
+      border-color: var(--super-cyan);
     }
     .filter-btn.active {
-      background: var(--beds-teal-primary, #0097a7);
-      border-color: var(--beds-teal-primary, #0097a7);
+      background: var(--super-cyan);
+      border-color: var(--super-cyan);
       color: #ffffff;
+      box-shadow: 0 2px 8px var(--super-cyan-glow);
     }
 
     /* Section Headings */
@@ -299,7 +407,7 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 14px;
-      margin-top: 8px;
+      margin-top: 10px;
     }
     .section-header-row h3 {
       font-size: 15px;
@@ -320,85 +428,94 @@
     .quick-shortcuts-row {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 12px;
+      gap: 14px;
       margin-bottom: 32px;
     }
     .shortcut-card {
       background: var(--beds-bg-panel, #ffffff);
-      border: 1px solid var(--beds-border, #e2e8f0);
-      border-radius: 8px;
-      padding: 12px 14px;
+      border: 1px solid var(--super-border);
+      border-radius: 10px;
+      padding: 13px 16px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       text-decoration: none;
       color: inherit;
-      transition: all 0.2s ease;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
     }
     .shortcut-card:hover {
-      border-color: var(--beds-teal-primary, #0097a7);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(16, 42, 53, 0.06);
+      border-color: var(--super-cyan);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(0, 151, 167, 0.12);
     }
     .shortcut-icon {
-      font-size: 22px;
+      font-size: 24px;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.08));
     }
     .shortcut-info .shortcut-title {
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 800;
       color: var(--beds-charcoal-heading, #102a35);
     }
     .shortcut-info .shortcut-tag {
       font-size: 11px;
       color: var(--beds-text-muted, #64748b);
-      margin-top: 1px;
+      margin-top: 2px;
+      font-weight: 500;
     }
 
-    /* 4. SMART PORTAL DIRECTORY GRID */
+    /* 4. SMART PORTAL DIRECTORY GRID (STUNNING ANIMATED) */
     .portal-cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 20px;
+      gap: 22px;
     }
 
     .clean-portal-card {
       background: var(--beds-bg-panel, #ffffff);
-      border: 1px solid var(--beds-border, #e2e8f0);
-      border-radius: 12px;
-      padding: 20px;
+      border: 1px solid var(--super-border);
+      border-radius: 14px;
+      padding: 22px;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 2px 8px rgba(16, 42, 53, 0.04);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: var(--super-shadow);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
+      animation: cardStagger 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
     .clean-portal-card:hover {
-      border-color: var(--beds-teal-primary, #0097a7);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 24px rgba(16, 42, 53, 0.08);
+      border-color: var(--super-cyan);
+      transform: translateY(-6px) scale(1.008);
+      box-shadow: 0 20px 38px -12px rgba(0, 151, 167, 0.22), 0 0 0 1px rgba(0, 151, 167, 0.35);
     }
 
     .card-top-row {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
     .card-title-group {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
     .card-icon-box {
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       border-radius: 10px;
-      background: rgba(16, 42, 53, 0.05);
-      border: 1px solid rgba(16, 42, 53, 0.08);
+      background: rgba(0, 151, 167, 0.08);
+      border: 1px solid rgba(0, 151, 167, 0.15);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
+      font-size: 24px;
+      transition: transform 0.25s ease;
+    }
+    .clean-portal-card:hover .card-icon-box {
+      transform: scale(1.1) rotate(2deg);
+      background: rgba(0, 151, 167, 0.15);
     }
     .card-title-text h4 {
       font-size: 15px;
@@ -409,51 +526,67 @@
     }
     .card-title-text .card-domain-tag {
       font-size: 11px;
-      font-weight: 600;
-      color: var(--beds-teal-primary, #0097a7);
+      font-weight: 700;
+      color: var(--super-cyan);
       display: inline-block;
       margin-top: 2px;
+      letter-spacing: 0.3px;
     }
 
     .operational-pill {
       font-size: 10px;
       font-weight: 800;
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: 9999px;
       letter-spacing: 0.5px;
       background: #ecfdf5;
       color: #065f46;
       border: 1px solid #a7f3d0;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .operational-pill::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: #10b981;
+      border-radius: 50%;
+      animation: pulseGlow 1.8s infinite;
     }
 
     /* PERSONNEL MATRIX BOX (Admin, Area Mgr, Max 3 Supervisors) */
     .personnel-matrix-box {
-      background: var(--beds-bg-page, #f8fafc);
-      border: 1px solid var(--beds-border, #e2e8f0);
-      border-radius: 8px;
-      padding: 12px 14px;
+      background: var(--super-bg);
+      border: 1px solid var(--super-border);
+      border-radius: 10px;
+      padding: 13px 15px;
       margin-top: 8px;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 9px;
+      transition: background 0.2s ease;
+    }
+    .clean-portal-card:hover .personnel-matrix-box {
+      background: rgba(0, 151, 167, 0.03);
     }
     .personnel-row {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 9px;
       font-size: 12px;
     }
     .tier-badge {
       font-size: 10px;
       font-weight: 800;
-      padding: 2px 6px;
-      border-radius: 4px;
+      padding: 3px 7px;
+      border-radius: 5px;
       text-transform: uppercase;
       letter-spacing: 0.3px;
       flex-shrink: 0;
-      width: 72px;
+      width: 76px;
       text-align: center;
     }
     .tier-admin {
@@ -469,7 +602,7 @@
     .personnel-details {
       display: flex;
       align-items: baseline;
-      gap: 5px;
+      gap: 6px;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -477,7 +610,7 @@
     .personnel-name {
       font-weight: 700;
       color: var(--beds-text-primary, #1e293b);
-      font-size: 12px;
+      font-size: 12.5px;
     }
     .personnel-desig {
       font-size: 11px;
@@ -487,7 +620,7 @@
     .supervisors-container {
       margin-top: 4px;
       padding-top: 8px;
-      border-top: 1px dashed var(--beds-border, #cbd5e1);
+      border-top: 1px dashed var(--super-border);
     }
     .supervisors-label {
       font-size: 10.5px;
@@ -504,17 +637,22 @@
       gap: 5px;
     }
     .sup-chip {
-      background: #ffffff;
-      border: 1px solid var(--beds-border, #cbd5e1);
-      border-radius: 4px;
+      background: var(--beds-bg-panel, #ffffff);
+      border: 1px solid var(--super-border);
+      border-radius: 5px;
       padding: 3px 8px;
       font-size: 10.5px;
       font-weight: 600;
       color: #334155;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
       box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+      transition: all 0.2s ease;
+    }
+    .sup-chip:hover {
+      border-color: var(--super-cyan);
+      transform: translateY(-1px);
     }
     .sup-chip span.dot {
       width: 5px;
@@ -531,11 +669,11 @@
     }
     .btn-portal-primary {
       flex: 1;
-      background: linear-gradient(135deg, #102a35 0%, #173f4f 100%);
+      background: linear-gradient(135deg, #102a35 0%, #163847 100%);
       color: #ffffff;
       border: none;
-      border-radius: 6px;
-      padding: 9px 12px;
+      border-radius: 8px;
+      padding: 10px 14px;
       font-size: 12.5px;
       font-weight: 700;
       text-align: center;
@@ -545,21 +683,27 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      transition: all 0.2s ease;
-      box-shadow: 0 2px 4px rgba(16, 42, 53, 0.15);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 6px rgba(16, 42, 53, 0.15);
+    }
+    .btn-portal-primary span.arrow {
+      transition: transform 0.2s ease;
     }
     .btn-portal-primary:hover {
-      background: linear-gradient(135deg, #163847 0%, #0097b2 100%);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(0, 151, 178, 0.25);
+      background: linear-gradient(135deg, #163847 0%, #0097a7 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0, 151, 167, 0.3);
+    }
+    .btn-portal-primary:hover span.arrow {
+      transform: translateX(3px);
     }
     .btn-portal-secondary {
-      background: var(--beds-bg-page, #f1f5f9);
-      border: 1px solid var(--beds-border, #cbd5e1);
-      border-radius: 6px;
-      padding: 9px 12px;
+      background: var(--super-bg);
+      border: 1px solid var(--super-border);
+      border-radius: 8px;
+      padding: 10px 12px;
       font-size: 11.5px;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--beds-text-secondary, #475569);
       text-decoration: none;
       cursor: pointer;
@@ -568,14 +712,15 @@
     }
     .btn-portal-secondary:hover {
       background: #e2e8f0;
+      border-color: #cbd5e1;
       color: #0f172a;
     }
     .btn-fav {
       background: transparent;
-      border: 1px solid var(--beds-border, #cbd5e1);
-      border-radius: 6px;
-      width: 34px;
-      height: 34px;
+      border: 1px solid var(--super-border);
+      border-radius: 8px;
+      width: 36px;
+      height: 36px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -588,12 +733,13 @@
       color: #eab308;
       border-color: #fde047;
       background: #fefce8;
+      transform: scale(1.08);
     }
 
     /* 5. MASTER FOOTER */
     footer.exec-footer {
       background: var(--beds-bg-panel, #ffffff);
-      border-top: 1px solid var(--beds-border, #e2e8f0);
+      border-top: 1px solid var(--super-border);
       padding: 24px 32px;
       font-size: 12px;
       color: var(--beds-text-muted, #64748b);
@@ -639,7 +785,7 @@
     <div class="super-view-container">
       <div class="super-view-header">
         <div class="super-view-title">
-          <h2>Central Enterprise Super View</h2>
+          <h2><span>⚡</span> Central Enterprise Super View</h2>
           <p>Real-time operational status, key personnel matrix, and unified portal governance across all active divisions.</p>
         </div>
         <span class="super-view-tag">Executive Summary · JTRWF Base</span>
@@ -653,12 +799,12 @@
         </div>
         <div class="super-stat-card">
           <div class="stat-label"><span>🛡️</span> Safety Mandate</div>
-          <div class="stat-value">Zero Incident</div>
+          <div class="stat-value">Zero Incident Protocol</div>
           <div class="stat-sub">High-Risk Lifting & PTW Governed</div>
         </div>
         <div class="super-stat-card">
           <div class="stat-label"><span>👥</span> Key Personnel</div>
-          <div class="stat-value">Assigned & Verified</div>
+          <div class="stat-value">Role Enforced Matrix</div>
           <div class="stat-sub">1 Admin · 1 Area Mgr · Max 3 Supervisors</div>
         </div>
         <div class="super-stat-card">
@@ -732,7 +878,7 @@
     <div class="portal-cards-grid" id="portalGrid">
 
       <!-- 1. GATE ENTRY & SITE ACCESS -->
-      <div class="clean-portal-card" data-portal-id="gate_entry" data-category="safety" data-title="Gate Entry Site Access Visitor Vehicle Muster Clearance RGP NRGP Bikash Mohapatra Pradeep Nayak Manoj Das">
+      <div class="clean-portal-card" style="--i: 0;" data-portal-id="gate_entry" data-category="safety" data-title="Gate Entry Site Access Visitor Vehicle Muster Clearance RGP NRGP Bikash Mohapatra Pradeep Nayak Manoj Das Subhashree Jena">
         <div class="card-top-row">
           <div class="card-title-group">
             <div class="card-icon-box">🚧</div>
@@ -771,7 +917,7 @@
 
         <div class="card-actions-row">
           <a href="BALSONS GATE ENTRY MANAGER/frontend/index.html" class="btn-portal-primary portal-launch-btn">
-            Open workspace →
+            Open workspace <span class="arrow">→</span>
           </a>
           <a href="BALSONS GATE ENTRY MANAGER/frontend/index.html#gate-dossier-360" class="btn-portal-secondary" title="View 360 Dossier">
             Dossier 360
@@ -781,7 +927,7 @@
       </div>
 
       <!-- 2. STORE & INVENTORY MANAGER -->
-      <div class="clean-portal-card" data-portal-id="store_tools" data-category="operations" data-title="Store Inventory Tools Rigging Lifting Tackles Form 11 Gagan Bihari Das Ashok Mohanty Kailash Sahu Bijay Barik">
+      <div class="clean-portal-card" style="--i: 1;" data-portal-id="store_tools" data-category="operations" data-title="Store Inventory Tools Rigging Lifting Tackles Form 11 Gagan Bihari Das Ashok Mohanty Kailash Sahu Bijay Barik">
         <div class="card-top-row">
           <div class="card-title-group">
             <div class="card-icon-box">📦</div>
@@ -820,7 +966,7 @@
 
         <div class="card-actions-row">
           <a href="BALSONS STORE MANAGER/frontend/index.html" class="btn-portal-primary portal-launch-btn">
-            Open workspace →
+            Open workspace <span class="arrow">→</span>
           </a>
           <a href="BALSONS STORE MANAGER/frontend/index.html#store-dossier-360" class="btn-portal-secondary" title="View 360 Dossier">
             Dossier 360
@@ -830,7 +976,7 @@
       </div>
 
       <!-- 3. SAFETY & PTW MANAGER -->
-      <div class="clean-portal-card" data-portal-id="safety_ptw" data-category="safety" data-title="Safety PTW Permit Work JSA HSE Compliance Gajendra Rao Dilip Rout Niranjan Sahu Rakesh Panda">
+      <div class="clean-portal-card" style="--i: 2;" data-portal-id="safety_ptw" data-category="safety" data-title="Safety PTW Permit Work JSA HSE Compliance Gajendra Rao Dilip Rout Niranjan Sahu Rakesh Panda">
         <div class="card-top-row">
           <div class="card-title-group">
             <div class="card-icon-box">🦺</div>
@@ -869,7 +1015,7 @@
 
         <div class="card-actions-row">
           <a href="BALSONS SAFETY MANAGER/frontend/index.html" class="btn-portal-primary portal-launch-btn">
-            Open workspace →
+            Open workspace <span class="arrow">→</span>
           </a>
           <a href="BALSONS SAFETY MANAGER/frontend/index.html#view-dossier-360" class="btn-portal-secondary" title="View 360 Dossier">
             Dossier 360
@@ -879,7 +1025,7 @@
       </div>
 
       <!-- 4. HR & PAYROLL MANAGER -->
-      <div class="clean-portal-card" data-portal-id="hr_payroll" data-category="admin" data-title="HR Payroll Employee Attendance Wages Biometrics Priyanka Senapati Rashmi Ranjan Alok Patra Snehalata Mishra">
+      <div class="clean-portal-card" style="--i: 3;" data-portal-id="hr_payroll" data-category="admin" data-title="HR Payroll Employee Attendance Wages Biometrics Priyanka Senapati Rashmi Ranjan Alok Patra Snehalata Mishra">
         <div class="card-top-row">
           <div class="card-title-group">
             <div class="card-icon-box">👥</div>
@@ -918,7 +1064,7 @@
 
         <div class="card-actions-row">
           <a href="BALSONS HR MANAGER/frontend/index.html" class="btn-portal-primary portal-launch-btn">
-            Open workspace →
+            Open workspace <span class="arrow">→</span>
           </a>
           <a href="BALSONS HR MANAGER/frontend/register.html" target="_blank" class="btn-portal-secondary" title="Employee Self-Registration Portal">
             Self-Register
@@ -928,7 +1074,7 @@
       </div>
 
       <!-- 5. OPERATIONS & HEAVY LIFT PORTAL -->
-      <div class="clean-portal-card" data-portal-id="operations" data-category="operations" data-title="Operations Heavy Lift Crane SPMT Erection Haulage Satish Chandra Ashok Mohanty Dilip Rout Suresh Behera">
+      <div class="clean-portal-card" style="--i: 4;" data-portal-id="operations" data-category="operations" data-title="Operations Heavy Lift Crane SPMT Erection Haulage Satish Chandra Ashok Mohanty Dilip Rout Suresh Behera Kartik Nayak">
         <div class="card-top-row">
           <div class="card-title-group">
             <div class="card-icon-box">🏗️</div>
@@ -967,14 +1113,14 @@
 
         <div class="card-actions-row">
           <a href="BALSONS OPERATIONS MANAGER/" class="btn-portal-primary portal-launch-btn">
-            Open workspace →
+            Open workspace <span class="arrow">→</span>
           </a>
           <button class="btn-fav" onclick="toggleFav(this)" title="Toggle Favorite">★</button>
         </div>
       </div>
 
       <!-- 6. PURCHASE & PROCUREMENT MANAGER -->
-      <div class="clean-portal-card" data-portal-id="purchase" data-category="admin" data-title="Purchase Procurement Vendor RFQ GRN Commercial Gagan Bihari Das Sanjay Verma Amit Pradhan">
+      <div class="clean-portal-card" style="--i: 5;" data-portal-id="purchase" data-category="admin" data-title="Purchase Procurement Vendor RFQ GRN Commercial Gagan Bihari Das Sanjay Verma Amit Pradhan Pravat Rout">
         <div class="card-top-row">
           <div class="card-title-group">
             <div class="card-icon-box">🛒</div>
@@ -1013,14 +1159,14 @@
 
         <div class="card-actions-row">
           <a href="BALSONS PURCHASE MANAGER/" class="btn-portal-primary portal-launch-btn">
-            Open workspace →
+            Open workspace <span class="arrow">→</span>
           </a>
           <button class="btn-fav" onclick="toggleFav(this)" title="Toggle Favorite">★</button>
         </div>
       </div>
 
       <!-- 7. CENTRAL SYNC HUB & REPORTS -->
-      <div class="clean-portal-card" data-portal-id="sync_reports" data-category="admin" data-title="Central Sync Hub Reporting Cross-Portal Analytics Audit Prashant Mohanty Gajendra Rao Priyanka Senapati">
+      <div class="clean-portal-card" style="--i: 6;" data-portal-id="sync_reports" data-category="admin" data-title="Central Sync Hub Reporting Cross-Portal Analytics Audit Prashant Mohanty Gajendra Rao Priyanka Senapati Gagan Bihari Das">
         <div class="card-top-row">
           <div class="card-title-group">
             <div class="card-icon-box">📊</div>
@@ -1059,14 +1205,14 @@
 
         <div class="card-actions-row">
           <a href="BALSONS REPOTS PORTAL/" class="btn-portal-primary portal-launch-btn">
-            Open workspace →
+            Open workspace <span class="arrow">→</span>
           </a>
           <button class="btn-fav" onclick="toggleFav(this)" title="Toggle Favorite">★</button>
         </div>
       </div>
 
       <!-- 8. SITE EXPENSE & IMPREST MANAGER -->
-      <div class="clean-portal-card" data-portal-id="expenses" data-category="admin" data-title="Site Expense Imprest Petty Cash Fuel Diesel Vouchers Reconciliation Bikash Mohapatra Dilip Rout Kailash Sahu">
+      <div class="clean-portal-card" style="--i: 7;" data-portal-id="expenses" data-category="admin" data-title="Site Expense Imprest Petty Cash Fuel Diesel Vouchers Reconciliation Bikash Mohapatra Dilip Rout Kailash Sahu Rashmi Ranjan">
         <div class="card-top-row">
           <div class="card-title-group">
             <div class="card-icon-box">💳</div>
@@ -1105,7 +1251,7 @@
 
         <div class="card-actions-row">
           <a href="#" class="btn-portal-primary portal-launch-btn">
-            Open workspace →
+            Open workspace <span class="arrow">→</span>
           </a>
           <button class="btn-fav" onclick="toggleFav(this)" title="Toggle Favorite">★</button>
         </div>
@@ -1120,7 +1266,7 @@
     <p>
       <strong>BALSONS Heavy Lift & Shift</strong> • Enterprise Portal Ecosystem · JTRWF Khordha Base
     </p>
-    <p style="font-style: italic; color: var(--beds-teal-primary, #0097a7); margin: 4px 0; font-weight: 600;">
+    <p style="font-style: italic; color: var(--super-cyan); margin: 4px 0; font-weight: 600;">
       “Difficult We Do Easily, Impossible Takes Little Time...!”
     </p>
     <p style="font-size: 11px; margin: 4px 0 0 0;">
@@ -1204,9 +1350,18 @@
       }
     }
 
+    // Ensure any stray simulator bar is obliterated from DOM
+    function obliterateSimulatorBars() {
+      ['sam-global-topbar', 'beds-enterprise-topbar', 'sam-gov-bar'].forEach(id => {
+        const el = document.getElementById(id) || document.querySelector('.' + id);
+        if (el) el.remove();
+      });
+    }
+
     // GitHub Pages Multi-Repo Link Resolution
     window.addEventListener('DOMContentLoaded', () => {
       updateHeaderUser();
+      obliterateSimulatorBars();
 
       if (window.location.hostname.includes('github.io')) {
         document.querySelectorAll('a[href]').forEach(a => {
