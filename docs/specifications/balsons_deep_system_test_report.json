@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-22T11:30:40.124Z",
+  "timestamp": "2026-11-22T11:48:17.600Z",
   "environment": "Windows 11 x64 / Node v24.19.0",
   "testSuites": [
     {
@@ -51,7 +51,7 @@
         {
           "title": "BALSONS GATE ENTRY MANAGER/frontend/assets/images contains login-gate.jpg",
           "status": "PASS",
-          "details": "Size: 1822038 bytes"
+          "details": "Size: 1401052 bytes"
         },
         {
           "title": "BALSONS GATE ENTRY MANAGER/frontend/assets/images contains login-hr.jpg",
@@ -91,7 +91,7 @@
         {
           "title": "BALSONS HR MANAGER/frontend/assets/images contains login-gate.jpg",
           "status": "PASS",
-          "details": "Size: 1822038 bytes"
+          "details": "Size: 1401052 bytes"
         },
         {
           "title": "BALSONS HR MANAGER/frontend/assets/images contains login-hr.jpg",
@@ -131,7 +131,7 @@
         {
           "title": "BALSONS OPERATIONS MANAGER/assets/images contains login-gate.jpg",
           "status": "PASS",
-          "details": "Size: 1822038 bytes"
+          "details": "Size: 1401052 bytes"
         },
         {
           "title": "BALSONS OPERATIONS MANAGER/assets/images contains login-hr.jpg",
@@ -171,7 +171,7 @@
         {
           "title": "BALSONS PURCHASE MANAGER/assets/images contains login-gate.jpg",
           "status": "PASS",
-          "details": "Size: 1822038 bytes"
+          "details": "Size: 1401052 bytes"
         },
         {
           "title": "BALSONS PURCHASE MANAGER/assets/images contains login-hr.jpg",
@@ -211,7 +211,7 @@
         {
           "title": "BALSONS SAFETY MANAGER/frontend/assets/images contains login-gate.jpg",
           "status": "PASS",
-          "details": "Size: 1822038 bytes"
+          "details": "Size: 1401052 bytes"
         },
         {
           "title": "BALSONS SAFETY MANAGER/frontend/assets/images contains login-hr.jpg",
@@ -251,7 +251,7 @@
         {
           "title": "BALSONS STORE MANAGER/frontend/assets/images contains login-gate.jpg",
           "status": "PASS",
-          "details": "Size: 1822038 bytes"
+          "details": "Size: 1401052 bytes"
         },
         {
           "title": "BALSONS STORE MANAGER/frontend/assets/images contains login-hr.jpg",
@@ -291,7 +291,7 @@
         {
           "title": "BALSONS ENTERPRISE LAUNCHER/assets/images contains login-gate.jpg",
           "status": "PASS",
-          "details": "Size: 1822038 bytes"
+          "details": "Size: 1401052 bytes"
         },
         {
           "title": "BALSONS ENTERPRISE LAUNCHER/assets/images contains login-hr.jpg",
