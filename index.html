@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Central Portal Launcher</title>
+  <title>BALSONS Central Portal — Super Administrator Control Center</title>
   <link rel="icon" type="image/png" href="assets/images/balsons-logo.png" />
   <link rel="stylesheet" href="beds.css">
   <style>
@@ -849,7 +849,7 @@
       <img src="assets/images/balsons-logo.png" alt="BALSONS Logo">
       <div class="brand-text">
         <h1>BALSONS HEAVY LIFT & SHIFT</h1>
-        <p>Central Portal Launcher</p>
+        <p>👑 Super Administrator Exclusive Control Center</p>
         <div class="brand-slogan">“Difficult We Do Easily, Impossible Takes Little Time...!”</div>
       </div>
     </div>
@@ -917,6 +917,108 @@
 
   <!-- 3. MAIN WORKSPACE CONTENT -->
   <main class="workspace-main">
+
+    <!-- Master View Switcher (Super Admin Exclusive) -->
+    <div style="display: flex; gap: 12px; margin-bottom: 24px; border-bottom: 2px solid var(--super-border); padding-bottom: 12px; flex-wrap: wrap;">
+      <button id="viewTabPortals" class="filter-btn active" style="font-size: 13.5px; padding: 10px 22px; font-weight: 800; border-radius: 8px; cursor: pointer;" onclick="switchSuperAdminView('portals')">
+        🏢 Portal Workspaces (Super Admin Access)
+      </button>
+      <button id="viewTabUsers" class="filter-btn" style="font-size: 13.5px; padding: 10px 22px; font-weight: 800; border-radius: 8px; cursor: pointer;" onclick="switchSuperAdminView('users')">
+        👑 User &amp; Credential Management Console
+      </button>
+    </div>
+
+    <!-- ═══ USER & CREDENTIAL MANAGEMENT CONSOLE (SUPER ADMIN EXCLUSIVE) ═══ -->
+    <div id="superAdminUserConsole" style="display: none; margin-bottom: 40px; animation: superFadeIn 0.3s ease;">
+      <div style="background: var(--super-card, #ffffff); border: 1px solid var(--super-border, #e2e8f0); border-radius: 16px; padding: 24px; box-shadow: var(--super-shadow);">
+        
+        <!-- Header -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 14px;">
+          <div>
+            <h2 style="margin: 0; font-size: 18px; font-weight: 800; color: var(--beds-charcoal-heading, #102a35); display: flex; align-items: center; gap: 8px;">
+              <span>👑</span> Master User &amp; Credential Management Console
+            </h2>
+            <p style="margin: 4px 0 0; font-size: 12px; color: var(--beds-text-secondary, #475569);">
+              Add, edit, change passwords, assign portal scopes, and delete user accounts across all 6 BALSONS portals.
+            </p>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <button class="btn-portal-primary" style="padding: 9px 18px; font-size: 12.5px; font-weight: 800; border-radius: 8px; cursor: pointer;" onclick="openAddUserModal()">
+              ➕ Add Enterprise User
+            </button>
+            <button class="btn-signout" style="padding: 8px 14px; font-size: 12px; font-weight: 700;" onclick="confirmResetRoster()">
+              🔄 Reset Baseline
+            </button>
+          </div>
+        </div>
+
+        <!-- KPI Mini Stats -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 22px;">
+          <div style="background: var(--super-bg, #f8fafc); border: 1px solid var(--super-border, #e2e8f0); border-radius: 10px; padding: 14px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--beds-text-muted, #64748b); text-transform: uppercase;">Total Accounts</div>
+            <div id="statTotalUsers" style="font-size: 24px; font-weight: 800; color: var(--super-cyan, #0097a7); margin-top: 4px;">14</div>
+            <div style="font-size: 10.5px; color: var(--beds-text-secondary, #475569);">Ecosystem user directory</div>
+          </div>
+          <div style="background: var(--super-bg, #f8fafc); border: 1px solid var(--super-border, #e2e8f0); border-radius: 10px; padding: 14px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--beds-text-muted, #64748b); text-transform: uppercase;">Active Users</div>
+            <div id="statActiveUsers" style="font-size: 24px; font-weight: 800; color: #10b981; margin-top: 4px;">14</div>
+            <div style="font-size: 10.5px; color: var(--beds-text-secondary, #475569);">Authorized site personnel</div>
+          </div>
+          <div style="background: var(--super-bg, #f8fafc); border: 1px solid var(--super-border, #e2e8f0); border-radius: 10px; padding: 14px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--beds-text-muted, #64748b); text-transform: uppercase;">Portals Managed</div>
+            <div style="font-size: 24px; font-weight: 800; color: #f59e0b; margin-top: 4px;">6</div>
+            <div style="font-size: 10.5px; color: var(--beds-text-secondary, #475569);">Gate, HR, Ops, Purch, Safe, Store</div>
+          </div>
+          <div style="background: var(--super-bg, #f8fafc); border: 1px solid var(--super-border, #e2e8f0); border-radius: 10px; padding: 14px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--beds-text-muted, #64748b); text-transform: uppercase;">Security Tier</div>
+            <div style="font-size: 16px; font-weight: 800; color: #8b5cf6; margin-top: 6px;">Tier 1 Executive</div>
+            <div style="font-size: 10.5px; color: var(--beds-text-secondary, #475569);">Super Admin exclusive</div>
+          </div>
+        </div>
+
+        <!-- Filter & Search Bar -->
+        <div style="display: flex; gap: 12px; margin-bottom: 18px; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 240px; position: relative;">
+            <input type="text" id="userConsoleSearch" placeholder="Filter users by name, username, department or role..." style="width: 100%; height: 40px; padding: 0 14px; border: 1px solid var(--super-border); border-radius: 8px; font-size: 13px; font-family: inherit; background: var(--super-bg); box-sizing: border-box;" oninput="filterUserTable()">
+          </div>
+          <select id="userConsolePortalFilter" style="height: 40px; padding: 0 14px; border: 1px solid var(--super-border); border-radius: 8px; font-size: 12.5px; font-family: inherit; font-weight: 600; background: var(--super-bg); cursor: pointer;" onchange="filterUserTable()">
+            <option value="all">🌐 All Portals</option>
+            <option value="gate">🚪 Gate Entry</option>
+            <option value="hr">👥 HR &amp; Payroll</option>
+            <option value="operations">🏗️ Operations &amp; Rigging</option>
+            <option value="purchase">🛒 Purchase &amp; Commercial</option>
+            <option value="safety">🦺 Safety &amp; Risk</option>
+            <option value="store">📦 Store &amp; Tackle</option>
+          </select>
+          <select id="userConsoleStatusFilter" style="height: 40px; padding: 0 14px; border: 1px solid var(--super-border); border-radius: 8px; font-size: 12.5px; font-family: inherit; font-weight: 600; background: var(--super-bg); cursor: pointer;" onchange="filterUserTable()">
+            <option value="all">● All Status</option>
+            <option value="Active">● Active Only</option>
+            <option value="Deactivated">● Deactivated Only</option>
+          </select>
+        </div>
+
+        <!-- User Accounts Table -->
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 12.5px; text-align: left;">
+            <thead>
+              <tr style="background: var(--super-bg, #f8fafc); border-bottom: 2px solid var(--super-border, #e2e8f0); color: var(--beds-text-secondary, #475569); font-size: 11.5px; text-transform: uppercase;">
+                <th style="padding: 12px 14px;">User Identity</th>
+                <th style="padding: 12px 14px;">Role &amp; Department</th>
+                <th style="padding: 12px 14px;">Assigned Portal</th>
+                <th style="padding: 12px 14px;">Password Credential</th>
+                <th style="padding: 12px 14px;">Account Status</th>
+                <th style="padding: 12px 14px; text-align: right;">Governance Actions</th>
+              </tr>
+            </thead>
+            <tbody id="userTableBody">
+              <!-- Rendered Dynamically -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
 
     <!-- Search & Filter Toolbar -->
     <div class="workspace-toolbar">
@@ -1462,6 +1564,39 @@
       updateHeaderUser();
       obliterateSimulatorBars();
 
+      // Super Admin Exclusive Access Enforcement for Centralized Portal
+      if (window.BalsonsSuperAdmin) {
+        const u = window.BalsonsSuperAdmin.getCurrentUser();
+        const isSuper = Boolean(u && (u.isSuperAdmin === true || u.role === 'Super Administrator'));
+        if (!isSuper) {
+          console.warn('Non-SuperAdmin accessed centralized launcher. Restricting view.');
+          const mainContent = document.querySelector('.workspace-main');
+          if (mainContent) {
+            mainContent.innerHTML = `
+              <div style="max-width: 640px; margin: 60px auto; padding: 32px; background: var(--super-card); border: 2px solid #ef4444; border-radius: 16px; text-align: center; box-shadow: 0 10px 30px rgba(239,68,68,0.15);">
+                <div style="font-size: 48px; margin-bottom: 12px;">🚫</div>
+                <h2 style="color: #b91c1c; margin: 0 0 10px 0; font-size: 22px; font-weight: 800;">Super Administrator Authority Required</h2>
+                <p style="color: var(--beds-text-secondary); font-size: 14px; line-height: 1.6; margin-bottom: 24px;">
+                  The Centralised Portal is strictly reserved for the <strong>Master Super Administrator</strong>. Ordinary users and portal administrators must log in directly through their assigned portal.
+                </p>
+                <div style="padding: 12px; background: rgba(239,68,68,0.06); border-radius: 8px; font-size: 12.5px; color: var(--beds-charcoal-heading); margin-bottom: 24px;">
+                  Currently identified as: <strong>${u ? u.fullName : 'Guest'}</strong> (Role: ${u ? u.role : 'Unassigned'})
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                  <button onclick="handleLauncherSignOut()" style="padding: 10px 20px; background: #0097a7; color: #fff; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">
+                    👑 Sign In as Super Administrator
+                  </button>
+                  <a href="${u && u.assignedPortal ? ('BALSONS ' + u.assignedPortal.toUpperCase() + ' MANAGER/frontend/index.html') : 'BALSONS GATE ENTRY MANAGER/frontend/index.html'}" style="padding: 10px 20px; background: var(--super-bg); border: 1px solid var(--super-border); color: var(--beds-text-primary); border-radius: 8px; font-weight: 700; text-decoration: none;">
+                    Return to My Assigned Portal
+                  </a>
+                </div>
+              </div>
+            `;
+          }
+        }
+      }
+    
+
       if (window.location.hostname.includes('github.io')) {
         document.querySelectorAll('a[href]').forEach(a => {
           const href = a.getAttribute('href');
@@ -1506,5 +1641,459 @@
       }
     });
   </script>
+
+  <!-- ═══ USER MANAGEMENT MODALS (SUPER ADMIN) ═══ -->
+  <!-- 1. Add User Modal -->
+  <div id="addUserModal" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(16,45,53,0.65); backdrop-filter:blur(4px); align-items:center; justify-content:center;">
+    <div style="background:var(--super-card, #ffffff); border:1px solid var(--super-border, #e2e8f0); border-radius:14px; width:90%; max-width:520px; box-shadow:0 20px 40px rgba(0,0,0,0.25); overflow:hidden; animation:superFadeIn 0.2s ease;">
+      <div style="padding:16px 20px; background:#102D35; color:#fff; display:flex; justify-content:space-between; align-items:center;">
+        <h3 style="margin:0; font-size:15px; font-weight:800; display:flex; align-items:center; gap:8px;">
+          <span>➕</span> Add New Enterprise User
+        </h3>
+        <button onclick="closeAddUserModal()" style="background:transparent; border:none; color:#fff; font-size:20px; cursor:pointer;">&times;</button>
+      </div>
+      <form onsubmit="submitAddUser(event)" style="padding:20px;">
+        <div style="margin-bottom:12px;">
+          <label style="display:block; font-size:11px; font-weight:700; color:var(--beds-text-secondary); margin-bottom:4px; text-transform:uppercase;">Full Name</label>
+          <input type="text" id="addFullName" required placeholder="e.g. Ramesh Chandra (Rigging Supervisor)" style="width:100%; height:38px; border:1px solid var(--super-border); border-radius:6px; padding:0 10px; font-size:13px; font-family:inherit; box-sizing:border-box;">
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+          <div>
+            <label style="display:block; font-size:11px; font-weight:700; color:var(--beds-text-secondary); margin-bottom:4px; text-transform:uppercase;">User ID / Username</label>
+            <input type="text" id="addUsername" required placeholder="e.g. ramesh.chandra" style="width:100%; height:38px; border:1px solid var(--super-border); border-radius:6px; padding:0 10px; font-size:13px; font-family:inherit; box-sizing:border-box;">
+          </div>
+          <div>
+            <label style="display:block; font-size:11px; font-weight:700; color:var(--beds-text-secondary); margin-bottom:4px; text-transform:uppercase;">Password</label>
+            <input type="password" id="addPassword" required placeholder="e.g. Balsons@2026!" style="width:100%; height:38px; border:1px solid var(--super-border); border-radius:6px; padding:0 10px; font-size:13px; font-family:inherit; box-sizing:border-box;">
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+          <div>
+            <label style="display:block; font-size:11px; font-weight:700; color:var(--beds-text-secondary); margin-bottom:4px; text-transform:uppercase;">Assigned Portal</label>
+            <select id="addPortal" required style="width:100%; height:38px; border:1px solid var(--super-border); border-radius:6px; padding:0 10px; font-size:12.5px; font-family:inherit; font-weight:600; box-sizing:border-box;">
+              <option value="gate">🚪 Gate Entry</option>
+              <option value="hr">👥 HR &amp; Payroll</option>
+              <option value="operations">🏗️ Operations &amp; Rigging</option>
+              <option value="purchase">🛒 Purchase &amp; Commercial</option>
+              <option value="safety">🦺 Safety &amp; Risk</option>
+              <option value="store">📦 Store &amp; Tackle</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block; font-size:11px; font-weight:700; color:var(--beds-text-secondary); margin-bottom:4px; text-transform:uppercase;">Role Level</label>
+            <select id="addRole" required style="width:100%; height:38px; border:1px solid var(--super-border); border-radius:6px; padding:0 10px; font-size:12.5px; font-family:inherit; font-weight:600; box-sizing:border-box;">
+              <option value="Portal Administrator">⚙️ Portal Administrator</option>
+              <option value="Management / Director">🏛️ Management / Director</option>
+              <option value="Operations Area Manager">🏗️ Area Manager</option>
+              <option value="HOD / Department Head">📋 HOD / Department Head</option>
+              <option value="Manager / Supervisor">👷 Manager / Supervisor</option>
+              <option value="Indenter / Site Engineer">📝 Indenter / Site Engineer</option>
+              <option value="Employee / General User">👤 Employee / Crew</option>
+              <option value="Client Observer / Auditor">🔍 Client Auditor</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <label style="display:block; font-size:11px; font-weight:700; color:var(--beds-text-secondary); margin-bottom:4px; text-transform:uppercase;">Department</label>
+          <input type="text" id="addDept" placeholder="e.g. Heavy Rigging Bay-3 / Logistics" style="width:100%; height:38px; border:1px solid var(--super-border); border-radius:6px; padding:0 10px; font-size:13px; font-family:inherit; box-sizing:border-box;">
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:10px;">
+          <button type="button" class="btn-signout" onclick="closeAddUserModal()">Cancel</button>
+          <button type="submit" class="btn-portal-primary" style="padding:8px 18px; font-size:12.5px; font-weight:700;">Save User</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. Edit User Modal -->
+  <div id="editUserModal" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(16,45,53,0.65); backdrop-filter:blur(4px); align-items:center; justify-content:center;">
+    <div style="background:var(--super-card, #ffffff); border:1px solid var(--super-border, #e2e8f0); border-radius:14px; width:90%; max-width:520px; box-shadow:0 20px 40px rgba(0,0,0,0.25); overflow:hidden; animation:superFadeIn 0.2s ease;">
+      <div style="padding:16px 20px; background:#102D35; color:#fff; display:flex; justify-content:space-between; align-items:center;">
+        <h3 style="margin:0; font-size:15px; font-weight:800; display:flex; align-items:center; gap:8px;">
+          <span>✏️</span> Edit User Account &amp; Permissions
+        </h3>
+        <button onclick="closeEditUserModal()" style="background:transparent; border:none; color:#fff; font-size:20px; cursor:pointer;">&times;</button>
+      </div>
+      <form onsubmit="submitEditUser(event)" style="padding:20px;">
+        <input type="hidden" id="editUsernameHidden">
+        <div style="margin-bottom:12px;">
+          <label style="display:block; font-size:11px; font-weight:700; color:var(--beds-text-secondary); margin-bottom:4px; text-transform:uppercase;">User ID (Immutable)</label>
+          <input type="text" id="editUsernameDisplay" disabled style="width:100%; height:38px; border:1px solid var(--super-border); border-radius:6px; padding:0 10px; font-size:13px; font-family:monospace; background:rgba(0,0,0,0.04); box-sizing:border-box;">
+        </div>
+        <div style="margin-bottom:12px;">
+          <label style="display:block; font-size:11px; font-weight:700; color:var(--beds-text-secondary); margin-bottom:4px; text-transform:uppercase;">Full Name</label>
+          <input type="text" id="editFullName" required style="width:100%; height:38px; border:1px solid var(--super-border); border-radius:6px; padding:0 10px; font-size:13px; font-family:inherit; box-sizing:border-box;">
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+          <div>
+            <label style="display:block; font-size:11px; font-weight:700; color:var(--beds-text-secondary); margin-bottom:4px; text-transform:uppercase;">Assigned Portal</label>
+            <select id="editPortal" required style="width:100%; height:38px; border:1px solid var(--super-border); border-radius:6px; padding:0 10px; font-size:12.5px; font-family:inherit; font-weight:600; box-sizing:border-box;">
+              <option value="gate">🚪 Gate Entry</option>
+              <option value="hr">👥 HR &amp; Payroll</option>
+              <option value="operations">🏗️ Operations &amp; Rigging</option>
+              <option value="purchase">🛒 Purchase &amp; Commercial</option>
+              <option value="safety">🦺 Safety &amp; Risk</option>
+              <option value="store">📦 Store &amp; Tackle</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block; font-size:11px; font-weight:700; color:var(--beds-text-secondary); margin-bottom:4px; text-transform:uppercase;">Role Level</label>
+            <select id="editRole" required style="width:100%; height:38px; border:1px solid var(--super-border); border-radius:6px; padding:0 10px; font-size:12.5px; font-family:inherit; font-weight:600; box-sizing:border-box;">
+              <option value="Portal Administrator">⚙️ Portal Administrator</option>
+              <option value="Management / Director">🏛️ Management / Director</option>
+              <option value="Operations Area Manager">🏗️ Area Manager</option>
+              <option value="HOD / Department Head">📋 HOD / Department Head</option>
+              <option value="Manager / Supervisor">👷 Manager / Supervisor</option>
+              <option value="Indenter / Site Engineer">📝 Indenter / Site Engineer</option>
+              <option value="Employee / General User">👤 Employee / Crew</option>
+              <option value="Client Observer / Auditor">🔍 Client Auditor</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+          <div>
+            <label style="display:block; font-size:11px; font-weight:700; color:var(--beds-text-secondary); margin-bottom:4px; text-transform:uppercase;">Department</label>
+            <input type="text" id="editDept" style="width:100%; height:38px; border:1px solid var(--super-border); border-radius:6px; padding:0 10px; font-size:13px; font-family:inherit; box-sizing:border-box;">
+          </div>
+          <div>
+            <label style="display:block; font-size:11px; font-weight:700; color:var(--beds-text-secondary); margin-bottom:4px; text-transform:uppercase;">Account Status</label>
+            <select id="editStatus" style="width:100%; height:38px; border:1px solid var(--super-border); border-radius:6px; padding:0 10px; font-size:12.5px; font-family:inherit; font-weight:700; box-sizing:border-box;">
+              <option value="Active">● Active</option>
+              <option value="Deactivated">● Deactivated</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:10px;">
+          <button type="button" class="btn-signout" onclick="closeEditUserModal()">Cancel</button>
+          <button type="submit" class="btn-portal-primary" style="padding:8px 18px; font-size:12.5px; font-weight:700;">Update Account</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. Change Password Modal -->
+  <div id="changePasswordModal" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(16,45,53,0.65); backdrop-filter:blur(4px); align-items:center; justify-content:center;">
+    <div style="background:var(--super-card, #ffffff); border:1px solid var(--super-border, #e2e8f0); border-radius:14px; width:90%; max-width:440px; box-shadow:0 20px 40px rgba(0,0,0,0.25); overflow:hidden; animation:superFadeIn 0.2s ease;">
+      <div style="padding:16px 20px; background:#102D35; color:#fff; display:flex; justify-content:space-between; align-items:center;">
+        <h3 style="margin:0; font-size:15px; font-weight:800; display:flex; align-items:center; gap:8px;">
+          <span>🔑</span> Reset User Password
+        </h3>
+        <button onclick="closeChangePasswordModal()" style="background:transparent; border:none; color:#fff; font-size:20px; cursor:pointer;">&times;</button>
+      </div>
+      <form onsubmit="submitChangePassword(event)" style="padding:20px;">
+        <input type="hidden" id="pwUsernameHidden">
+        <div style="margin-bottom:14px; padding:10px; background:rgba(0,151,178,0.08); border-radius:8px; border:1px solid rgba(0,151,178,0.2);">
+          <div style="font-size:11px; color:var(--beds-text-muted); text-transform:uppercase; font-weight:700;">Target Account</div>
+          <div id="pwUserDisplay" style="font-size:13px; font-weight:800; color:var(--beds-charcoal-heading); margin-top:2px;">User</div>
+        </div>
+        <div style="margin-bottom:12px;">
+          <label style="display:block; font-size:11px; font-weight:700; color:var(--beds-text-secondary); margin-bottom:4px; text-transform:uppercase;">New Password</label>
+          <input type="password" id="newPassword" required placeholder="Minimum 4 characters" style="width:100%; height:38px; border:1px solid var(--super-border); border-radius:6px; padding:0 10px; font-size:13px; font-family:inherit; box-sizing:border-box;">
+        </div>
+        <div style="margin-bottom:16px;">
+          <label style="display:block; font-size:11px; font-weight:700; color:var(--beds-text-secondary); margin-bottom:4px; text-transform:uppercase;">Confirm New Password</label>
+          <input type="password" id="confirmPassword" required placeholder="Re-type password" style="width:100%; height:38px; border:1px solid var(--super-border); border-radius:6px; padding:0 10px; font-size:13px; font-family:inherit; box-sizing:border-box;">
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:10px;">
+          <button type="button" class="btn-signout" onclick="closeChangePasswordModal()">Cancel</button>
+          <button type="submit" class="btn-portal-primary" style="padding:8px 18px; font-size:12.5px; font-weight:700;">Set Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Super Admin View Switcher (Portals vs User Console)
+    function switchSuperAdminView(view) {
+      const tabPortals = document.getElementById('viewTabPortals');
+      const tabUsers = document.getElementById('viewTabUsers');
+      const userConsole = document.getElementById('superAdminUserConsole');
+      const toolbar = document.querySelector('.workspace-toolbar');
+      const quickShortcuts = document.querySelector('.quick-shortcuts-row');
+      const shortcutsHeader = document.querySelector('.section-header-row');
+      const portalGrid = document.querySelector('.portal-grid');
+      const portalCountBar = document.querySelector('.results-count-bar');
+
+      if (view === 'users') {
+        if (tabUsers) tabUsers.classList.add('active');
+        if (tabPortals) tabPortals.classList.remove('active');
+        if (userConsole) userConsole.style.display = 'block';
+        if (toolbar) toolbar.style.display = 'none';
+        if (quickShortcuts) quickShortcuts.style.display = 'none';
+        if (shortcutsHeader) shortcutsHeader.style.display = 'none';
+        if (portalGrid) portalGrid.style.display = 'none';
+        if (portalCountBar) portalCountBar.style.display = 'none';
+        renderUserManagementTable();
+      } else {
+        if (tabPortals) tabPortals.classList.add('active');
+        if (tabUsers) tabUsers.classList.remove('active');
+        if (userConsole) userConsole.style.display = 'none';
+        if (toolbar) toolbar.style.display = 'flex';
+        if (quickShortcuts) quickShortcuts.style.display = 'grid';
+        if (shortcutsHeader) shortcutsHeader.style.display = 'flex';
+        if (portalGrid) portalGrid.style.display = 'grid';
+        if (portalCountBar) portalCountBar.style.display = 'flex';
+      }
+    }
+
+    // Render User Management Table
+    function renderUserManagementTable() {
+      if (!window.BalsonsSuperAdmin) return;
+      const users = window.BalsonsSuperAdmin.users || [];
+      const tbody = document.getElementById('userTableBody');
+      if (!tbody) return;
+
+      const q = (document.getElementById('userConsoleSearch')?.value || '').toLowerCase().trim();
+      const portalFilter = document.getElementById('userConsolePortalFilter')?.value || 'all';
+      const statusFilter = document.getElementById('userConsoleStatusFilter')?.value || 'all';
+
+      let activeCount = 0;
+      users.forEach(u => { if (u.status === 'Active') activeCount++; });
+
+      const statTotal = document.getElementById('statTotalUsers');
+      const statActive = document.getElementById('statActiveUsers');
+      if (statTotal) statTotal.textContent = users.length;
+      if (statActive) statActive.textContent = activeCount;
+
+      const portalIcons = {
+        'gate': '🚪 Gate Entry',
+        'hr': '👥 HR & Payroll',
+        'operations': '🏗️ Operations',
+        'purchase': '🛒 Purchase',
+        'safety': '🦺 Safety',
+        'store': '📦 Store',
+        'all': '👑 All Portals'
+      };
+
+      const filtered = users.filter(u => {
+        const text = `${u.fullName} ${u.username} ${u.dept} ${u.role}`.toLowerCase();
+        const matchesQuery = !q || text.includes(q);
+        const assigned = (u.assignedPortal || (u.permittedPortals && u.permittedPortals[0]) || 'gate').toLowerCase();
+        const matchesPortal = (portalFilter === 'all') || assigned === portalFilter || (u.isSuperAdmin);
+        const matchesStatus = (statusFilter === 'all') || u.status === statusFilter;
+        return matchesQuery && matchesPortal && matchesStatus;
+      });
+
+      tbody.innerHTML = filtered.map(u => {
+        const assigned = u.assignedPortal || (u.permittedPortals && u.permittedPortals[0]) || 'gate';
+        const portalLabel = u.isSuperAdmin ? '👑 All Portals (Global)' : (portalIcons[assigned] || assigned.toUpperCase());
+        const isMaster = u.isSuperAdmin || u.username === 'superadmin' || u.locked;
+        const pass = u.password || 'Balsons@2026!';
+
+        return `
+          <tr style="border-bottom: 1px solid var(--super-border, #e2e8f0); transition: background 0.15s;" onmouseover="this.style.background='var(--super-bg)'" onmouseout="this.style.background='transparent'">
+            <td style="padding: 12px 14px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:20px;">${u.avatar || '👤'}</span>
+                <div>
+                  <div style="font-weight:700; color:var(--beds-charcoal-heading, #102a35);">${u.fullName}</div>
+                  <div style="font-family:monospace; font-size:11px; color:var(--super-cyan, #0097a7);">@${u.username}</div>
+                </div>
+              </div>
+            </td>
+            <td style="padding: 12px 14px;">
+              <span class="role-badge" style="font-size:11px; font-weight:700;">${u.role}</span>
+              <div style="font-size:11px; color:var(--beds-text-secondary); margin-top:2px;">${u.dept || 'Site Management'}</div>
+            </td>
+            <td style="padding: 12px 14px;">
+              <span style="display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px; background:rgba(0,151,178,0.08); color:var(--beds-teal-primary, #0097a7); border:1px solid rgba(0,151,178,0.2);">
+                ${portalLabel}
+              </span>
+            </td>
+            <td style="padding: 12px 14px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span id="pw-mask-${u.username}" style="font-family:monospace; font-weight:700; letter-spacing:1px; color:var(--beds-text-secondary);">••••••••</span>
+                <span id="pw-text-${u.username}" style="display:none; font-family:monospace; font-weight:700; font-size:12px; color:#059669; background:#ecfdf5; padding:1px 6px; border-radius:4px;">${pass}</span>
+                <button type="button" onclick="togglePasswordVisibility('${u.username}')" style="background:transparent; border:none; cursor:pointer; font-size:13px; color:var(--beds-text-muted);" title="Toggle View Password">👁</button>
+                <button type="button" onclick="openChangePasswordModal('${u.username}')" style="background:transparent; border:1px solid var(--super-border); border-radius:4px; padding:2px 6px; cursor:pointer; font-size:10.5px; font-weight:700; color:var(--beds-teal-primary);" title="Change Password">🔑</button>
+              </div>
+            </td>
+            <td style="padding: 12px 14px;">
+              ${isMaster ? `
+                <span style="font-size:11px; font-weight:800; color:#10b981;">● Always Active</span>
+              ` : `
+                <button onclick="toggleUserStatusQuick('${u.username}')" style="background:${u.status === 'Active' ? '#ecfdf5' : '#fef2f2'}; color:${u.status === 'Active' ? '#059669' : '#dc2626'}; border:1px solid ${u.status === 'Active' ? '#a7f3d0' : '#fecaca'}; border-radius:12px; padding:3px 10px; font-size:11px; font-weight:700; cursor:pointer;" title="Click to toggle status">
+                  ● ${u.status}
+                </button>
+              `}
+            </td>
+            <td style="padding: 12px 14px; text-align:right;">
+              <div style="display:inline-flex; gap:6px;">
+                <button onclick="openEditUserModal('${u.username}')" style="padding:4px 9px; font-size:11px; font-weight:700; border:1px solid var(--super-border); border-radius:6px; background:var(--super-bg); color:var(--beds-text-primary); cursor:pointer;" title="Edit Profile & Permissions">
+                  ✏️ Edit
+                </button>
+                ${isMaster ? `
+                  <button disabled style="padding:4px 9px; font-size:11px; font-weight:700; border:1px solid var(--super-border); border-radius:6px; background:#f1f5f9; color:#94a3b8; cursor:not-allowed;" title="Super Admin is protected">
+                    🔒 Protected
+                  </button>
+                ` : `
+                  <button onclick="confirmDeleteUser('${u.username}')" style="padding:4px 9px; font-size:11px; font-weight:700; border:1px solid #fecaca; border-radius:6px; background:#fff1f2; color:#e11d48; cursor:pointer;" title="Delete User">
+                    🗑️ Delete
+                  </button>
+                `}
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function filterUserTable() {
+      renderUserManagementTable();
+    }
+
+    function togglePasswordVisibility(username) {
+      const mask = document.getElementById(`pw-mask-${username}`);
+      const text = document.getElementById(`pw-text-${username}`);
+      if (!mask || !text) return;
+      if (text.style.display === 'none') {
+        text.style.display = 'inline-block';
+        mask.style.display = 'none';
+      } else {
+        text.style.display = 'none';
+        mask.style.display = 'inline-block';
+      }
+    }
+
+    // Modal Triggers
+    function openAddUserModal() {
+      document.getElementById('addUserModal').style.display = 'flex';
+      document.getElementById('addFullName').focus();
+    }
+    function closeAddUserModal() {
+      document.getElementById('addUserModal').style.display = 'none';
+    }
+    function submitAddUser(e) {
+      e.preventDefault();
+      try {
+        const fullName = document.getElementById('addFullName').value.trim();
+        const username = document.getElementById('addUsername').value.trim().toLowerCase();
+        const password = document.getElementById('addPassword').value;
+        const role = document.getElementById('addRole').value;
+        const assignedPortal = document.getElementById('addPortal').value;
+        const dept = document.getElementById('addDept').value.trim() || 'Operations';
+
+        window.BalsonsSuperAdmin.createUser({
+          fullName,
+          username,
+          password,
+          role,
+          assignedPortal,
+          dept,
+          permittedPortals: [assignedPortal]
+        });
+
+        closeAddUserModal();
+        renderUserManagementTable();
+        alert(`✔ User @${username} (${fullName}) created successfully with access to ${assignedPortal.toUpperCase()} portal.`);
+      } catch (err) {
+        alert('Error: ' + err.message);
+      }
+    }
+
+    function openEditUserModal(username) {
+      const u = window.BalsonsSuperAdmin.users.find(x => x.username.toLowerCase() === username.toLowerCase());
+      if (!u) return;
+
+      document.getElementById('editUsernameHidden').value = u.username;
+      document.getElementById('editUsernameDisplay').value = `@${u.username}`;
+      document.getElementById('editFullName').value = u.fullName;
+      document.getElementById('editRole').value = u.role;
+      document.getElementById('editPortal').value = u.assignedPortal || (u.permittedPortals && u.permittedPortals[0]) || 'gate';
+      document.getElementById('editDept').value = u.dept || '';
+      document.getElementById('editStatus').value = u.status || 'Active';
+
+      document.getElementById('editUserModal').style.display = 'flex';
+    }
+    function closeEditUserModal() {
+      document.getElementById('editUserModal').style.display = 'none';
+    }
+    function submitEditUser(e) {
+      e.preventDefault();
+      try {
+        const username = document.getElementById('editUsernameHidden').value;
+        const fullName = document.getElementById('editFullName').value;
+        const role = document.getElementById('editRole').value;
+        const assignedPortal = document.getElementById('editPortal').value;
+        const dept = document.getElementById('editDept').value;
+        const status = document.getElementById('editStatus').value;
+
+        window.BalsonsSuperAdmin.updateUser(username, {
+          fullName,
+          role,
+          assignedPortal,
+          dept,
+          status
+        });
+
+        closeEditUserModal();
+        renderUserManagementTable();
+        alert(`✔ Account @${username} updated successfully.`);
+      } catch (err) {
+        alert('Error: ' + err.message);
+      }
+    }
+
+    function openChangePasswordModal(username) {
+      const u = window.BalsonsSuperAdmin.users.find(x => x.username.toLowerCase() === username.toLowerCase());
+      if (!u) return;
+      document.getElementById('pwUsernameHidden').value = u.username;
+      document.getElementById('pwUserDisplay').innerHTML = `<strong>${u.fullName}</strong> (@${u.username})`;
+      document.getElementById('newPassword').value = '';
+      document.getElementById('confirmPassword').value = '';
+      document.getElementById('changePasswordModal').style.display = 'flex';
+    }
+    function closeChangePasswordModal() {
+      document.getElementById('changePasswordModal').style.display = 'none';
+    }
+    function submitChangePassword(e) {
+      e.preventDefault();
+      const username = document.getElementById('pwUsernameHidden').value;
+      const p1 = document.getElementById('newPassword').value;
+      const p2 = document.getElementById('confirmPassword').value;
+      if (p1 !== p2) {
+        alert('❌ Passwords do not match. Please re-enter.');
+        return;
+      }
+      try {
+        window.BalsonsSuperAdmin.updateUserPassword(username, p1);
+        closeChangePasswordModal();
+        renderUserManagementTable();
+        alert(`✔ Password for @${username} changed successfully.`);
+      } catch (err) {
+        alert('Error: ' + err.message);
+      }
+    }
+
+    function toggleUserStatusQuick(username) {
+      if (window.BalsonsSuperAdmin) {
+        window.BalsonsSuperAdmin.toggleUserStatus(username);
+        renderUserManagementTable();
+      }
+    }
+
+    function confirmDeleteUser(username) {
+      if (!confirm(`Are you sure you want to permanently delete user account @${username}? This action is immediate and irrevocable.`)) {
+        return;
+      }
+      try {
+        window.BalsonsSuperAdmin.deleteUser(username);
+        renderUserManagementTable();
+        alert(`✔ Account @${username} has been deleted.`);
+      } catch (err) {
+        alert('Error: ' + err.message);
+      }
+    }
+
+    function confirmResetRoster() {
+      if (!confirm('Reset all enterprise accounts back to the standard baseline roster? Custom users will be reset.')) {
+        return;
+      }
+      window.BalsonsSuperAdmin.resetDefaultUsers();
+      renderUserManagementTable();
+      alert('✔ Ecosystem user directory reset to standard baseline.');
+    }
+  </script>
+
 </body>
 </html>
