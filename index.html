@@ -214,6 +214,96 @@
       transform: translateY(-1px);
     }
 
+    /* ═══ USER PILL DROPDOWN ════════════════════════════════════════ */
+    .user-pill-wrap { position: relative; display: inline-block; }
+    .user-pill { cursor: pointer; user-select: none; }
+    .user-pill-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 220px;
+      background: var(--super-card, #ffffff);
+      border: 1px solid var(--super-border, #e2e8f0);
+      border-radius: 12px;
+      box-shadow: 0 12px 32px rgba(16,45,53,0.18);
+      z-index: 500;
+      padding: 6px;
+      animation: dropdownSlide 0.15s ease-out;
+    }
+    .user-pill-wrap.open .user-pill-menu { display: block; }
+    .user-pill-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--beds-text-primary, #102d35);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .user-pill-menu-item:hover { background: rgba(0,151,178,0.08); }
+    .user-pill-menu-divider { height: 1px; background: var(--super-border, #e2e8f0); margin: 4px 0; }
+    .user-pill-menu-item.danger { color: #dc2626; }
+    .user-pill-menu-item.danger:hover { background: rgba(220,38,38,0.08); }
+
+    /* ═══ PORTAL SWITCHER DROPDOWN ══════════════════════════════════ */
+    .portal-switcher-wrap { position: relative; display: inline-block; }
+    .portal-switcher-btn {
+      background: var(--super-bg, #f8fafc);
+      border: 1px solid var(--super-border, #e2e8f0);
+      color: var(--beds-text-primary, #102d35);
+      padding: 6px 12px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: inherit;
+    }
+    .portal-switcher-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 230px;
+      background: var(--super-card, #ffffff);
+      border: 1px solid var(--super-border, #e2e8f0);
+      border-radius: 12px;
+      box-shadow: 0 12px 32px rgba(16,45,53,0.18);
+      z-index: 500;
+      padding: 6px;
+      animation: dropdownSlide 0.15s ease-out;
+    }
+    .portal-switcher-wrap.open .portal-switcher-menu { display: block; }
+    .portal-switcher-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--beds-text-primary, #102d35);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .portal-switcher-item:hover { background: rgba(0,151,178,0.08); }
+    .portal-switcher-item.current { background: rgba(0,151,178,0.12); border-left: 3px solid #0097a7; }
+
+    /* KPI Card Standards */
+    .super-stat-card:hover, .card-panel:hover, .shortcut-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(16,45,53,0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
     /* 2. EXECUTIVE SUPER VIEW RIBBON (STUNNING ANIMATED) */
     .super-view-ribbon {
       background: linear-gradient(135deg, #0d1e27 0%, #102a35 45%, #163847 100%);
@@ -774,15 +864,39 @@
       <a href="mobile/index.html" class="badge-pill" style="background: rgba(0, 151, 167, 0.15); border-color: #0097a7; color: #0097a7; font-weight: 800; text-decoration: none;" title="Launch Mobile & Tablet Ecosystem Hub">
         📱 Mobile Hub
       </a>
+      <!-- Portal Switcher Dropdown -->
+      <div class="portal-switcher-wrap" id="portalSwitcherWrap">
+        <button class="portal-switcher-btn" type="button" onclick="document.getElementById('portalSwitcherWrap').classList.toggle('open')">
+          🚀 Portals <span style="font-size:10px;">▾</span>
+        </button>
+        <div class="portal-switcher-menu">
+          <a class="portal-switcher-item current" href="index.html">🏢 Enterprise Launcher</a>
+          <a class="portal-switcher-item" href="BALSONS GATE ENTRY MANAGER/frontend/index.html">🚪 Gate Entry Manager</a>
+          <a class="portal-switcher-item" href="BALSONS HR MANAGER/frontend/index.html">👥 HR &amp; Payroll Manager</a>
+          <a class="portal-switcher-item" href="BALSONS OPERATIONS MANAGER/index.html">🏗️ Operations Manager</a>
+          <a class="portal-switcher-item" href="BALSONS PURCHASE MANAGER/index.html">🛒 Purchase Manager</a>
+          <a class="portal-switcher-item" href="BALSONS SAFETY MANAGER/frontend/index.html">🦺 Safety Manager</a>
+          <a class="portal-switcher-item" href="BALSONS STORE MANAGER/frontend/index.html">📦 Store Manager</a>
+        </div>
+      </div>
+
       <button class="badge-pill" id="themeBtn" onclick="toggleTheme()" style="cursor: pointer;" title="Toggle Light/Dark Theme">
         🌙 Dark
       </button>
-      <div id="headerUserBadge" class="user-session-chip">
-        👑 <strong>Prashant Muley</strong> · Super Administrator
+
+      <!-- User Pill Wrap with Dropdown -->
+      <div class="user-pill-wrap" id="userPillWrap">
+        <div id="headerUserBadge" class="user-session-chip user-pill" onclick="document.getElementById('userPillWrap').classList.toggle('open')">
+          👑 <strong>Prashant Muley</strong> · Super Administrator <span style="font-size:10px; margin-left:2px;">▾</span>
+        </div>
+        <div class="user-pill-menu">
+          <div class="user-pill-menu-item">👑 <span id="menuUserFullName">Prashant Muley (Super Admin)</span></div>
+          <div class="user-pill-menu-divider"></div>
+          <a class="user-pill-menu-item" href="balsons-master-ecosystem-directory.html">🌐 Master Directory</a>
+          <div class="user-pill-menu-divider"></div>
+          <div class="user-pill-menu-item danger" onclick="handleLauncherSignOut()">🔓 Sign Out</div>
+        </div>
       </div>
-      <button class="btn-signout" onclick="handleLauncherSignOut()" title="Sign Out of Session">
-        Sign Out
-      </button>
     </div>
   </header>
 
@@ -1379,5 +1493,18 @@
   <!-- Core Security & Login Controller with Smart Role Dropdown -->
   <script src="assets/js/beds-superadmin.js"></script>
   <script src="assets/js/beds-portal-login.js"></script>
+  <script>
+    // Header Dropdowns Outside-Click Handler
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('#portalSwitcherWrap')) {
+        var w = document.getElementById('portalSwitcherWrap');
+        if (w) w.classList.remove('open');
+      }
+      if (!e.target.closest('#userPillWrap')) {
+        var u = document.getElementById('userPillWrap');
+        if (u) u.classList.remove('open');
+      }
+    });
+  </script>
 </body>
 </html>

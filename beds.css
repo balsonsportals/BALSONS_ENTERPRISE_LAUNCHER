@@ -1248,15 +1248,15 @@ table.beds-data-table tr:hover td, table.data-table tr:hover td {
 }
 .beds-login-card {
   width: 100%;
-  max-width: 900px;
+  max-width: 980px;
   background: var(--beds-bg-panel);
-  border-radius: 14px;
+  border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 151, 178, 0.25);
   border: 1px solid var(--beds-border);
   display: flex;
   flex-direction: row;
-  min-height: 520px;
+  min-height: 560px;
   animation: bedsLoginCardIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
   transition: transform 0.4s ease, opacity 0.4s ease, filter 0.4s ease;
 }
@@ -1298,14 +1298,14 @@ table.beds-data-table tr:hover td, table.data-table tr:hover td {
   }
 }
 .beds-login-left {
-  flex: 1 1 50%;
+  flex: 0 0 52%;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   background-color: #102D35;
-  min-height: 520px;
+  min-height: 560px;
 }
 .beds-login-left-img {
   position: absolute;
@@ -1324,13 +1324,14 @@ table.beds-data-table tr:hover td, table.data-table tr:hover td {
   100% { transform: scale(1.08) translate(-1%, -1%); }
 }
 .beds-login-left-overlay {
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 2;
-  background: #102D35;
-  border-top: 1px solid rgba(0, 151, 178, 0.4);
-  padding: 18px 20px 18px;
+  background: linear-gradient(to top, rgba(16, 45, 53, 0.95) 0%, rgba(16, 45, 53, 0.65) 55%, rgba(16, 45, 53, 0.0) 100%);
+  padding: 36px 30px 28px;
   color: #FFFFFF;
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
 }
 .beds-login-portal-title {
   font-size: 22px;
